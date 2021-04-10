@@ -6,3 +6,7 @@ Integrantes del proyecto:
 -De La Cruz Joel Salvador Mendoza
 -Mendivil Pacheco Cesar Magdiel
 
+Materia: Ingenieria de Software
+Universidad Autonoma de Baja Calfornia
+Mexicali,B.C.,Mexico
+
