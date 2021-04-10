@@ -15,17 +15,22 @@ import javax.swing.JPanel;
  * @author Inzunza Kevin
  */
 public class RegistrarClientePanel extends javax.swing.JPanel {
+
     private final JPanel mPrincipal;
     private final AudioClip sonidoBoton;
+    private final AudioClip regresar;
     /**
      * Creates new form RegistrarPedidoFrame
+     *
      * @param mPrincipal
+     * @param regresar
      * @param sonidoBoton
      */
-    public RegistrarClientePanel(AudioClip sonidoBoton,JPanel mPrincipal) {
+    public RegistrarClientePanel(AudioClip sonidoBoton,AudioClip regresar,JPanel mPrincipal) {
         initComponents();
-        this.sonidoBoton=sonidoBoton;
-        this.mPrincipal=mPrincipal;
+        this.sonidoBoton = sonidoBoton;
+        this.mPrincipal = mPrincipal;
+        this.regresar=regresar;
     }
 
     /**
@@ -90,6 +95,9 @@ public class RegistrarClientePanel extends javax.swing.JPanel {
         direccionJLabel.setForeground(new java.awt.Color(153, 255, 153));
         direccionJLabel.setText("Direccion:");
 
+        direccion.setBackground(new java.awt.Color(153, 255, 204));
+        direccion.setFont(new java.awt.Font("Comfortaa Light", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -116,6 +124,9 @@ public class RegistrarClientePanel extends javax.swing.JPanel {
         nombreJLabel.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
         nombreJLabel.setForeground(new java.awt.Color(153, 255, 153));
         nombreJLabel.setText("Nombre:");
+
+        nombre.setBackground(new java.awt.Color(153, 255, 204));
+        nombre.setFont(new java.awt.Font("Comfortaa Light", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -144,6 +155,9 @@ public class RegistrarClientePanel extends javax.swing.JPanel {
         apellidoJLabel.setForeground(new java.awt.Color(153, 255, 153));
         apellidoJLabel.setText("Apellido:");
 
+        apellido.setBackground(new java.awt.Color(153, 255, 204));
+        apellido.setFont(new java.awt.Font("Comfortaa Light", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -170,6 +184,9 @@ public class RegistrarClientePanel extends javax.swing.JPanel {
         numTelJLabel.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
         numTelJLabel.setForeground(new java.awt.Color(153, 255, 153));
         numTelJLabel.setText("Num. de telefono:");
+
+        numTelefono.setBackground(new java.awt.Color(153, 255, 204));
+        numTelefono.setFont(new java.awt.Font("Comfortaa Light", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -299,37 +316,49 @@ public class RegistrarClientePanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelarBotonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarBotonMouseExited
-        cancelarBoton.setBackground(new Color(0,51,51));
+        cancelarBoton.setBackground(new Color(0, 51, 51));
     }//GEN-LAST:event_cancelarBotonMouseExited
 
     private void cancelarBotonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarBotonMouseEntered
-        cancelarBoton.setBackground(new Color(0,102,102));
+        cancelarBoton.setBackground(new Color(0, 102, 102));
         sonidoBoton.play();
     }//GEN-LAST:event_cancelarBotonMouseEntered
 
     private void cancelarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarBotonActionPerformed
-        
+        if (JOptionPane.showConfirmDialog(null, "¿Desea cancelar el registro del cliente?","Cancelar", JOptionPane.YES_NO_OPTION) == 0) {
+            nombre.setText(null);
+            apellido.setText(null);
+            numTelefono.setText(null);
+            direccion.setText(null);
+        }
     }//GEN-LAST:event_cancelarBotonActionPerformed
 
     private void aceptarBotonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aceptarBotonMouseExited
-         aceptarBoton.setBackground(new Color(0,51,51));
+        aceptarBoton.setBackground(new Color(0, 51, 51));
     }//GEN-LAST:event_aceptarBotonMouseExited
 
     private void aceptarBotonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aceptarBotonMouseEntered
-       aceptarBoton.setBackground(new Color(0,102,102));
-       sonidoBoton.play();
+        aceptarBoton.setBackground(new Color(0, 102, 102));
+        sonidoBoton.play();
     }//GEN-LAST:event_aceptarBotonMouseEntered
 
     private void aceptarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarBotonActionPerformed
-        // TODO add your handling code here:
+        aceptar();
     }//GEN-LAST:event_aceptarBotonActionPerformed
-
+    
+    public void aceptar(){
+        if(!nombre.getText().isEmpty() && apellido.getText().isEmpty() && numTelefono.getText().isEmpty() && direccion.getText().isEmpty()){
+         
+        }else{
+            JOptionPane.showMessageDialog(null, "Verifique que todos los campos esten ingresados","Datos faltantes", JOptionPane.INFORMATION_MESSAGE);
+        }  
+    }
+    
     private void regresarImagenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_regresarImagenMouseClicked
-        AudioClip sonido=java.applet.Applet.newAudioClip(getClass().getResource("../sonidos/salir.wav"));
-        sonido.play();
-        if(JOptionPane.showConfirmDialog(null, "¿Desea regresar al menu principal?",null, JOptionPane.YES_NO_OPTION)==0){
-             this.setVisible(false);
-             mPrincipal.setVisible(true);
+        regresar.play();
+        if (JOptionPane.showConfirmDialog(null, "¿Desea regresar al menu principal?","Regresar", JOptionPane.YES_NO_OPTION) == 0) {
+            this.setVisible(false);
+            mPrincipal.setVisible(true);
         }
     }//GEN-LAST:event_regresarImagenMouseClicked
 

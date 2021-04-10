@@ -5,17 +5,30 @@
  */
 package vista;
 
+import java.applet.AudioClip;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 /**
  *
  * @author kevin
  */
 public class RegistrarPedidoPanel extends javax.swing.JPanel {
 
+    private final JPanel mPrincipal;
+    private final AudioClip sonidoBoton;
+    private final AudioClip regresar;
+
     /**
      * Creates new form RegistrarPedidoFrame
+     * @param sonidoBoton
+     * @param mPrincipal
      */
-    public RegistrarPedidoPanel() {
+    public RegistrarPedidoPanel(AudioClip sonidoBoton,AudioClip regresar, JPanel mPrincipal) {
         initComponents();
+        this.sonidoBoton = sonidoBoton;
+        this.mPrincipal = mPrincipal;
+        this.regresar=regresar;
     }
 
     /**
@@ -27,23 +40,79 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        registroClienteTitulo = new javax.swing.JPanel();
+        manejoOTexto = new javax.swing.JLabel();
+        regresarImagen = new javax.swing.JLabel();
+
         setBackground(new java.awt.Color(0, 153, 51));
         setForeground(new java.awt.Color(255, 255, 0));
         setPreferredSize(new java.awt.Dimension(1045, 490));
+
+        registroClienteTitulo.setBackground(new java.awt.Color(0, 153, 153));
+
+        manejoOTexto.setFont(new java.awt.Font("EB Garamond 08", 1, 24)); // NOI18N
+        manejoOTexto.setForeground(new java.awt.Color(153, 255, 204));
+        manejoOTexto.setText("REGISTRAR PEDIDO");
+
+        javax.swing.GroupLayout registroClienteTituloLayout = new javax.swing.GroupLayout(registroClienteTitulo);
+        registroClienteTitulo.setLayout(registroClienteTituloLayout);
+        registroClienteTituloLayout.setHorizontalGroup(
+            registroClienteTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(registroClienteTituloLayout.createSequentialGroup()
+                .addGap(126, 126, 126)
+                .addComponent(manejoOTexto)
+                .addContainerGap(146, Short.MAX_VALUE))
+        );
+        registroClienteTituloLayout.setVerticalGroup(
+            registroClienteTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, registroClienteTituloLayout.createSequentialGroup()
+                .addComponent(manejoOTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        regresarImagen.setBackground(new java.awt.Color(0, 153, 204));
+        regresarImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/regreso.png"))); // NOI18N
+        regresarImagen.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                regresarImagenMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 735, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(233, 233, 233)
+                .addComponent(registroClienteTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(268, 268, 268)
+                .addComponent(regresarImagen)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 415, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(regresarImagen)
+                    .addComponent(registroClienteTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(443, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void regresarImagenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_regresarImagenMouseClicked
+        AudioClip sonido = java.applet.Applet.newAudioClip(getClass().getResource("../sonidos/salir.wav"));
+        sonido.play();
+        if (JOptionPane.showConfirmDialog(null, "¿Desea regresar al menu principal?", "Regresar", JOptionPane.YES_NO_OPTION) == 0) {
+            this.setVisible(false);
+            mPrincipal.setVisible(true);
+        }
+    }//GEN-LAST:event_regresarImagenMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel manejoOTexto;
+    private javax.swing.JPanel registroClienteTitulo;
+    private javax.swing.JLabel regresarImagen;
     // End of variables declaration//GEN-END:variables
 }

@@ -17,13 +17,17 @@ import javax.swing.JPanel;
 public class PrincipalFrame extends javax.swing.JFrame {
 private final AudioClip sonidoBoton;
 private final JPanel registrarCliente;
+private final JPanel registrarPedido;
+private final AudioClip salir;
     /**
      * Creates new form PrincipalFrame
      */
     public PrincipalFrame() {
         initComponents();
         sonidoBoton=java.applet.Applet.newAudioClip(getClass().getResource("../sonidos/sonido_boton.wav"));
-        registrarCliente = new RegistrarClientePanel(sonidoBoton,fondoJPanel);
+        salir=java.applet.Applet.newAudioClip(getClass().getResource("../sonidos/salir.wav"));
+        registrarPedido = new RegistrarPedidoPanel(sonidoBoton,salir,fondoJPanel);
+        registrarCliente = new RegistrarClientePanel(sonidoBoton,salir,fondoJPanel);
     }
 
     /**
@@ -337,7 +341,6 @@ private final JPanel registrarCliente;
     }// </editor-fold>//GEN-END:initComponents
 
     private void registroPedidoBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registroPedidoBotonActionPerformed
-         JPanel registrarPedido = new RegistrarPedidoPanel();
          this.getContentPane().add(registrarPedido);
          registrarPedido.setSize(1045, 490); //Tamaño de la ventana asignada al JPanel
          fondoJPanel.setVisible(false);
@@ -345,9 +348,8 @@ private final JPanel registrarCliente;
     }//GEN-LAST:event_registroPedidoBotonActionPerformed
 
     private void salirImagenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salirImagenMouseClicked
-        AudioClip sonido=java.applet.Applet.newAudioClip(getClass().getResource("../sonidos/salir.wav"));
-        sonido.play();
-        if(JOptionPane.showConfirmDialog(null, "¿Desea finalizar el programa?",null, JOptionPane.YES_NO_OPTION)==0){
+        salir.play();
+        if(JOptionPane.showConfirmDialog(null, "¿Desea finalizar el programa?","Salir", JOptionPane.YES_NO_OPTION)==0){
          System.exit(0);
      }     
     }//GEN-LAST:event_salirImagenMouseClicked
