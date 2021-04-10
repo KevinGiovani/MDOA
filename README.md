@@ -1,5 +1,5 @@
 # MDOA
-Software Proyecto / Manejador de Ordenes Mi Pollo
+Software Proyecto / Manejador de Ordenes Asadero Mi Pollo
 
 Integrantes del proyecto:
 -Inzunza Rodriguez Kevin Giovani
