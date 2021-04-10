@@ -12,16 +12,18 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author kevin
+ * @author Inzunza Kevin
  */
 public class PrincipalFrame extends javax.swing.JFrame {
 private final AudioClip sonidoBoton;
+private final JPanel registrarCliente;
     /**
      * Creates new form PrincipalFrame
      */
     public PrincipalFrame() {
         initComponents();
         sonidoBoton=java.applet.Applet.newAudioClip(getClass().getResource("../sonidos/sonido_boton.wav"));
+        registrarCliente = new RegistrarClientePanel(sonidoBoton,fondoJPanel);
     }
 
     /**
@@ -33,7 +35,7 @@ private final AudioClip sonidoBoton;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        FondoJPanel = new javax.swing.JPanel();
+        fondoJPanel = new javax.swing.JPanel();
         registroClienteBoton = new javax.swing.JButton();
         consultarBoton = new javax.swing.JButton();
         registroPedidoBoton = new javax.swing.JButton();
@@ -60,8 +62,8 @@ private final AudioClip sonidoBoton;
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setUndecorated(true);
 
-        FondoJPanel.setBackground(new java.awt.Color(255, 204, 0));
-        FondoJPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        fondoJPanel.setBackground(new java.awt.Color(255, 204, 0));
+        fondoJPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         registroClienteBoton.setBackground(new java.awt.Color(0, 51, 51));
         registroClienteBoton.setFont(new java.awt.Font("Gayathri", 1, 8)); // NOI18N
@@ -80,7 +82,7 @@ private final AudioClip sonidoBoton;
                 registroClienteBotonActionPerformed(evt);
             }
         });
-        FondoJPanel.add(registroClienteBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 240, 190, 40));
+        fondoJPanel.add(registroClienteBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 240, 190, 40));
 
         consultarBoton.setBackground(new java.awt.Color(0, 51, 51));
         consultarBoton.setFont(new java.awt.Font("Gayathri", 1, 8)); // NOI18N
@@ -94,7 +96,7 @@ private final AudioClip sonidoBoton;
                 consultarBotonMouseEntered(evt);
             }
         });
-        FondoJPanel.add(consultarBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 320, 190, 40));
+        fondoJPanel.add(consultarBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 320, 190, 40));
 
         registroPedidoBoton.setBackground(new java.awt.Color(0, 51, 51));
         registroPedidoBoton.setFont(new java.awt.Font("Gayathri", 1, 8)); // NOI18N
@@ -113,7 +115,7 @@ private final AudioClip sonidoBoton;
                 registroPedidoBotonActionPerformed(evt);
             }
         });
-        FondoJPanel.add(registroPedidoBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, 190, 40));
+        fondoJPanel.add(registroPedidoBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, 190, 40));
 
         consultarJPanel.setBackground(new java.awt.Color(0, 51, 51));
 
@@ -136,7 +138,7 @@ private final AudioClip sonidoBoton;
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        FondoJPanel.add(consultarJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 320, 80, 50));
+        fondoJPanel.add(consultarJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 320, 80, 50));
 
         clienteJPanel.setBackground(new java.awt.Color(0, 51, 51));
 
@@ -159,7 +161,7 @@ private final AudioClip sonidoBoton;
                 .addContainerGap())
         );
 
-        FondoJPanel.add(clienteJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 80, 50));
+        fondoJPanel.add(clienteJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 80, 50));
 
         polloJPanel.setBackground(new java.awt.Color(0, 51, 51));
 
@@ -182,7 +184,7 @@ private final AudioClip sonidoBoton;
                 .addContainerGap())
         );
 
-        FondoJPanel.add(polloJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 80, 50));
+        fondoJPanel.add(polloJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 80, 50));
 
         manejoOrdenesLabel.setBackground(new java.awt.Color(255, 204, 0));
 
@@ -206,7 +208,7 @@ private final AudioClip sonidoBoton;
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        FondoJPanel.add(manejoOrdenesLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 150, 40));
+        fondoJPanel.add(manejoOrdenesLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 150, 40));
 
         tituloJPanel.setBackground(new java.awt.Color(255, 204, 0));
 
@@ -230,7 +232,7 @@ private final AudioClip sonidoBoton;
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        FondoJPanel.add(tituloJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 350, 40));
+        fondoJPanel.add(tituloJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 350, 40));
 
         inferiorJPanel.setBackground(new java.awt.Color(102, 51, 0));
 
@@ -289,10 +291,10 @@ private final AudioClip sonidoBoton;
                 .addContainerGap(44, Short.MAX_VALUE))
         );
 
-        FondoJPanel.add(inferiorJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 540, 120));
+        fondoJPanel.add(inferiorJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 540, 120));
 
         imagenIzq_jLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondoInicio.png"))); // NOI18N
-        FondoJPanel.add(imagenIzq_jLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 540, 380));
+        fondoJPanel.add(imagenIzq_jLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 540, 380));
 
         salirImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/salir.png"))); // NOI18N
         salirImagen.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -300,11 +302,11 @@ private final AudioClip sonidoBoton;
                 salirImagenMouseClicked(evt);
             }
         });
-        FondoJPanel.add(salirImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 10, -1, -1));
+        fondoJPanel.add(salirImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 10, -1, -1));
 
         cLittleImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/FondoInicioLogo.gif"))); // NOI18N
         cLittleImagen.setText("jLabel1");
-        FondoJPanel.add(cLittleImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 0, 480, 490));
+        fondoJPanel.add(cLittleImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 0, 480, 490));
 
         javax.swing.GroupLayout izquierdo_JPanelLayout = new javax.swing.GroupLayout(izquierdo_JPanel);
         izquierdo_JPanel.setLayout(izquierdo_JPanelLayout);
@@ -317,17 +319,17 @@ private final AudioClip sonidoBoton;
             .addGap(0, 490, Short.MAX_VALUE)
         );
 
-        FondoJPanel.add(izquierdo_JPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 540, 490));
+        fondoJPanel.add(izquierdo_JPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 540, 490));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(FondoJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1045, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(fondoJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1045, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(FondoJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(fondoJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -338,7 +340,7 @@ private final AudioClip sonidoBoton;
          JPanel registrarPedido = new RegistrarPedidoPanel();
          this.getContentPane().add(registrarPedido);
          registrarPedido.setSize(1045, 490); //Tamaño de la ventana asignada al JPanel
-         FondoJPanel.setVisible(false);
+         fondoJPanel.setVisible(false);
          registrarPedido.setVisible(true);
     }//GEN-LAST:event_registroPedidoBotonActionPerformed
 
@@ -387,10 +389,9 @@ private final AudioClip sonidoBoton;
     }//GEN-LAST:event_corteBotonMouseExited
 
     private void registroClienteBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registroClienteBotonActionPerformed
-         JPanel registrarCliente = new RegistrarClientePanel(sonidoBoton);
          this.getContentPane().add(registrarCliente);
          registrarCliente.setSize(1045, 490); //Tamaño de la ventana asignada al JPanel
-         FondoJPanel.setVisible(false);
+         fondoJPanel.setVisible(false);
          registrarCliente.setVisible(true);
     }//GEN-LAST:event_registroClienteBotonActionPerformed
 
@@ -430,7 +431,6 @@ private final AudioClip sonidoBoton;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel FondoJPanel;
     private javax.swing.JLabel cLittleImagen;
     private javax.swing.JLabel clienteIcono;
     private javax.swing.JPanel clienteJPanel;
@@ -440,6 +440,7 @@ private final AudioClip sonidoBoton;
     private javax.swing.JButton corteBoton;
     private javax.swing.JLabel corteIcono;
     private javax.swing.JPanel corteJPanel;
+    private javax.swing.JPanel fondoJPanel;
     private javax.swing.JLabel imagenIzq_jLabel;
     private javax.swing.JPanel inferiorJPanel;
     private javax.swing.JPanel izquierdo_JPanel;

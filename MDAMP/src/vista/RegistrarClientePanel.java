@@ -8,20 +8,24 @@ package vista;
 import java.applet.AudioClip;
 import java.awt.Color;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
- * @author kevin
+ * @author Inzunza Kevin
  */
 public class RegistrarClientePanel extends javax.swing.JPanel {
+    private final JPanel mPrincipal;
     private final AudioClip sonidoBoton;
     /**
      * Creates new form RegistrarPedidoFrame
+     * @param mPrincipal
      * @param sonidoBoton
      */
-    public RegistrarClientePanel(AudioClip sonidoBoton) {
+    public RegistrarClientePanel(AudioClip sonidoBoton,JPanel mPrincipal) {
         initComponents();
         this.sonidoBoton=sonidoBoton;
+        this.mPrincipal=mPrincipal;
     }
 
     /**
@@ -53,7 +57,6 @@ public class RegistrarClientePanel extends javax.swing.JPanel {
         regresarImagen = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 153, 51));
-        setForeground(new java.awt.Color(255, 255, 0));
         setPreferredSize(new java.awt.Dimension(1045, 490));
 
         cLittleImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/FondoInicioLogo.gif"))); // NOI18N
@@ -325,7 +328,8 @@ public class RegistrarClientePanel extends javax.swing.JPanel {
         AudioClip sonido=java.applet.Applet.newAudioClip(getClass().getResource("../sonidos/salir.wav"));
         sonido.play();
         if(JOptionPane.showConfirmDialog(null, "¿Desea regresar al menu principal?",null, JOptionPane.YES_NO_OPTION)==0){
-
+             this.setVisible(false);
+             mPrincipal.setVisible(true);
         }
     }//GEN-LAST:event_regresarImagenMouseClicked
 
