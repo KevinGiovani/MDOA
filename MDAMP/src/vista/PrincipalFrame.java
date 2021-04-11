@@ -74,11 +74,11 @@ private final AudioClip salir;
         registroClienteBoton.setForeground(new java.awt.Color(204, 204, 204));
         registroClienteBoton.setText("REGISTRAR CLIENTE");
         registroClienteBoton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                registroClienteBotonMouseExited(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 registroClienteBotonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                registroClienteBotonMouseExited(evt);
             }
         });
         registroClienteBoton.addActionListener(new java.awt.event.ActionListener() {
@@ -93,11 +93,11 @@ private final AudioClip salir;
         consultarBoton.setForeground(new java.awt.Color(204, 204, 204));
         consultarBoton.setText("CONSULTAR");
         consultarBoton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                consultarBotonMouseExited(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 consultarBotonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                consultarBotonMouseExited(evt);
             }
         });
         fondoJPanel.add(consultarBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 320, 190, 40));
@@ -107,11 +107,11 @@ private final AudioClip salir;
         registroPedidoBoton.setForeground(new java.awt.Color(204, 204, 204));
         registroPedidoBoton.setText("REGISTRAR PEDIDO");
         registroPedidoBoton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                registroPedidoBotonMouseExited(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 registroPedidoBotonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                registroPedidoBotonMouseExited(evt);
             }
         });
         registroPedidoBoton.addActionListener(new java.awt.event.ActionListener() {
@@ -342,7 +342,7 @@ private final AudioClip salir;
 
     private void registroPedidoBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registroPedidoBotonActionPerformed
          this.getContentPane().add(registrarPedido);
-         registrarPedido.setSize(1045, 490); //Tamaño de la ventana asignada al JPanel
+         registrarPedido.setSize(1045, 533); //Tamaño de la ventana asignada al JPanel
          fondoJPanel.setVisible(false);
          registrarPedido.setVisible(true);
     }//GEN-LAST:event_registroPedidoBotonActionPerformed
