@@ -170,7 +170,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="direccionJLabel" alignment="3" pref="27" max="32767" attributes="0"/>
+                      <Component id="direccionJLabel" alignment="3" max="32767" attributes="0"/>
                       <Component id="direccion" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -226,7 +226,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="nombreJLabel" alignment="3" pref="27" max="32767" attributes="0"/>
+                      <Component id="nombreJLabel" alignment="3" max="32767" attributes="0"/>
                       <Component id="nombre" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -282,7 +282,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="apellidoJLabel" alignment="3" pref="27" max="32767" attributes="0"/>
+                      <Component id="apellidoJLabel" alignment="3" max="32767" attributes="0"/>
                       <Component id="apellido" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -338,7 +338,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="numTelJLabel" alignment="3" pref="27" max="32767" attributes="0"/>
+                      <Component id="numTelJLabel" alignment="3" max="32767" attributes="0"/>
                       <Component id="numTelefono" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
