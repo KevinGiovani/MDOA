@@ -7,6 +7,8 @@ package vista;
 
 import java.applet.AudioClip;
 import java.awt.Color;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -71,7 +73,7 @@ private final AudioClip salir;
 
         registroClienteBoton.setBackground(new java.awt.Color(0, 51, 51));
         registroClienteBoton.setFont(new java.awt.Font("Gayathri", 1, 8)); // NOI18N
-        registroClienteBoton.setForeground(new java.awt.Color(204, 204, 204));
+        registroClienteBoton.setForeground(new java.awt.Color(153, 255, 204));
         registroClienteBoton.setText("REGISTRAR CLIENTE");
         registroClienteBoton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -90,7 +92,7 @@ private final AudioClip salir;
 
         consultarBoton.setBackground(new java.awt.Color(0, 51, 51));
         consultarBoton.setFont(new java.awt.Font("Gayathri", 1, 8)); // NOI18N
-        consultarBoton.setForeground(new java.awt.Color(204, 204, 204));
+        consultarBoton.setForeground(new java.awt.Color(153, 255, 204));
         consultarBoton.setText("CONSULTAR");
         consultarBoton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -104,14 +106,14 @@ private final AudioClip salir;
 
         registroPedidoBoton.setBackground(new java.awt.Color(0, 51, 51));
         registroPedidoBoton.setFont(new java.awt.Font("Gayathri", 1, 8)); // NOI18N
-        registroPedidoBoton.setForeground(new java.awt.Color(204, 204, 204));
+        registroPedidoBoton.setForeground(new java.awt.Color(153, 255, 204));
         registroPedidoBoton.setText("REGISTRAR PEDIDO");
         registroPedidoBoton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                registroPedidoBotonMouseEntered(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 registroPedidoBotonMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                registroPedidoBotonMouseEntered(evt);
             }
         });
         registroPedidoBoton.addActionListener(new java.awt.event.ActionListener() {
@@ -263,7 +265,7 @@ private final AudioClip salir;
 
         corteBoton.setBackground(new java.awt.Color(0, 51, 51));
         corteBoton.setFont(new java.awt.Font("Gayathri", 1, 8)); // NOI18N
-        corteBoton.setForeground(new java.awt.Color(204, 204, 204));
+        corteBoton.setForeground(new java.awt.Color(153, 255, 204));
         corteBoton.setText("REALIZAR CORTE");
         corteBoton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
@@ -348,8 +350,9 @@ private final AudioClip salir;
     }//GEN-LAST:event_registroPedidoBotonActionPerformed
 
     private void salirImagenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salirImagenMouseClicked
+        Icon icono = new ImageIcon(getClass().getResource("../imagenes/salir.png"));
         salir.play();
-        if(JOptionPane.showConfirmDialog(null, "¿Desea finalizar el programa?","Salir", JOptionPane.YES_NO_OPTION)==0){
+        if(JOptionPane.showConfirmDialog(null, "¿Desea finalizar el programa?","Salir", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,icono)==0){
          System.exit(0);
      }     
     }//GEN-LAST:event_salirImagenMouseClicked

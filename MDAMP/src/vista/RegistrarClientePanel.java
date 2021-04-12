@@ -8,6 +8,8 @@ package vista;
 import db.BDCliente;
 import java.applet.AudioClip;
 import java.awt.Color;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -32,6 +34,7 @@ public class RegistrarClientePanel extends javax.swing.JPanel {
         this.sonidoBoton = sonidoBoton;
         this.mPrincipal = mPrincipal;
         this.regresar=regresar;
+       
     }
 
     /**
@@ -212,8 +215,8 @@ public class RegistrarClientePanel extends javax.swing.JPanel {
 
         cancelarBoton.setBackground(new java.awt.Color(0, 51, 51));
         cancelarBoton.setFont(new java.awt.Font("Gayathri", 1, 8)); // NOI18N
-        cancelarBoton.setForeground(new java.awt.Color(204, 204, 204));
-        cancelarBoton.setText("CANCELAR");
+        cancelarBoton.setForeground(new java.awt.Color(153, 255, 204));
+        cancelarBoton.setText("Cancelar");
         cancelarBoton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 cancelarBotonMouseExited(evt);
@@ -230,8 +233,8 @@ public class RegistrarClientePanel extends javax.swing.JPanel {
 
         aceptarBoton.setBackground(new java.awt.Color(0, 51, 51));
         aceptarBoton.setFont(new java.awt.Font("Gayathri", 1, 8)); // NOI18N
-        aceptarBoton.setForeground(new java.awt.Color(204, 204, 204));
-        aceptarBoton.setText("ACEPTAR");
+        aceptarBoton.setForeground(new java.awt.Color(153, 255, 204));
+        aceptarBoton.setText("Aceptar");
         aceptarBoton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 aceptarBotonMouseExited(evt);
@@ -324,7 +327,8 @@ public class RegistrarClientePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_cancelarBotonMouseEntered
 
     private void cancelarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarBotonActionPerformed
-        if (JOptionPane.showConfirmDialog(null, "¿Desea cancelar el registro del cliente?","Cancelar", JOptionPane.YES_NO_OPTION) == 0) {
+        Icon icono = new ImageIcon(getClass().getResource("../imagenes/cancelar.png"));
+        if (JOptionPane.showConfirmDialog(null, "¿Desea cancelar el registro del cliente?","Cancelar", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,icono) == 0) {
             nombre.setText(null);
             apellido.setText(null);
             numTelefono.setText(null);
@@ -356,8 +360,9 @@ public class RegistrarClientePanel extends javax.swing.JPanel {
     }
     
     private void regresarImagenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_regresarImagenMouseClicked
+        Icon icono = new ImageIcon(getClass().getResource("../imagenes/regreso.png"));
         regresar.play();
-        if (JOptionPane.showConfirmDialog(null, "¿Desea regresar al menu principal?","Regresar", JOptionPane.YES_NO_OPTION) == 0) {
+        if(JOptionPane.showConfirmDialog(null, "¿Desea regresar al menu principal?","Regresar", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,icono) == 0) {
             this.setVisible(false);
             mPrincipal.setVisible(true);
         }
