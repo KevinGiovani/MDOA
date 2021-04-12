@@ -7,6 +7,7 @@ package vista;
 
 import java.applet.AudioClip;
 import java.awt.Color;
+import static java.lang.Math.abs;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -713,7 +714,23 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
     private void pagarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pagarBotonActionPerformed
        Icon icono = new ImageIcon(getClass().getResource("../imagenes/pagar.png"));
         if (JOptionPane.showConfirmDialog(null, "Se efectuara el pago,¿Desea confirmar?","Confirmacion", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,icono) == 0) {
-            sonidoDePago.play();
+        }
+        if (!totalPagar.getText().isEmpty() && !totalCliente.getText().isEmpty()) {
+            int total = Integer.parseInt(totalCliente.getText()) - Integer.parseInt(totalPagar.getText());
+
+            if (total > 0) {
+                sonidoDePago.play();
+                total = abs(total);
+                JOptionPane.showMessageDialog(null, "Gracias por su Compra!\n" + "Cambio: " + total, "Pago Exitoso", JOptionPane.INFORMATION_MESSAGE,icono);
+            } else if (total == 0) {
+                sonidoDePago.play();
+                JOptionPane.showMessageDialog(null, "Gracias por su Compra!", "Pago Exitoso", JOptionPane.INFORMATION_MESSAGE,icono);
+            } else {
+                regresar.play();
+                JOptionPane.showMessageDialog(null, "No se ha completado el monto a pagar", "Error", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Verifique que todos los campos esten ingresados", "Datos faltantes", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_pagarBotonActionPerformed
 
