@@ -6,6 +6,7 @@
 package vista;
 
 import db.BDCliente;
+import clases.Cliente;
 import java.applet.AudioClip;
 import java.awt.Color;
 import javax.swing.Icon;
@@ -351,8 +352,9 @@ public class RegistrarClientePanel extends javax.swing.JPanel {
     
     public void aceptar(){
        if(!nombre.getText().isEmpty() && !apellido.getText().isEmpty() && !numTelefono.getText().isEmpty() && !direccion.getText().isEmpty()){
-         BDCliente cliente=new BDCliente();
-        cliente.agregarDatos(nombre.getText(),apellido.getText(),numTelefono.getText(),direccion.getText());
+         BDCliente clientes=new BDCliente();
+         Cliente cliente=new Cliente(nombre.getText(),apellido.getText(),numTelefono.getText(),direccion.getText());
+        clientes.agregarDatos(cliente);
           JOptionPane.showMessageDialog(null, "Operación Exitosa","Datos agregados", JOptionPane.INFORMATION_MESSAGE);
         }else{
             JOptionPane.showMessageDialog(null, "Verifique que todos los campos esten ingresados","Datos faltantes", JOptionPane.INFORMATION_MESSAGE);

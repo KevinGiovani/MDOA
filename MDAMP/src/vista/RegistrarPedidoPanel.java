@@ -5,6 +5,8 @@
  */
 package vista;
 
+import db.BDCliente;
+import clases.Cliente;
 import java.applet.AudioClip;
 import java.awt.Color;
 import static java.lang.Math.abs;
@@ -699,7 +701,12 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_buscarBotonMouseEntered
 
     private void buscarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarBotonActionPerformed
-
+        BDCliente clientes=new BDCliente();
+        Cliente cliente;
+        cliente=clientes.buscar(Integer.parseInt(numTelefono.getText()));
+        nombre.setText(cliente.getNombre());
+        apellido.setText(cliente.getApellido());
+        direccion.setText(cliente.getDireccion());
     }//GEN-LAST:event_buscarBotonActionPerformed
 
     private void pagarBotonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pagarBotonMouseExited
