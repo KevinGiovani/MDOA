@@ -4,7 +4,7 @@ Software Proyecto / Manejador de Ordenes Asadero Mi Pollo
 Integrantes del proyecto:
 - Inzunza Rodriguez Kevin Giovani
 - De La Cruz Joel Salvador Mendoza
-- Mendivil Pacheco Cesar Magdiel
+- Mendibil Pacheco Cesar Magdiel
 
 Materia: Ingenieria de Software
 Docente: Olguin Espinoza Jose Martin
