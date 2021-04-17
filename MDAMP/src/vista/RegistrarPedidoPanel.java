@@ -304,13 +304,12 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
                     .addComponent(jLabel2))
                 .addGap(31, 31, 31)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(paq2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(paq3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(paq4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(paq5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(paq6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(paq1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(paq2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(paq3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(paq4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(paq5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(paq6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(paq1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(extra1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(extra3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(extra4)
@@ -338,9 +337,7 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel1)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(paq1)
@@ -383,8 +380,8 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
                                 .addGap(10, 10, 10)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(extra4)
-                                    .addComponent(cantExt4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(10, 10, 10))))
+                                    .addComponent(cantExt4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         jPanel5.setBackground(new java.awt.Color(0, 102, 102));
@@ -460,7 +457,7 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
                     .addComponent(direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
+                .addContainerGap(34, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel3)
@@ -530,6 +527,16 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
         totalPagar.setBackground(new java.awt.Color(153, 255, 204));
         totalPagar.setFont(new java.awt.Font("Comfortaa Light", 0, 14)); // NOI18N
         totalPagar.setPreferredSize(new java.awt.Dimension(12, 24));
+        totalPagar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                totalPagarMouseClicked(evt);
+            }
+        });
+        totalPagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                totalPagarActionPerformed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(153, 255, 153));
@@ -665,6 +672,7 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
 
     private void extra1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_extra1ActionPerformed
         // TODO add your handling code here:
+        totalPagar.setText(extra1.getToolTipText());
     }//GEN-LAST:event_extra1ActionPerformed
 
     private void paq6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paq6ActionPerformed
@@ -740,6 +748,26 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Verifique que todos los campos esten ingresados", "Datos faltantes", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_pagarBotonActionPerformed
+
+    private void totalPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalPagarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_totalPagarActionPerformed
+
+    private void totalPagarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_totalPagarMouseClicked
+        // TODO add your handling code here:
+        int totalPagar = 0;
+        totalPagar = totalPagar + new Integer((240)*(Integer.parseInt(cantPaq1.getValue().toString())));
+        totalPagar = totalPagar + new Integer((210)*(Integer.parseInt(cantPaq2.getValue().toString())));
+        totalPagar = totalPagar + new Integer((190)*(Integer.parseInt(cantPaq3.getValue().toString())));
+        totalPagar = totalPagar + new Integer((150)*(Integer.parseInt(cantPaq4.getValue().toString())));
+        totalPagar = totalPagar + new Integer((120)*(Integer.parseInt(cantPaq5.getValue().toString())));
+        totalPagar = totalPagar + new Integer((60)*(Integer.parseInt(cantPaq6.getValue().toString())));
+        totalPagar = totalPagar + new Integer((20)*(Integer.parseInt(cantExt1.getValue().toString())));
+        totalPagar = totalPagar + new Integer((5)*(Integer.parseInt(cantExt2.getValue().toString())));
+        totalPagar = totalPagar + new Integer((20)*(Integer.parseInt(cantExt3.getValue().toString())));
+        totalPagar = totalPagar + new Integer((15)*(Integer.parseInt(cantExt4.getValue().toString())));
+        this.totalPagar.setText(new Integer(totalPagar).toString());
+    }//GEN-LAST:event_totalPagarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
