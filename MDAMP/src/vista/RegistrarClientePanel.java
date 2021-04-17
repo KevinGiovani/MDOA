@@ -6,7 +6,7 @@
 package vista;
 
 import db.BDCliente;
-import clases.Cliente;
+import modelos.Cliente;
 import java.applet.AudioClip;
 import java.awt.Color;
 import javax.swing.Icon;

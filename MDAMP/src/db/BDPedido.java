@@ -5,8 +5,7 @@
  */
 package db;
 
-import clases.Cliente;
-import clases.Pedido;
+import modelos.Pedido;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 

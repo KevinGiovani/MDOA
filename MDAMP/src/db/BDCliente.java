@@ -5,7 +5,7 @@
  */
 package db;
 
-import clases.Cliente;
+import modelos.Cliente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -53,7 +53,6 @@ public class BDCliente {
                 cliente.setApellido(res.getString("Apellido"));
                 cliente.setTelefono(String.valueOf(res.getInt("Telefono")));
                 cliente.setDireccion(res.getString("Direccion"));
-                System.out.println("HI Hi HI");
             }
             con.close();
         }catch(Exception e){

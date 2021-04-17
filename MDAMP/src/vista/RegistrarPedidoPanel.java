@@ -6,7 +6,7 @@
 package vista;
 
 import db.BDCliente;
-import clases.Cliente;
+import modelos.Cliente;
 import java.applet.AudioClip;
 import java.awt.Color;
 import static java.lang.Math.abs;
@@ -25,6 +25,9 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
     private final AudioClip sonidoBoton;
     private final AudioClip regresar;
     private final AudioClip sonidoDePago;
+    private int[] precios;
+    private int[] precioNeto;
+
     /**
      * Creates new form RegistrarPedidoFrame
      *
@@ -34,10 +37,69 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
      */
     public RegistrarPedidoPanel(AudioClip sonidoBoton, AudioClip regresar, JPanel mPrincipal) {
         initComponents();
-        sonidoDePago=java.applet.Applet.newAudioClip(getClass().getResource("../sonidos/pago-realizado.wav"));
+        sonidoDePago = java.applet.Applet.newAudioClip(getClass().getResource("../sonidos/pago-realizado.wav"));
         this.sonidoBoton = sonidoBoton;
         this.mPrincipal = mPrincipal;
         this.regresar = regresar;
+        inicializar();
+        desactivar();
+    }
+    
+    public void inicializar(){
+        precios=new int[11];
+        precioNeto=new int[11];
+        for(int i=0;i<11;i++){
+            precios[i]=0;
+        }
+        precioNeto[0]=210; //Precio Paquete 1
+        precioNeto[1]=240; //Precio Paquete 2
+        precioNeto[2]=190; //Precio Paquete 3
+        precioNeto[3]=150; //Precio Paquete 4
+        precioNeto[4]=120; //Precio Paquete 5
+        precioNeto[5]=60; //Precio Paquete 6
+        precioNeto[6]=5; //Precio Extra 1
+        precioNeto[7]=20; //Precio Extra 2
+        precioNeto[8]=5; //Precio Extra 3
+        precioNeto[9]=10; //Precio Extra 4
+        precioNeto[10]=15; //Precio Extra 5
+    }
+    private void desactivar(){
+        cantPaq1.setEnabled(false);
+        cantPaq2.setEnabled(false);
+        cantPaq3.setEnabled(false);
+        cantPaq4.setEnabled(false);
+        cantPaq5.setEnabled(false);
+        cantPaq6.setEnabled(false);
+        cantExt1.setEnabled(false);
+        cantExt2.setEnabled(false);
+        cantExt3.setEnabled(false);
+        cantExt4.setEnabled(false);
+        cantExt5.setEnabled(false);
+    }
+    
+    private void limpiar(){
+        desactivar();
+        paq1.setSelected(false);
+        paq2.setSelected(false);
+        paq3.setSelected(false);
+        paq4.setSelected(false);
+        paq5.setSelected(false);
+        paq6.setSelected(false);
+        extra1.setSelected(false);
+        extra2.setSelected(false);
+        extra3.setSelected(false);
+        extra4.setSelected(false);
+        extra5.setSelected(false);
+        
+        numTelefono.setText("");
+        nombre.setText("");
+        apellido.setText("");
+        direccion.setText("");
+        totalPagar.setText("");
+        totalCliente.setText("");
+        for(int i=0;i<11;i++){
+            precios[i]=0;
+        }
     }
 
     /**
@@ -68,15 +130,17 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
         paq6 = new javax.swing.JCheckBox();
         cantPaq6 = new javax.swing.JSpinner();
         jLabel1 = new javax.swing.JLabel();
-        extra1 = new javax.swing.JCheckBox();
-        cantExt1 = new javax.swing.JSpinner();
         extra2 = new javax.swing.JCheckBox();
         cantExt2 = new javax.swing.JSpinner();
         extra3 = new javax.swing.JCheckBox();
         cantExt3 = new javax.swing.JSpinner();
         extra4 = new javax.swing.JCheckBox();
         cantExt4 = new javax.swing.JSpinner();
+        extra5 = new javax.swing.JCheckBox();
+        cantExt5 = new javax.swing.JSpinner();
         jLabel2 = new javax.swing.JLabel();
+        cantExt1 = new javax.swing.JSpinner();
+        extra1 = new javax.swing.JCheckBox();
         jPanel5 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -165,8 +229,13 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
         });
 
         cantPaq1.setFont(new java.awt.Font("Comfortaa Light", 0, 14)); // NOI18N
-        cantPaq1.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        cantPaq1.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
         cantPaq1.setPreferredSize(new java.awt.Dimension(85, 24));
+        cantPaq1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                setCantPaq1(evt);
+            }
+        });
 
         paq2.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
         paq2.setForeground(new java.awt.Color(153, 255, 153));
@@ -177,9 +246,14 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
             }
         });
 
-        cantPaq2.setFont(new java.awt.Font("Comfortaa Light", 0, 12)); // NOI18N
-        cantPaq2.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        cantPaq2.setFont(new java.awt.Font("Comfortaa Light", 0, 14)); // NOI18N
+        cantPaq2.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
         cantPaq2.setPreferredSize(new java.awt.Dimension(85, 24));
+        cantPaq2.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                setCantPaq2(evt);
+            }
+        });
 
         paq3.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
         paq3.setForeground(new java.awt.Color(153, 255, 153));
@@ -191,8 +265,13 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
         });
 
         cantPaq3.setFont(new java.awt.Font("Comfortaa Light", 0, 14)); // NOI18N
-        cantPaq3.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        cantPaq3.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
         cantPaq3.setPreferredSize(new java.awt.Dimension(85, 24));
+        cantPaq3.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                setCantPaq3(evt);
+            }
+        });
 
         paq4.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
         paq4.setForeground(new java.awt.Color(153, 255, 153));
@@ -204,8 +283,13 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
         });
 
         cantPaq4.setFont(new java.awt.Font("Comfortaa Light", 0, 14)); // NOI18N
-        cantPaq4.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        cantPaq4.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
         cantPaq4.setPreferredSize(new java.awt.Dimension(85, 24));
+        cantPaq4.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                setCantPaq4(evt);
+            }
+        });
 
         paq5.setFont(new java.awt.Font("Ebrima", 1, 14)); // NOI18N
         paq5.setForeground(new java.awt.Color(153, 255, 153));
@@ -217,8 +301,13 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
         });
 
         cantPaq5.setFont(new java.awt.Font("Comfortaa Light", 0, 14)); // NOI18N
-        cantPaq5.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        cantPaq5.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
         cantPaq5.setPreferredSize(new java.awt.Dimension(85, 24));
+        cantPaq5.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                setCantPaq5(evt);
+            }
+        });
 
         paq6.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
         paq6.setForeground(new java.awt.Color(153, 255, 153));
@@ -230,29 +319,21 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
         });
 
         cantPaq6.setFont(new java.awt.Font("Comfortaa Light", 0, 14)); // NOI18N
-        cantPaq6.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        cantPaq6.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
         cantPaq6.setPreferredSize(new java.awt.Dimension(85, 24));
+        cantPaq6.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                setCantPaq6(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(153, 255, 153));
         jLabel1.setText("Paquete:");
 
-        extra1.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
-        extra1.setForeground(new java.awt.Color(153, 255, 153));
-        extra1.setText("Ensalada");
-        extra1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                extra1ActionPerformed(evt);
-            }
-        });
-
-        cantExt1.setFont(new java.awt.Font("Comfortaa Light", 0, 14)); // NOI18N
-        cantExt1.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
-        cantExt1.setPreferredSize(new java.awt.Dimension(85, 24));
-
         extra2.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
         extra2.setForeground(new java.awt.Color(153, 255, 153));
-        extra2.setText("Tortillas de Maiz");
+        extra2.setText("Ensalada");
         extra2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 extra2ActionPerformed(evt);
@@ -260,12 +341,17 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
         });
 
         cantExt2.setFont(new java.awt.Font("Comfortaa Light", 0, 14)); // NOI18N
-        cantExt2.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        cantExt2.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
         cantExt2.setPreferredSize(new java.awt.Dimension(85, 24));
+        cantExt2.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                setCantExt2(evt);
+            }
+        });
 
         extra3.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
         extra3.setForeground(new java.awt.Color(153, 255, 153));
-        extra3.setText("Tortillas de Harina");
+        extra3.setText("Tortillas de Maiz");
         extra3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 extra3ActionPerformed(evt);
@@ -273,12 +359,17 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
         });
 
         cantExt3.setFont(new java.awt.Font("Comfortaa Light", 0, 14)); // NOI18N
-        cantExt3.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        cantExt3.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
         cantExt3.setPreferredSize(new java.awt.Dimension(85, 24));
+        cantExt3.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                setCantExt3(evt);
+            }
+        });
 
         extra4.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
         extra4.setForeground(new java.awt.Color(153, 255, 153));
-        extra4.setText("Orden de Papas");
+        extra4.setText("Tortillas de Harina");
         extra4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 extra4ActionPerformed(evt);
@@ -286,12 +377,51 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
         });
 
         cantExt4.setFont(new java.awt.Font("Comfortaa Light", 0, 14)); // NOI18N
-        cantExt4.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        cantExt4.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
         cantExt4.setPreferredSize(new java.awt.Dimension(85, 24));
+        cantExt4.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                setCantExt4(evt);
+            }
+        });
+
+        extra5.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
+        extra5.setForeground(new java.awt.Color(153, 255, 153));
+        extra5.setText("Orden de Papas");
+        extra5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                extra5ActionPerformed(evt);
+            }
+        });
+
+        cantExt5.setFont(new java.awt.Font("Comfortaa Light", 0, 14)); // NOI18N
+        cantExt5.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+        cantExt5.setPreferredSize(new java.awt.Dimension(85, 24));
+        cantExt5.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                setCantExt6(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(153, 255, 153));
         jLabel2.setText("Extra:");
+
+        cantExt1.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+        cantExt1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                setCantExt1(evt);
+            }
+        });
+
+        extra1.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
+        extra1.setForeground(new java.awt.Color(153, 255, 153));
+        extra1.setText("Salsa Y Cebolla");
+        extra1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                extra1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -301,7 +431,9 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addComponent(jLabel2)))
                 .addGap(31, 31, 31)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(paq2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -309,27 +441,28 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
                     .addComponent(paq4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(paq5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(paq6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(paq1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(extra1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(extra4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(extra3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(extra4)
-                    .addComponent(extra2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(paq1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(extra2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(extra5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(extra1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(54, 54, 54)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(cantPaq5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cantPaq4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cantPaq3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(cantPaq6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(cantExt1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(cantPaq2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(cantExt3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cantExt4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cantExt2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(cantPaq1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(cantPaq5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cantPaq4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cantPaq3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cantPaq6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cantExt2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cantExt4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cantExt5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cantExt3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cantPaq1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cantPaq2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cantExt1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 53, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -337,16 +470,17 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
                             .addComponent(paq1)
-                            .addComponent(cantPaq2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(10, 10, 10)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(paq2)
                             .addComponent(cantPaq1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(10, 10, 10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cantPaq2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(paq2)
+                        .addGap(12, 12, 12)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cantPaq3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(paq3))
@@ -361,26 +495,29 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
                         .addGap(10, 10, 10)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cantPaq6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(paq6))
-                        .addGap(35, 35, 35)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cantExt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(extra1)
-                                    .addComponent(jLabel2))
-                                .addGap(10, 10, 10)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(extra2)
-                                    .addComponent(cantExt2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(10, 10, 10)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(extra3)
-                                    .addComponent(cantExt3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(10, 10, 10)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(extra4)
-                                    .addComponent(cantExt4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                            .addComponent(paq6))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cantExt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(extra1))
+                .addGap(10, 10, 10)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cantExt2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(extra2)
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(extra3)
+                            .addComponent(cantExt3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(extra4)
+                            .addComponent(cantExt4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(extra5)
+                            .addComponent(cantExt5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(10, Short.MAX_VALUE))
         );
 
@@ -527,16 +664,6 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
         totalPagar.setBackground(new java.awt.Color(153, 255, 204));
         totalPagar.setFont(new java.awt.Font("Comfortaa Light", 0, 14)); // NOI18N
         totalPagar.setPreferredSize(new java.awt.Dimension(12, 24));
-        totalPagar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                totalPagarMouseClicked(evt);
-            }
-        });
-        totalPagar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                totalPagarActionPerformed(evt);
-            }
-        });
 
         jLabel8.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(153, 255, 153));
@@ -585,7 +712,7 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel8)
-                .addGap(48, 48, 48)
+                .addGap(72, 72, 72)
                 .addComponent(jLabel9)
                 .addGap(131, 131, 131))
         );
@@ -620,12 +747,12 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(35, 35, 35))
+                .addGap(78, 78, 78))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -645,58 +772,138 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void regresarImagenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_regresarImagenMouseClicked
         Icon icono = new ImageIcon(getClass().getResource("../imagenes/regreso.png"));
         regresar.play();
-        if (JOptionPane.showConfirmDialog(null, "¿Desea regresar al menu principal?", "Regresar", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,icono) == 0) {
+        if (JOptionPane.showConfirmDialog(null, "¿Desea regresar al menu principal?", "Regresar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icono) == 0) {
             this.setVisible(false);
             mPrincipal.setVisible(true);
+            limpiar();
         }
     }//GEN-LAST:event_regresarImagenMouseClicked
 
+    private void extra5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_extra5ActionPerformed
+        // TODO add your handling code here:
+        if(extra5.isSelected()){
+            cantExt5.setEnabled(true);
+            calcular(10,Integer.parseInt(cantExt5.getValue().toString()));
+        }else{
+            cantExt5.setEnabled(false);
+            cantExt5.setValue(1);
+            calcular(10,0);
+        }
+    }//GEN-LAST:event_extra5ActionPerformed
+
     private void extra4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_extra4ActionPerformed
         // TODO add your handling code here:
+        if(extra4.isSelected()){
+            cantExt4.setEnabled(true);
+            calcular(9,Integer.parseInt(cantExt4.getValue().toString()));
+        }else{
+            cantExt4.setEnabled(false);
+            cantExt4.setValue(1);
+            calcular(9,0);
+        }
     }//GEN-LAST:event_extra4ActionPerformed
 
     private void extra3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_extra3ActionPerformed
         // TODO add your handling code here:
+        if(extra3.isSelected()){
+            cantExt3.setEnabled(true);
+            calcular(8,Integer.parseInt(cantExt3.getValue().toString()));
+        }else{
+            cantExt3.setEnabled(false);
+            cantExt3.setValue(1);
+            calcular(8,0);
+        }
     }//GEN-LAST:event_extra3ActionPerformed
 
     private void extra2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_extra2ActionPerformed
         // TODO add your handling code here:
+        if(extra2.isSelected()){
+            cantExt2.setEnabled(true);
+            calcular(7,Integer.parseInt(cantExt2.getValue().toString()));
+        }else{
+            cantExt2.setEnabled(false);
+            cantExt2.setValue(1);
+            calcular(7,0);
+        }
     }//GEN-LAST:event_extra2ActionPerformed
-
-    private void extra1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_extra1ActionPerformed
-        // TODO add your handling code here:
-        totalPagar.setText(extra1.getToolTipText());
-    }//GEN-LAST:event_extra1ActionPerformed
 
     private void paq6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paq6ActionPerformed
         // TODO add your handling code here:
+        if(paq6.isSelected()){
+            cantPaq6.setEnabled(true);
+            calcular(5,Integer.parseInt(cantPaq6.getValue().toString()));
+        }else{
+            cantPaq6.setEnabled(false);
+            cantPaq6.setValue(1);
+            calcular(5,0);
+        }
     }//GEN-LAST:event_paq6ActionPerformed
 
     private void paq5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paq5ActionPerformed
         // TODO add your handling code here:
+        if(paq5.isSelected()){
+            cantPaq5.setEnabled(true);
+            calcular(4,Integer.parseInt(cantPaq5.getValue().toString()));
+        }else{
+            cantPaq5.setEnabled(false);
+            cantPaq5.setValue(1);
+            calcular(4,0);
+        }
     }//GEN-LAST:event_paq5ActionPerformed
 
     private void paq4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paq4ActionPerformed
         // TODO add your handling code here:
+        if(paq4.isSelected()){
+            cantPaq4.setEnabled(true);
+            calcular(3,Integer.parseInt(cantPaq4.getValue().toString()));
+        }else{
+            cantPaq4.setEnabled(false);
+            cantPaq4.setValue(1);
+            calcular(3,0);
+        }
     }//GEN-LAST:event_paq4ActionPerformed
 
     private void paq3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paq3ActionPerformed
         // TODO add your handling code here:
+        if(paq3.isSelected()){
+            cantPaq3.setEnabled(true);
+            calcular(2,Integer.parseInt(cantPaq3.getValue().toString()));
+        }else{
+            cantPaq3.setEnabled(false);
+            cantPaq3.setValue(1);
+            calcular(2,0);
+        }
     }//GEN-LAST:event_paq3ActionPerformed
 
     private void paq2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paq2ActionPerformed
         // TODO add your handling code here:
+        if(paq2.isSelected()){
+            cantPaq2.setEnabled(true);
+            calcular(1,Integer.parseInt(cantPaq2.getValue().toString()));
+        }else{
+            cantPaq2.setEnabled(false);
+            cantPaq2.setValue(1);
+            calcular(1,0);
+        }
     }//GEN-LAST:event_paq2ActionPerformed
 
     private void paq1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paq1ActionPerformed
         // TODO add your handling code here:
+        if(paq1.isSelected()){
+            cantPaq1.setEnabled(true);
+            calcular(0,Integer.parseInt(cantPaq1.getValue().toString()));
+        }else{
+            cantPaq1.setEnabled(false);
+            cantPaq1.setValue(1);
+            calcular(0,0);
+        }
     }//GEN-LAST:event_paq1ActionPerformed
 
     private void buscarBotonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarBotonMouseExited
@@ -709,9 +916,9 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_buscarBotonMouseEntered
 
     private void buscarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarBotonActionPerformed
-        BDCliente clientes=new BDCliente();
+        BDCliente clientes = new BDCliente();
         Cliente cliente;
-        cliente=clientes.buscar(Integer.parseInt(numTelefono.getText()));
+        cliente = clientes.buscar(Integer.parseInt(numTelefono.getText()));
         nombre.setText(cliente.getNombre());
         apellido.setText(cliente.getApellido());
         direccion.setText(cliente.getDireccion());
@@ -727,8 +934,8 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_pagarBotonMouseEntered
 
     private void pagarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pagarBotonActionPerformed
-       Icon icono = new ImageIcon(getClass().getResource("../imagenes/pagar.png"));
-        if (JOptionPane.showConfirmDialog(null, "Se efectuara el pago,¿Desea confirmar?","Confirmacion", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,icono) == 0) {
+        Icon icono = new ImageIcon(getClass().getResource("../imagenes/pagar.png"));
+        if (JOptionPane.showConfirmDialog(null, "Se efectuara el pago,¿Desea confirmar?", "Confirmacion", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icono) == 0) {
         }
         if (!totalPagar.getText().isEmpty() && !totalCliente.getText().isEmpty()) {
             int total = Integer.parseInt(totalCliente.getText()) - Integer.parseInt(totalPagar.getText());
@@ -736,10 +943,12 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
             if (total > 0) {
                 sonidoDePago.play();
                 total = abs(total);
-                JOptionPane.showMessageDialog(null, "Gracias por su Compra!\n" + "Cambio: " + total, "Pago Exitoso", JOptionPane.INFORMATION_MESSAGE,icono);
+                JOptionPane.showMessageDialog(null, "Gracias por su Compra!\n" + "Cambio: " + total, "Pago Exitoso", JOptionPane.INFORMATION_MESSAGE, icono);
+                limpiar();
             } else if (total == 0) {
                 sonidoDePago.play();
-                JOptionPane.showMessageDialog(null, "Gracias por su Compra!", "Pago Exitoso", JOptionPane.INFORMATION_MESSAGE,icono);
+                JOptionPane.showMessageDialog(null, "Gracias por su Compra!", "Pago Exitoso", JOptionPane.INFORMATION_MESSAGE, icono);
+                limpiar();
             } else {
                 regresar.play();
                 JOptionPane.showMessageDialog(null, "No se ha completado el monto a pagar", "Error", JOptionPane.INFORMATION_MESSAGE);
@@ -749,26 +958,104 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_pagarBotonActionPerformed
 
-    private void totalPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalPagarActionPerformed
+    private void setCantPaq2(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_setCantPaq2
         // TODO add your handling code here:
-    }//GEN-LAST:event_totalPagarActionPerformed
+        if (paq2.isSelected()) {
+            calcular(1,Integer.parseInt(cantPaq2.getValue().toString()));
+        }
+    }//GEN-LAST:event_setCantPaq2
 
-    private void totalPagarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_totalPagarMouseClicked
+    private void setCantPaq1(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_setCantPaq1
         // TODO add your handling code here:
-        int totalPagar = 0;
-        totalPagar = totalPagar + new Integer((240)*(Integer.parseInt(cantPaq1.getValue().toString())));
-        totalPagar = totalPagar + new Integer((210)*(Integer.parseInt(cantPaq2.getValue().toString())));
-        totalPagar = totalPagar + new Integer((190)*(Integer.parseInt(cantPaq3.getValue().toString())));
-        totalPagar = totalPagar + new Integer((150)*(Integer.parseInt(cantPaq4.getValue().toString())));
-        totalPagar = totalPagar + new Integer((120)*(Integer.parseInt(cantPaq5.getValue().toString())));
-        totalPagar = totalPagar + new Integer((60)*(Integer.parseInt(cantPaq6.getValue().toString())));
-        totalPagar = totalPagar + new Integer((20)*(Integer.parseInt(cantExt1.getValue().toString())));
-        totalPagar = totalPagar + new Integer((5)*(Integer.parseInt(cantExt2.getValue().toString())));
-        totalPagar = totalPagar + new Integer((20)*(Integer.parseInt(cantExt3.getValue().toString())));
-        totalPagar = totalPagar + new Integer((15)*(Integer.parseInt(cantExt4.getValue().toString())));
-        this.totalPagar.setText(new Integer(totalPagar).toString());
-    }//GEN-LAST:event_totalPagarMouseClicked
+        if (paq1.isSelected()) {
+           calcular(0,Integer.parseInt(cantPaq1.getValue().toString()));
+        }
+    }//GEN-LAST:event_setCantPaq1
 
+    private void extra1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_extra1ActionPerformed
+        // TODO add your handling code here:
+        if(extra1.isSelected()){
+            cantExt1.setEnabled(true);
+            calcular(6,Integer.parseInt(cantExt1.getValue().toString()));
+        }else{
+            cantExt1.setEnabled(false);
+            cantExt1.setValue(1);
+            calcular(6,0);
+        }
+    }//GEN-LAST:event_extra1ActionPerformed
+
+    private void setCantPaq3(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_setCantPaq3
+        // TODO add your handling code here:
+        if (paq3.isSelected()) {
+           calcular(2,Integer.parseInt(cantPaq3.getValue().toString()));
+        }
+    }//GEN-LAST:event_setCantPaq3
+
+    private void setCantPaq4(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_setCantPaq4
+        // TODO add your handling code here:
+        if (paq4.isSelected()) {
+           calcular(3,Integer.parseInt(cantPaq4.getValue().toString()));
+        }
+    }//GEN-LAST:event_setCantPaq4
+
+    private void setCantPaq5(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_setCantPaq5
+        // TODO add your handling code here:
+        if (paq5.isSelected()) {
+           calcular(4,Integer.parseInt(cantPaq5.getValue().toString()));
+        }
+    }//GEN-LAST:event_setCantPaq5
+
+    private void setCantPaq6(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_setCantPaq6
+        // TODO add your handling code here:
+        if (paq6.isSelected()) {
+           calcular(5,Integer.parseInt(cantPaq6.getValue().toString()));
+        }
+    }//GEN-LAST:event_setCantPaq6
+
+    private void setCantExt1(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_setCantExt1
+        // TODO add your handling code here:
+        if (extra1.isSelected()) {
+           calcular(6,Integer.parseInt(cantExt1.getValue().toString()));
+        }
+    }//GEN-LAST:event_setCantExt1
+
+    private void setCantExt2(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_setCantExt2
+        // TODO add your handling code here:
+        if (extra2.isSelected()) {
+           calcular(7,Integer.parseInt(cantExt2.getValue().toString()));
+        }
+    }//GEN-LAST:event_setCantExt2
+
+    private void setCantExt3(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_setCantExt3
+        // TODO add your handling code here:
+        if (extra3.isSelected()) {
+           calcular(8,Integer.parseInt(cantExt3.getValue().toString()));
+        }
+    }//GEN-LAST:event_setCantExt3
+
+    private void setCantExt4(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_setCantExt4
+        // TODO add your handling code here:
+        if (extra4.isSelected()) {
+           calcular(9,Integer.parseInt(cantExt4.getValue().toString()));
+        }
+    }//GEN-LAST:event_setCantExt4
+
+    private void setCantExt6(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_setCantExt6
+        // TODO add your handling code here:
+        if (extra5.isSelected()) {
+           calcular(10,Integer.parseInt(cantExt5.getValue().toString()));
+        }
+    }//GEN-LAST:event_setCantExt6
+
+    private void calcular(int pos,int valor){
+         int totalPago=0;
+         precios[pos]=valor*precioNeto[pos];
+         
+       for(int i=0;i<11;i++){
+           totalPago+=precios[i];
+       }
+        this.totalPagar.setText(String.valueOf(totalPago));
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellido;
@@ -777,6 +1064,7 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
     private javax.swing.JSpinner cantExt2;
     private javax.swing.JSpinner cantExt3;
     private javax.swing.JSpinner cantExt4;
+    private javax.swing.JSpinner cantExt5;
     private javax.swing.JSpinner cantPaq1;
     private javax.swing.JSpinner cantPaq2;
     private javax.swing.JSpinner cantPaq3;
@@ -788,6 +1076,7 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
     private javax.swing.JCheckBox extra2;
     private javax.swing.JCheckBox extra3;
     private javax.swing.JCheckBox extra4;
+    private javax.swing.JCheckBox extra5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
