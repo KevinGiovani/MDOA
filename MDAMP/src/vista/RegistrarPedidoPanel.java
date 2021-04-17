@@ -6,10 +6,13 @@
 package vista;
 
 import db.BDCliente;
+import db.BDPedido;
 import modelos.Cliente;
+import modelos.Pedido;
 import java.applet.AudioClip;
 import java.awt.Color;
 import static java.lang.Math.abs;
+import java.sql.Date;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -44,26 +47,27 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
         inicializar();
         desactivar();
     }
-    
-    public void inicializar(){
-        precios=new int[11];
-        precioNeto=new int[11];
-        for(int i=0;i<11;i++){
-            precios[i]=0;
+
+    public void inicializar() {
+        precios = new int[11];
+        precioNeto = new int[11];
+        for (int i = 0; i < 11; i++) {
+            precios[i] = 0;
         }
-        precioNeto[0]=210; //Precio Paquete 1
-        precioNeto[1]=240; //Precio Paquete 2
-        precioNeto[2]=190; //Precio Paquete 3
-        precioNeto[3]=150; //Precio Paquete 4
-        precioNeto[4]=120; //Precio Paquete 5
-        precioNeto[5]=60; //Precio Paquete 6
-        precioNeto[6]=5; //Precio Extra 1
-        precioNeto[7]=20; //Precio Extra 2
-        precioNeto[8]=5; //Precio Extra 3
-        precioNeto[9]=10; //Precio Extra 4
-        precioNeto[10]=15; //Precio Extra 5
+        precioNeto[0] = 210; //Precio Paquete 1
+        precioNeto[1] = 240; //Precio Paquete 2
+        precioNeto[2] = 190; //Precio Paquete 3
+        precioNeto[3] = 150; //Precio Paquete 4
+        precioNeto[4] = 120; //Precio Paquete 5
+        precioNeto[5] = 60; //Precio Paquete 6
+        precioNeto[6] = 5; //Precio Extra 1
+        precioNeto[7] = 20; //Precio Extra 2
+        precioNeto[8] = 5; //Precio Extra 3
+        precioNeto[9] = 10; //Precio Extra 4
+        precioNeto[10] = 15; //Precio Extra 5
     }
-    private void desactivar(){
+
+    private void desactivar() {
         cantPaq1.setEnabled(false);
         cantPaq2.setEnabled(false);
         cantPaq3.setEnabled(false);
@@ -76,8 +80,8 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
         cantExt4.setEnabled(false);
         cantExt5.setEnabled(false);
     }
-    
-    private void limpiar(){
+
+    private void limpiar() {
         desactivar();
         paq1.setSelected(false);
         paq2.setSelected(false);
@@ -90,15 +94,15 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
         extra3.setSelected(false);
         extra4.setSelected(false);
         extra5.setSelected(false);
-        
+
         numTelefono.setText("");
         nombre.setText("");
         apellido.setText("");
         direccion.setText("");
         totalPagar.setText("");
         totalCliente.setText("");
-        for(int i=0;i<11;i++){
-            precios[i]=0;
+        for (int i = 0; i < 11; i++) {
+            precios[i] = 0;
         }
     }
 
@@ -387,7 +391,7 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
 
         extra5.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
         extra5.setForeground(new java.awt.Color(153, 255, 153));
-        extra5.setText("Orden de Papas");
+        extra5.setText("Puré de Papa");
         extra5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 extra5ActionPerformed(evt);
@@ -712,9 +716,9 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel8)
-                .addGap(72, 72, 72)
+                .addGap(61, 61, 61)
                 .addComponent(jLabel9)
-                .addGap(131, 131, 131))
+                .addGap(142, 142, 142))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -788,121 +792,121 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
 
     private void extra5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_extra5ActionPerformed
         // TODO add your handling code here:
-        if(extra5.isSelected()){
+        if (extra5.isSelected()) {
             cantExt5.setEnabled(true);
-            calcular(10,Integer.parseInt(cantExt5.getValue().toString()));
-        }else{
+            calcular(10, Integer.parseInt(cantExt5.getValue().toString()));
+        } else {
             cantExt5.setEnabled(false);
             cantExt5.setValue(1);
-            calcular(10,0);
+            calcular(10, 0);
         }
     }//GEN-LAST:event_extra5ActionPerformed
 
     private void extra4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_extra4ActionPerformed
         // TODO add your handling code here:
-        if(extra4.isSelected()){
+        if (extra4.isSelected()) {
             cantExt4.setEnabled(true);
-            calcular(9,Integer.parseInt(cantExt4.getValue().toString()));
-        }else{
+            calcular(9, Integer.parseInt(cantExt4.getValue().toString()));
+        } else {
             cantExt4.setEnabled(false);
             cantExt4.setValue(1);
-            calcular(9,0);
+            calcular(9, 0);
         }
     }//GEN-LAST:event_extra4ActionPerformed
 
     private void extra3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_extra3ActionPerformed
         // TODO add your handling code here:
-        if(extra3.isSelected()){
+        if (extra3.isSelected()) {
             cantExt3.setEnabled(true);
-            calcular(8,Integer.parseInt(cantExt3.getValue().toString()));
-        }else{
+            calcular(8, Integer.parseInt(cantExt3.getValue().toString()));
+        } else {
             cantExt3.setEnabled(false);
             cantExt3.setValue(1);
-            calcular(8,0);
+            calcular(8, 0);
         }
     }//GEN-LAST:event_extra3ActionPerformed
 
     private void extra2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_extra2ActionPerformed
         // TODO add your handling code here:
-        if(extra2.isSelected()){
+        if (extra2.isSelected()) {
             cantExt2.setEnabled(true);
-            calcular(7,Integer.parseInt(cantExt2.getValue().toString()));
-        }else{
+            calcular(7, Integer.parseInt(cantExt2.getValue().toString()));
+        } else {
             cantExt2.setEnabled(false);
             cantExt2.setValue(1);
-            calcular(7,0);
+            calcular(7, 0);
         }
     }//GEN-LAST:event_extra2ActionPerformed
 
     private void paq6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paq6ActionPerformed
         // TODO add your handling code here:
-        if(paq6.isSelected()){
+        if (paq6.isSelected()) {
             cantPaq6.setEnabled(true);
-            calcular(5,Integer.parseInt(cantPaq6.getValue().toString()));
-        }else{
+            calcular(5, Integer.parseInt(cantPaq6.getValue().toString()));
+        } else {
             cantPaq6.setEnabled(false);
             cantPaq6.setValue(1);
-            calcular(5,0);
+            calcular(5, 0);
         }
     }//GEN-LAST:event_paq6ActionPerformed
 
     private void paq5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paq5ActionPerformed
         // TODO add your handling code here:
-        if(paq5.isSelected()){
+        if (paq5.isSelected()) {
             cantPaq5.setEnabled(true);
-            calcular(4,Integer.parseInt(cantPaq5.getValue().toString()));
-        }else{
+            calcular(4, Integer.parseInt(cantPaq5.getValue().toString()));
+        } else {
             cantPaq5.setEnabled(false);
             cantPaq5.setValue(1);
-            calcular(4,0);
+            calcular(4, 0);
         }
     }//GEN-LAST:event_paq5ActionPerformed
 
     private void paq4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paq4ActionPerformed
         // TODO add your handling code here:
-        if(paq4.isSelected()){
+        if (paq4.isSelected()) {
             cantPaq4.setEnabled(true);
-            calcular(3,Integer.parseInt(cantPaq4.getValue().toString()));
-        }else{
+            calcular(3, Integer.parseInt(cantPaq4.getValue().toString()));
+        } else {
             cantPaq4.setEnabled(false);
             cantPaq4.setValue(1);
-            calcular(3,0);
+            calcular(3, 0);
         }
     }//GEN-LAST:event_paq4ActionPerformed
 
     private void paq3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paq3ActionPerformed
         // TODO add your handling code here:
-        if(paq3.isSelected()){
+        if (paq3.isSelected()) {
             cantPaq3.setEnabled(true);
-            calcular(2,Integer.parseInt(cantPaq3.getValue().toString()));
-        }else{
+            calcular(2, Integer.parseInt(cantPaq3.getValue().toString()));
+        } else {
             cantPaq3.setEnabled(false);
             cantPaq3.setValue(1);
-            calcular(2,0);
+            calcular(2, 0);
         }
     }//GEN-LAST:event_paq3ActionPerformed
 
     private void paq2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paq2ActionPerformed
         // TODO add your handling code here:
-        if(paq2.isSelected()){
+        if (paq2.isSelected()) {
             cantPaq2.setEnabled(true);
-            calcular(1,Integer.parseInt(cantPaq2.getValue().toString()));
-        }else{
+            calcular(1, Integer.parseInt(cantPaq2.getValue().toString()));
+        } else {
             cantPaq2.setEnabled(false);
             cantPaq2.setValue(1);
-            calcular(1,0);
+            calcular(1, 0);
         }
     }//GEN-LAST:event_paq2ActionPerformed
 
     private void paq1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paq1ActionPerformed
         // TODO add your handling code here:
-        if(paq1.isSelected()){
+        if (paq1.isSelected()) {
             cantPaq1.setEnabled(true);
-            calcular(0,Integer.parseInt(cantPaq1.getValue().toString()));
-        }else{
+            calcular(0, Integer.parseInt(cantPaq1.getValue().toString()));
+        } else {
             cantPaq1.setEnabled(false);
             cantPaq1.setValue(1);
-            calcular(0,0);
+            calcular(0, 0);
         }
     }//GEN-LAST:event_paq1ActionPerformed
 
@@ -944,10 +948,12 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
                 sonidoDePago.play();
                 total = abs(total);
                 JOptionPane.showMessageDialog(null, "Gracias por su Compra!\n" + "Cambio: " + total, "Pago Exitoso", JOptionPane.INFORMATION_MESSAGE, icono);
+                registrar();
                 limpiar();
             } else if (total == 0) {
                 sonidoDePago.play();
                 JOptionPane.showMessageDialog(null, "Gracias por su Compra!", "Pago Exitoso", JOptionPane.INFORMATION_MESSAGE, icono);
+                registrar();
                 limpiar();
             } else {
                 regresar.play();
@@ -961,100 +967,161 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
     private void setCantPaq2(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_setCantPaq2
         // TODO add your handling code here:
         if (paq2.isSelected()) {
-            calcular(1,Integer.parseInt(cantPaq2.getValue().toString()));
+            calcular(1, Integer.parseInt(cantPaq2.getValue().toString()));
         }
     }//GEN-LAST:event_setCantPaq2
 
     private void setCantPaq1(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_setCantPaq1
         // TODO add your handling code here:
         if (paq1.isSelected()) {
-           calcular(0,Integer.parseInt(cantPaq1.getValue().toString()));
+            calcular(0, Integer.parseInt(cantPaq1.getValue().toString()));
         }
     }//GEN-LAST:event_setCantPaq1
 
     private void extra1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_extra1ActionPerformed
         // TODO add your handling code here:
-        if(extra1.isSelected()){
+        if (extra1.isSelected()) {
             cantExt1.setEnabled(true);
-            calcular(6,Integer.parseInt(cantExt1.getValue().toString()));
-        }else{
+            calcular(6, Integer.parseInt(cantExt1.getValue().toString()));
+        } else {
             cantExt1.setEnabled(false);
             cantExt1.setValue(1);
-            calcular(6,0);
+            calcular(6, 0);
         }
     }//GEN-LAST:event_extra1ActionPerformed
 
     private void setCantPaq3(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_setCantPaq3
         // TODO add your handling code here:
         if (paq3.isSelected()) {
-           calcular(2,Integer.parseInt(cantPaq3.getValue().toString()));
+            calcular(2, Integer.parseInt(cantPaq3.getValue().toString()));
         }
     }//GEN-LAST:event_setCantPaq3
 
     private void setCantPaq4(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_setCantPaq4
         // TODO add your handling code here:
         if (paq4.isSelected()) {
-           calcular(3,Integer.parseInt(cantPaq4.getValue().toString()));
+            calcular(3, Integer.parseInt(cantPaq4.getValue().toString()));
         }
     }//GEN-LAST:event_setCantPaq4
 
     private void setCantPaq5(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_setCantPaq5
         // TODO add your handling code here:
         if (paq5.isSelected()) {
-           calcular(4,Integer.parseInt(cantPaq5.getValue().toString()));
+            calcular(4, Integer.parseInt(cantPaq5.getValue().toString()));
         }
     }//GEN-LAST:event_setCantPaq5
 
     private void setCantPaq6(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_setCantPaq6
         // TODO add your handling code here:
         if (paq6.isSelected()) {
-           calcular(5,Integer.parseInt(cantPaq6.getValue().toString()));
+            calcular(5, Integer.parseInt(cantPaq6.getValue().toString()));
         }
     }//GEN-LAST:event_setCantPaq6
 
     private void setCantExt1(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_setCantExt1
         // TODO add your handling code here:
         if (extra1.isSelected()) {
-           calcular(6,Integer.parseInt(cantExt1.getValue().toString()));
+            calcular(6, Integer.parseInt(cantExt1.getValue().toString()));
         }
     }//GEN-LAST:event_setCantExt1
 
     private void setCantExt2(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_setCantExt2
         // TODO add your handling code here:
         if (extra2.isSelected()) {
-           calcular(7,Integer.parseInt(cantExt2.getValue().toString()));
+            calcular(7, Integer.parseInt(cantExt2.getValue().toString()));
         }
     }//GEN-LAST:event_setCantExt2
 
     private void setCantExt3(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_setCantExt3
         // TODO add your handling code here:
         if (extra3.isSelected()) {
-           calcular(8,Integer.parseInt(cantExt3.getValue().toString()));
+            calcular(8, Integer.parseInt(cantExt3.getValue().toString()));
         }
     }//GEN-LAST:event_setCantExt3
 
     private void setCantExt4(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_setCantExt4
         // TODO add your handling code here:
         if (extra4.isSelected()) {
-           calcular(9,Integer.parseInt(cantExt4.getValue().toString()));
+            calcular(9, Integer.parseInt(cantExt4.getValue().toString()));
         }
     }//GEN-LAST:event_setCantExt4
 
     private void setCantExt6(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_setCantExt6
         // TODO add your handling code here:
         if (extra5.isSelected()) {
-           calcular(10,Integer.parseInt(cantExt5.getValue().toString()));
+            calcular(10, Integer.parseInt(cantExt5.getValue().toString()));
         }
     }//GEN-LAST:event_setCantExt6
 
-    private void calcular(int pos,int valor){
-         int totalPago=0;
-         precios[pos]=valor*precioNeto[pos];
-         
-       for(int i=0;i<11;i++){
-           totalPago+=precios[i];
-       }
+    private void calcular(int pos, int valor) {
+        int totalPago = 0;
+        precios[pos] = valor * precioNeto[pos];
+
+        for (int i = 0; i < 11; i++) {
+            totalPago += precios[i];
+        }
         this.totalPagar.setText(String.valueOf(totalPago));
+    }
+
+    private void registrar() {
+        BDPedido pedidos = new BDPedido();
+        int idCliente;
+        String paquete = validarPedido();
+        String extra = validarExtra();
+        long millis = System.currentTimeMillis();
+        Date fecha = new Date(millis);
+        if (numTelefono.getText().equals("")) {
+            idCliente = 1;
+        } else {
+            idCliente = Integer.parseInt(numTelefono.getText());
+        }
+        Pedido pedido = new Pedido(idCliente, paquete, extra, String.valueOf(fecha),Integer.parseInt(totalPagar.getText()));
+        pedidos.agregarDatos(pedido);
+    }
+
+    private String validarPedido() {
+        String cadena = "";
+        if (paq1.isSelected()) {
+            cadena += paq1.getText() + ": " + cantPaq1.getValue() + "\n";
+
+        }
+        if (paq2.isSelected()) {
+            cadena += paq2.getText()+ ": " + cantPaq2.getValue() + "\n";
+        }
+        if (paq3.isSelected()) {
+            cadena += paq3.getText() + ": " + cantPaq3.getValue() + "\n";
+        }
+        if (paq4.isSelected()) {
+            cadena += paq4.getText() + ": " + cantPaq4.getValue() + "\n";
+        }
+        if (paq5.isSelected()) {
+            cadena += paq5.getText() + ": " + cantPaq5.getValue() + "\n";
+        }
+        if (paq6.isSelected()) {
+            cadena += paq6.getText() + ": " + cantPaq6.getValue() + "\n";
+        }
+
+        return cadena;
+    }
+
+    private String validarExtra() {
+        String cadena = "";
+        if (extra1.isSelected()) {
+            cadena += extra1.getText() + ": " + cantExt1.getValue() + "\n";
+        }
+        if (extra2.isSelected()) {
+            cadena += extra2.getText() + ": " + cantExt2.getValue() + "\n";
+        }
+        if (extra3.isSelected()) {
+            cadena += extra3.getText() + ": " + cantExt3.getValue() + "\n";
+        }
+        if (extra4.isSelected()) {
+            cadena += extra4.getText() + ": " + cantExt4.getValue() + "\n";
+        }
+        if (extra5.isSelected()) {
+            cadena += extra5.getText() + ": " + cantExt5.getValue() + "\n";
+        }
+        return cadena;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

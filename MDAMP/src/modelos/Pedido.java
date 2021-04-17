@@ -19,12 +19,21 @@ public class Pedido {
     private String fecha;
     private int total;
 
-    public Pedido(int idPedido, int idCliente, String paquete, String extra, String fecha) {
+    public Pedido(int idPedido, int idCliente, String paquete, String extra, String fecha,int total) {
         this.idPedido = idPedido;
         this.idCliente = idCliente;
         this.paquete = paquete;
         this.extra = extra;
         this.fecha = fecha;
+        this.total=total;
+    }
+    
+    public Pedido(int idCliente, String paquete, String extra, String fecha,int total){
+        this.idCliente = idCliente;
+        this.paquete = paquete;
+        this.extra = extra;
+        this.fecha = fecha;
+        this.total=total;
     }
 
     public int getIdPedido() {

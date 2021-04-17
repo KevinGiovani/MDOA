@@ -25,13 +25,12 @@ public class BDPedido {
             Connection con=null;
             con=Conexion.getConnection();
             PreparedStatement ps;
-            ps=con.prepareStatement("INSERT INTO Pedido VALUES (?,?,?,?,?,?)");
-            ps.setInt(1, pedido.getIdPedido());
-            ps.setInt(2, pedido.getIdCliente());
-            ps.setString(3, pedido.getPaquete());
-            ps.setString(4, pedido.getExtra());
-            ps.setString(5, pedido.getFecha());
-            ps.setInt(4, pedido.getTotal());
+            ps=con.prepareStatement("INSERT INTO Pedido (Id_Cliente,Paquete,Extra,Fecha,Total) VALUES (?,?,?,?,?)");
+            ps.setInt(1, pedido.getIdCliente());
+            ps.setString(2, pedido.getPaquete());
+            ps.setString(3, pedido.getExtra());
+            ps.setString(4, pedido.getFecha());
+            ps.setInt(5, pedido.getTotal());
             int res=ps.executeUpdate();
             con.close();
         }catch(Exception e){
