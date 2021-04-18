@@ -5,6 +5,7 @@
  */
 package vistas;
 
+import controladores.ControladorMenuPrincipal;
 import java.applet.AudioClip;
 import java.awt.Color;
 import java.sql.Connection;
@@ -22,20 +23,21 @@ import modelos.Conexion;
  * @author Inzunza Kevin
  */
 public class PrincipalFrame extends javax.swing.JFrame {
-private final AudioClip sonidoBoton;
-private final JPanel registrarCliente;
-private final JPanel registrarPedido;
-private final AudioClip salir;
+    private final ControladorMenuPrincipal cMenu;
+ private final AudioClip sonidoDeBoton;
+    private final AudioClip sonidoDeSalir;
+    private final JPanel registrarPedido;
+    private final JPanel registrarCliente;
     /**
      * Creates new form PrincipalFrame
      */
     public PrincipalFrame() {
         initComponents();
-        sonidoBoton=java.applet.Applet.newAudioClip(getClass().getResource("../sonidos/sonido_boton.wav"));
-        salir=java.applet.Applet.newAudioClip(getClass().getResource("../sonidos/salir.wav"));
-        registrarPedido = new RegistrarPedidoPanel(sonidoBoton,salir,fondoJPanel);
-        registrarCliente = new RegistrarClientePanel(sonidoBoton,salir,fondoJPanel);
-        Connection con=Conexion.getConnection();
+        sonidoDeBoton=java.applet.Applet.newAudioClip(getClass().getResource("../sonidos/sonido_boton.wav"));
+        sonidoDeSalir=java.applet.Applet.newAudioClip(getClass().getResource("../sonidos/salir.wav"));
+        this.registrarPedido = new RegistrarPedidoPanel(sonidoDeBoton,sonidoDeSalir,fondoJPanel);
+        this.registrarCliente = new RegistrarClientePanel(sonidoDeBoton,sonidoDeSalir,fondoJPanel);
+         cMenu=new ControladorMenuPrincipal(this,sonidoDeBoton,sonidoDeSalir,registrarCliente,registrarPedido);
     }
 
     /**
@@ -81,52 +83,18 @@ private final AudioClip salir;
         registroClienteBoton.setFont(new java.awt.Font("Gayathri", 1, 8)); // NOI18N
         registroClienteBoton.setForeground(new java.awt.Color(153, 255, 204));
         registroClienteBoton.setText("REGISTRAR CLIENTE");
-        registroClienteBoton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                registroClienteBotonMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                registroClienteBotonMouseExited(evt);
-            }
-        });
-        registroClienteBoton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registroClienteBotonActionPerformed(evt);
-            }
-        });
         fondoJPanel.add(registroClienteBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 240, 190, 40));
 
         consultarBoton.setBackground(new java.awt.Color(0, 51, 51));
         consultarBoton.setFont(new java.awt.Font("Gayathri", 1, 8)); // NOI18N
         consultarBoton.setForeground(new java.awt.Color(153, 255, 204));
         consultarBoton.setText("CONSULTAR");
-        consultarBoton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                consultarBotonMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                consultarBotonMouseExited(evt);
-            }
-        });
         fondoJPanel.add(consultarBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 320, 190, 40));
 
         registroPedidoBoton.setBackground(new java.awt.Color(0, 51, 51));
         registroPedidoBoton.setFont(new java.awt.Font("Gayathri", 1, 8)); // NOI18N
         registroPedidoBoton.setForeground(new java.awt.Color(153, 255, 204));
         registroPedidoBoton.setText("REGISTRAR PEDIDO");
-        registroPedidoBoton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                registroPedidoBotonMouseExited(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                registroPedidoBotonMouseEntered(evt);
-            }
-        });
-        registroPedidoBoton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registroPedidoBotonActionPerformed(evt);
-            }
-        });
         fondoJPanel.add(registroPedidoBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, 190, 40));
 
         consultarJPanel.setBackground(new java.awt.Color(0, 51, 51));
@@ -273,14 +241,6 @@ private final AudioClip salir;
         corteBoton.setFont(new java.awt.Font("Gayathri", 1, 8)); // NOI18N
         corteBoton.setForeground(new java.awt.Color(153, 255, 204));
         corteBoton.setText("REALIZAR CORTE");
-        corteBoton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                corteBotonMouseExited(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                corteBotonMouseEntered(evt);
-            }
-        });
 
         javax.swing.GroupLayout inferiorJPanelLayout = new javax.swing.GroupLayout(inferiorJPanel);
         inferiorJPanel.setLayout(inferiorJPanelLayout);
@@ -309,11 +269,6 @@ private final AudioClip salir;
         fondoJPanel.add(imagenIzq_jLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 540, 380));
 
         salirImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/salir.png"))); // NOI18N
-        salirImagen.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                salirImagenMouseClicked(evt);
-            }
-        });
         fondoJPanel.add(salirImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 10, -1, -1));
 
         cLittleImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/FondoInicioLogo.gif"))); // NOI18N
@@ -347,69 +302,6 @@ private final AudioClip salir;
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void registroPedidoBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registroPedidoBotonActionPerformed
-         this.getContentPane().add(registrarPedido);
-         registrarPedido.setSize(1045, 533); //Tamaño de la ventana asignada al JPanel
-         fondoJPanel.setVisible(false);
-         registrarPedido.setVisible(true);
-    }//GEN-LAST:event_registroPedidoBotonActionPerformed
-
-    private void salirImagenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salirImagenMouseClicked
-        Icon icono = new ImageIcon(getClass().getResource("../imagenes/salir.png"));
-        salir.play();
-        if(JOptionPane.showConfirmDialog(null, "¿Desea finalizar el programa?","Salir", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,icono)==0){
-            try {
-               Conexion.desconectar();
-            } catch (SQLException ex) {
-                Logger.getLogger(PrincipalFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            System.exit(0);
-     }     
-    }//GEN-LAST:event_salirImagenMouseClicked
-
-    private void registroPedidoBotonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registroPedidoBotonMouseEntered
-        registroPedidoBoton.setBackground(new Color(0,102,102));
-        sonidoBoton.play();
-    }//GEN-LAST:event_registroPedidoBotonMouseEntered
-
-    private void registroClienteBotonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registroClienteBotonMouseEntered
-        registroClienteBoton.setBackground(new Color(0,102,102));
-        sonidoBoton.play();
-    }//GEN-LAST:event_registroClienteBotonMouseEntered
-
-    private void consultarBotonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_consultarBotonMouseEntered
-        consultarBoton.setBackground(new Color(0,102,102));
-        sonidoBoton.play();
-    }//GEN-LAST:event_consultarBotonMouseEntered
-
-    private void corteBotonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_corteBotonMouseEntered
-       corteBoton.setBackground(new Color(0,102,102));
-        sonidoBoton.play();
-    }//GEN-LAST:event_corteBotonMouseEntered
-
-    private void registroPedidoBotonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registroPedidoBotonMouseExited
-        registroPedidoBoton.setBackground(new Color(0,51,51));
-    }//GEN-LAST:event_registroPedidoBotonMouseExited
-
-    private void registroClienteBotonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registroClienteBotonMouseExited
-        registroClienteBoton.setBackground(new Color(0,51,51));
-    }//GEN-LAST:event_registroClienteBotonMouseExited
-
-    private void consultarBotonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_consultarBotonMouseExited
-        consultarBoton.setBackground(new Color(0,51,51));
-    }//GEN-LAST:event_consultarBotonMouseExited
-
-    private void corteBotonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_corteBotonMouseExited
-        corteBoton.setBackground(new Color(0,51,51));
-    }//GEN-LAST:event_corteBotonMouseExited
-
-    private void registroClienteBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registroClienteBotonActionPerformed
-         this.getContentPane().add(registrarCliente);
-         registrarCliente.setSize(1045, 490); //Tamaño de la ventana asignada al JPanel
-         fondoJPanel.setVisible(false);
-         registrarCliente.setVisible(true);
-    }//GEN-LAST:event_registroClienteBotonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -451,12 +343,12 @@ private final AudioClip salir;
     private javax.swing.JLabel clienteIcono;
     private javax.swing.JPanel clienteJPanel;
     private javax.swing.JLabel consultaIcono;
-    private javax.swing.JButton consultarBoton;
+    public javax.swing.JButton consultarBoton;
     private javax.swing.JPanel consultarJPanel;
-    private javax.swing.JButton corteBoton;
+    public javax.swing.JButton corteBoton;
     private javax.swing.JLabel corteIcono;
     private javax.swing.JPanel corteJPanel;
-    private javax.swing.JPanel fondoJPanel;
+    public javax.swing.JPanel fondoJPanel;
     private javax.swing.JLabel imagenIzq_jLabel;
     private javax.swing.JPanel inferiorJPanel;
     private javax.swing.JPanel izquierdo_JPanel;
@@ -465,9 +357,9 @@ private final AudioClip salir;
     private javax.swing.JLabel opcionesTexto;
     private javax.swing.JLabel polloIcono;
     private javax.swing.JPanel polloJPanel;
-    private javax.swing.JButton registroClienteBoton;
-    private javax.swing.JButton registroPedidoBoton;
-    private javax.swing.JLabel salirImagen;
+    public javax.swing.JButton registroClienteBoton;
+    public javax.swing.JButton registroPedidoBoton;
+    public javax.swing.JLabel salirImagen;
     private javax.swing.JPanel tituloJPanel;
     // End of variables declaration//GEN-END:variables
 }
