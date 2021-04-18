@@ -15,6 +15,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import static java.lang.Math.abs;
 import java.sql.Date;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -100,7 +103,11 @@ public class ControladorRegistrarPedido implements ActionListener, MouseListener
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getSource().getClass().getTypeName().equalsIgnoreCase("javax.swing.JButton")) {
-            eventosJButton(e);
+            try {
+                eventosJButton(e);
+            } catch (SQLException ex) {
+                Logger.getLogger(ControladorRegistrarPedido.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -346,7 +353,7 @@ public class ControladorRegistrarPedido implements ActionListener, MouseListener
         }
     }
 
-    public void eventosJButton(MouseEvent e) {
+    public void eventosJButton(MouseEvent e) throws SQLException {
         if (e.getSource().equals(registrarP.pagarBoton)) {
           accionPagar();
         }else if (e.getSource().equals(registrarP.buscarBoton)){
@@ -354,7 +361,7 @@ public class ControladorRegistrarPedido implements ActionListener, MouseListener
         }
     }
 
-    public void accionPagar() {
+    public void accionPagar() throws SQLException {
         Icon icono = new ImageIcon(getClass().getResource("../imagenes/pagar.png"));
         Icon icono2 = new ImageIcon(getClass().getResource("../imagenes/cancelar.png"));
         if (JOptionPane.showConfirmDialog(null, "Se efectuara el pago,¿Desea confirmar?", "Confirmacion", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icono) == 0) {
@@ -383,7 +390,7 @@ public class ControladorRegistrarPedido implements ActionListener, MouseListener
         }
     }
     
-    public void accionBuscar(){
+    public void accionBuscar() throws SQLException{
         BDCliente clientes = new BDCliente();
         Cliente cliente;
         cliente = clientes.buscar(Integer.parseInt(registrarP.numTelefono.getText()));
@@ -392,7 +399,7 @@ public class ControladorRegistrarPedido implements ActionListener, MouseListener
         registrarP.direccion.setText(cliente.getDireccion());
     }
 
-    private void registrar() {
+    private void registrar() throws SQLException {
         BDPedido pedidos = new BDPedido(); //ESTO NO VA AQUI!!!!
         String paquete = validarPedido();
         String extra = validarExtra();

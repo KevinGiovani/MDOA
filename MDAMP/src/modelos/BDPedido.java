@@ -8,6 +8,7 @@ package modelos;
 import modelos.Pedido;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 /**
  *
@@ -15,15 +16,13 @@ import java.sql.PreparedStatement;
  */
 public class BDPedido {
     private Pedido pedido;
+    private static Connection con;
     
     public BDPedido() {
-        
+        con=Conexion.getConnection();
     }
-    public void agregarDatos(Pedido nPedido) {
+    public void agregarDatos(Pedido nPedido) throws SQLException {
         pedido=nPedido;
-        try{
-            Connection con=null;
-            con=Conexion.getConnection();
             PreparedStatement ps;
             ps=con.prepareStatement("INSERT INTO Pedido (Id_Cliente,Paquete,Extra,Fecha,Total) VALUES (?,?,?,?,?)");
             ps.setInt(1, pedido.getIdCliente());
@@ -32,9 +31,6 @@ public class BDPedido {
             ps.setString(4, pedido.getFecha());
             ps.setInt(5, pedido.getTotal());
             int res=ps.executeUpdate();
-            con.close();
-        }catch(Exception e){
-            System.out.println(e);
-        }
+            
     }
 }

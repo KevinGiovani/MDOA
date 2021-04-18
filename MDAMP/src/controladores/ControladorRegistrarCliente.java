@@ -11,6 +11,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -57,7 +60,11 @@ public class ControladorRegistrarCliente implements MouseListener,KeyListener{
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getSource().getClass().getTypeName().equalsIgnoreCase("javax.swing.JButton")) {
-            eventosJButton(e);
+            try {
+                eventosJButton(e);
+            } catch (SQLException ex) {
+                Logger.getLogger(ControladorRegistrarCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else if (e.getSource().getClass().getTypeName().equalsIgnoreCase("javax.swing.JLabel")) {
             Icon icono = new ImageIcon(getClass().getResource("../imagenes/regreso.png"));
             sonidoDeRegresar.play();
@@ -68,7 +75,7 @@ public class ControladorRegistrarCliente implements MouseListener,KeyListener{
         }
     }
 
-    public void eventosJButton(MouseEvent e) {
+    public void eventosJButton(MouseEvent e) throws SQLException {
         if (e.getSource().equals(registrarC.aceptarBoton)) {
             aceptar();
         } else if (e.getSource().equals(registrarC.cancelarBoton)) {
@@ -79,7 +86,7 @@ public class ControladorRegistrarCliente implements MouseListener,KeyListener{
         }
     }
 
-    public void aceptar() {
+    public void aceptar() throws SQLException {
         if (!registrarC.nombre.getText().isEmpty() && !registrarC.apellido.getText().isEmpty() && !registrarC.numTelefono.getText().isEmpty() && !registrarC.direccion.getText().isEmpty()) {
             Icon icono = new ImageIcon(getClass().getResource("../imagenes/usuarioOk.png"));
             if(JOptionPane.showConfirmDialog(null, "¿Esta seguro que desea registrarse?", "Confirmacion", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,icono)==0){

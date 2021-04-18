@@ -7,10 +7,15 @@ package vistas;
 
 import java.applet.AudioClip;
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import modelos.Conexion;
 
 /**
  *
@@ -30,6 +35,7 @@ private final AudioClip salir;
         salir=java.applet.Applet.newAudioClip(getClass().getResource("../sonidos/salir.wav"));
         registrarPedido = new RegistrarPedidoPanel(sonidoBoton,salir,fondoJPanel);
         registrarCliente = new RegistrarClientePanel(sonidoBoton,salir,fondoJPanel);
+        Connection con=Conexion.getConnection();
     }
 
     /**
@@ -353,7 +359,12 @@ private final AudioClip salir;
         Icon icono = new ImageIcon(getClass().getResource("../imagenes/salir.png"));
         salir.play();
         if(JOptionPane.showConfirmDialog(null, "¿Desea finalizar el programa?","Salir", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,icono)==0){
-         System.exit(0);
+            try {
+               Conexion.desconectar();
+            } catch (SQLException ex) {
+                Logger.getLogger(PrincipalFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.exit(0);
      }     
     }//GEN-LAST:event_salirImagenMouseClicked
 

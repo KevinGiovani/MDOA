@@ -7,27 +7,35 @@ package modelos;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 /**
  *
  * @author magdielo-pacheco
  */
 public class Conexion {
-    private static final String URL="jdbc:mysql://localhost:3306/MiPollo";
-    private static final String USERNAME="cesarP";
-    private static final String PASSWORD="AsaderoMP";
+     private static Connection con=null;
     
-    public static Connection getConnection(){
-        Connection con=null;
-        try{
+    static{
+    String URL="jdbc:mysql://localhost:3306/MiPollo";
+    String USERNAME="CesarP";
+    String PASSWORD="AsaderoMP";
+     try{
             Class.forName("com.mysql.jdbc.Driver");
             con=(Connection) DriverManager.getConnection(URL, USERNAME, PASSWORD);
             System.out.println("Conexion Exitosa");
-        }catch(Exception e){
+        }catch(ClassNotFoundException | SQLException e){
             System.out.println(e);
         }
+    }
+    
+    public static Connection getConnection(){
         return con;
     }
     
-    
+    public static Connection desconectar() throws SQLException{
+        con.close();
+        System.out.println("Adiós");
+        return con;
+    }
 }

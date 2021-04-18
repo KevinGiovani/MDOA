@@ -5,10 +5,10 @@
  */
 package modelos;
 
-import modelos.Cliente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -16,15 +16,14 @@ import java.sql.ResultSet;
  */
 public class BDCliente {
     private Cliente cliente;
+    private static Connection con;
     
     public BDCliente() {
-        
+        con=Conexion.getConnection();
     }
-    public void agregarDatos(Cliente nCliente) {
+    
+    public void agregarDatos(Cliente nCliente) throws SQLException {
         cliente=nCliente;
-        try{
-            Connection con=null;
-            con=Conexion.getConnection();
             PreparedStatement ps;
             ps=con.prepareStatement("INSERT INTO Cliente VALUES (?,?,?,?)");
             ps.setString(1, cliente.getNombre());
@@ -32,17 +31,10 @@ public class BDCliente {
             ps.setString(3, cliente.getTelefono());
             ps.setString(4, cliente.getDireccion());
             int res=ps.executeUpdate();
-            con.close();
-        }catch(Exception e){
-            System.out.println(e);
-        }
     }
     
-    public Cliente buscar(int tel){
+    public Cliente buscar(int tel) throws SQLException{
         cliente=new Cliente();
-        try{
-            Connection con=null;
-            con=Conexion.getConnection();
             PreparedStatement ps;
             ResultSet res;
             ps=con.prepareStatement("Select * From Cliente where Telefono=?");
@@ -54,10 +46,6 @@ public class BDCliente {
                 cliente.setTelefono(String.valueOf(res.getInt("Telefono")));
                 cliente.setDireccion(res.getString("Direccion"));
             }
-            con.close();
-        }catch(Exception e){
-            System.out.println(e);
-        }
         return cliente;
     }
 }
