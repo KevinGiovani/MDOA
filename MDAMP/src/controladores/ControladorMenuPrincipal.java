@@ -103,6 +103,9 @@ public class ControladorMenuPrincipal implements MouseListener {
     }
 
     /**
+     * MouseEntered detectará cuando el mouse está sobre algún botón y cual de
+     * estos fue, cambiando el color de fondo del botón y reproduciendo un
+     * sonido.
      *
      * @param e
      */
@@ -123,6 +126,12 @@ public class ControladorMenuPrincipal implements MouseListener {
         }
     }
 
+    /**
+     * MouseExited detecta cuando el mouse ya no se encuentra dentro del botón
+     * por lo que regresará el estado en el que se encontraba originalmente
+     *
+     * @param e
+     */
     @Override
     public void mouseExited(MouseEvent e) {
         if (e.getSource().equals(menu.registroPedidoBoton)) {

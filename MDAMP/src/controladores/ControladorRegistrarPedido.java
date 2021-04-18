@@ -458,7 +458,7 @@ public class ControladorRegistrarPedido implements ActionListener, MouseListener
                 if (total > 0) {
                     sonidoDePago.play();
                     total = abs(total);
-                    JOptionPane.showMessageDialog(null, "Gracias por su Compra!\n" + "Cambio: " + total, "Pago Exitoso", JOptionPane.INFORMATION_MESSAGE, icono);
+                    JOptionPane.showMessageDialog(null, "Gracias por su Compra!\n" + "Cambio: " +"$"+ total, "Pago Exitoso", JOptionPane.INFORMATION_MESSAGE, icono);
                     registrar();
                     limpiar();
                 } else if (total == 0) {
