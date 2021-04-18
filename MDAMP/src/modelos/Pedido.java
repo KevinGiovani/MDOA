@@ -5,11 +5,9 @@
  */
 package modelos;
 
-import java.util.Date;
-
 /**
  *
- * @author magdielo-pacheco
+ *
  */
 public class Pedido {
     private int idPedido;
@@ -18,6 +16,8 @@ public class Pedido {
     private String extra;
     private String fecha;
     private int total;
+    private int[] costoAcumulado;
+    private int[] precioNeto;
 
     public Pedido(int idPedido, int idCliente, String paquete, String extra, String fecha,int total) {
         this.idPedido = idPedido;
@@ -26,6 +26,12 @@ public class Pedido {
         this.extra = extra;
         this.fecha = fecha;
         this.total=total;
+        inicializar();
+        
+    }
+    
+    public Pedido(){
+        inicializar();
     }
     
     public Pedido(int idCliente, String paquete, String extra, String fecha,int total){
@@ -34,6 +40,7 @@ public class Pedido {
         this.extra = extra;
         this.fecha = fecha;
         this.total=total;
+        inicializar();
     }
 
     public int getIdPedido() {
@@ -82,6 +89,41 @@ public class Pedido {
 
     public void setTotal(int total) {
         this.total = total;
+    }
+    
+      public void inicializar() {
+        costoAcumulado = new int[11];
+        precioNeto = new int[11];
+        precioNeto[0] = 210; //Precio Paquete 1
+        precioNeto[1] = 240; //Precio Paquete 2
+        precioNeto[2] = 190; //Precio Paquete 3
+        precioNeto[3] = 150; //Precio Paquete 4
+        precioNeto[4] = 120; //Precio Paquete 5
+        precioNeto[5] = 60; //Precio Paquete 6
+        precioNeto[6] = 5; //Precio Extra 1
+        precioNeto[7] = 20; //Precio Extra 2
+        precioNeto[8] = 5; //Precio Extra 3
+        precioNeto[9] = 10; //Precio Extra 4
+        precioNeto[10] = 15; //Precio Extra 5
+        comenzarCosto();
+    }
+    
+      public void comenzarCosto(){
+        for (int i = 0; i < 11; i++) {
+            costoAcumulado[i] = 0;
+        }
+      }
+      
+    
+    public int calcular(int pos, int valor) {
+        int totalPago = 0;
+        costoAcumulado[pos] = valor * precioNeto[pos];
+
+        for (int i = 0; i < 11; i++) {
+            totalPago += costoAcumulado[i];
+        }
+        setTotal(totalPago);
+        return totalPago;
     }
     
     

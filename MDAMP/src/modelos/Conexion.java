@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package db;
+package modelos;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,7 +14,7 @@ import java.sql.DriverManager;
  */
 public class Conexion {
     private static final String URL="jdbc:mysql://localhost:3306/MiPollo";
-    private static final String USERNAME="CesarP";
+    private static final String USERNAME="cesarP";
     private static final String PASSWORD="AsaderoMP";
     
     public static Connection getConnection(){

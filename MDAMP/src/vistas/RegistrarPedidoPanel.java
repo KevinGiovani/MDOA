@@ -3,19 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vista;
+package vistas;
 
-import db.BDCliente;
-import db.BDPedido;
-import modelos.Cliente;
+import controladores.ControladorRegistrarPedido;
 import modelos.Pedido;
 import java.applet.AudioClip;
-import java.awt.Color;
-import static java.lang.Math.abs;
-import java.sql.Date;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -24,12 +16,7 @@ import javax.swing.JPanel;
  */
 public class RegistrarPedidoPanel extends javax.swing.JPanel {
 
-    private final JPanel mPrincipal;
-    private final AudioClip sonidoBoton;
-    private final AudioClip regresar;
-    private final AudioClip sonidoDePago;
-    private int[] precios;
-    private int[] precioNeto;
+    private final ControladorRegistrarPedido cPedido;
 
     /**
      * Creates new form RegistrarPedidoFrame
@@ -40,71 +27,9 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
      */
     public RegistrarPedidoPanel(AudioClip sonidoBoton, AudioClip regresar, JPanel mPrincipal) {
         initComponents();
-        sonidoDePago = java.applet.Applet.newAudioClip(getClass().getResource("../sonidos/pago-realizado.wav"));
-        this.sonidoBoton = sonidoBoton;
-        this.mPrincipal = mPrincipal;
-        this.regresar = regresar;
-        inicializar();
-        desactivar();
+        cPedido= new ControladorRegistrarPedido(this,sonidoBoton,regresar,mPrincipal);
     }
 
-    public void inicializar() {
-        precios = new int[11];
-        precioNeto = new int[11];
-        for (int i = 0; i < 11; i++) {
-            precios[i] = 0;
-        }
-        precioNeto[0] = 210; //Precio Paquete 1
-        precioNeto[1] = 240; //Precio Paquete 2
-        precioNeto[2] = 190; //Precio Paquete 3
-        precioNeto[3] = 150; //Precio Paquete 4
-        precioNeto[4] = 120; //Precio Paquete 5
-        precioNeto[5] = 60; //Precio Paquete 6
-        precioNeto[6] = 5; //Precio Extra 1
-        precioNeto[7] = 20; //Precio Extra 2
-        precioNeto[8] = 5; //Precio Extra 3
-        precioNeto[9] = 10; //Precio Extra 4
-        precioNeto[10] = 15; //Precio Extra 5
-    }
-
-    private void desactivar() {
-        cantPaq1.setEnabled(false);
-        cantPaq2.setEnabled(false);
-        cantPaq3.setEnabled(false);
-        cantPaq4.setEnabled(false);
-        cantPaq5.setEnabled(false);
-        cantPaq6.setEnabled(false);
-        cantExt1.setEnabled(false);
-        cantExt2.setEnabled(false);
-        cantExt3.setEnabled(false);
-        cantExt4.setEnabled(false);
-        cantExt5.setEnabled(false);
-    }
-
-    private void limpiar() {
-        desactivar();
-        paq1.setSelected(false);
-        paq2.setSelected(false);
-        paq3.setSelected(false);
-        paq4.setSelected(false);
-        paq5.setSelected(false);
-        paq6.setSelected(false);
-        extra1.setSelected(false);
-        extra2.setSelected(false);
-        extra3.setSelected(false);
-        extra4.setSelected(false);
-        extra5.setSelected(false);
-
-        numTelefono.setText("");
-        nombre.setText("");
-        apellido.setText("");
-        direccion.setText("");
-        totalPagar.setText("");
-        totalCliente.setText("");
-        for (int i = 0; i < 11; i++) {
-            precios[i] = 0;
-        }
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -192,11 +117,6 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
 
         regresarImagen.setBackground(new java.awt.Color(0, 153, 204));
         regresarImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/regreso.png"))); // NOI18N
-        regresarImagen.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                regresarImagenMouseClicked(evt);
-            }
-        });
 
         jPanel2.setBackground(new java.awt.Color(0, 102, 102));
 
@@ -226,110 +146,50 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
         paq1.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
         paq1.setForeground(new java.awt.Color(153, 255, 153));
         paq1.setText("Paquete 1");
-        paq1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                paq1ActionPerformed(evt);
-            }
-        });
 
         cantPaq1.setFont(new java.awt.Font("Comfortaa Light", 0, 14)); // NOI18N
-        cantPaq1.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+        cantPaq1.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
         cantPaq1.setPreferredSize(new java.awt.Dimension(85, 24));
-        cantPaq1.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                setCantPaq1(evt);
-            }
-        });
 
         paq2.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
         paq2.setForeground(new java.awt.Color(153, 255, 153));
         paq2.setText("Paquete 2");
-        paq2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                paq2ActionPerformed(evt);
-            }
-        });
 
         cantPaq2.setFont(new java.awt.Font("Comfortaa Light", 0, 14)); // NOI18N
-        cantPaq2.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+        cantPaq2.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
         cantPaq2.setPreferredSize(new java.awt.Dimension(85, 24));
-        cantPaq2.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                setCantPaq2(evt);
-            }
-        });
 
         paq3.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
         paq3.setForeground(new java.awt.Color(153, 255, 153));
         paq3.setText("Paquete 3");
-        paq3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                paq3ActionPerformed(evt);
-            }
-        });
 
         cantPaq3.setFont(new java.awt.Font("Comfortaa Light", 0, 14)); // NOI18N
-        cantPaq3.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+        cantPaq3.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
         cantPaq3.setPreferredSize(new java.awt.Dimension(85, 24));
-        cantPaq3.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                setCantPaq3(evt);
-            }
-        });
 
         paq4.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
         paq4.setForeground(new java.awt.Color(153, 255, 153));
         paq4.setText("Paquete 4");
-        paq4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                paq4ActionPerformed(evt);
-            }
-        });
 
         cantPaq4.setFont(new java.awt.Font("Comfortaa Light", 0, 14)); // NOI18N
-        cantPaq4.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+        cantPaq4.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
         cantPaq4.setPreferredSize(new java.awt.Dimension(85, 24));
-        cantPaq4.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                setCantPaq4(evt);
-            }
-        });
 
         paq5.setFont(new java.awt.Font("Ebrima", 1, 14)); // NOI18N
         paq5.setForeground(new java.awt.Color(153, 255, 153));
         paq5.setText("Paquete 5");
-        paq5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                paq5ActionPerformed(evt);
-            }
-        });
 
         cantPaq5.setFont(new java.awt.Font("Comfortaa Light", 0, 14)); // NOI18N
-        cantPaq5.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+        cantPaq5.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
         cantPaq5.setPreferredSize(new java.awt.Dimension(85, 24));
-        cantPaq5.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                setCantPaq5(evt);
-            }
-        });
 
         paq6.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
         paq6.setForeground(new java.awt.Color(153, 255, 153));
         paq6.setText("Paquete 6");
-        paq6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                paq6ActionPerformed(evt);
-            }
-        });
 
         cantPaq6.setFont(new java.awt.Font("Comfortaa Light", 0, 14)); // NOI18N
-        cantPaq6.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+        cantPaq6.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
         cantPaq6.setPreferredSize(new java.awt.Dimension(85, 24));
-        cantPaq6.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                setCantPaq6(evt);
-            }
-        });
 
         jLabel1.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(153, 255, 153));
@@ -338,94 +198,44 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
         extra2.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
         extra2.setForeground(new java.awt.Color(153, 255, 153));
         extra2.setText("Ensalada");
-        extra2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                extra2ActionPerformed(evt);
-            }
-        });
 
         cantExt2.setFont(new java.awt.Font("Comfortaa Light", 0, 14)); // NOI18N
-        cantExt2.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+        cantExt2.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
         cantExt2.setPreferredSize(new java.awt.Dimension(85, 24));
-        cantExt2.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                setCantExt2(evt);
-            }
-        });
 
         extra3.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
         extra3.setForeground(new java.awt.Color(153, 255, 153));
         extra3.setText("Tortillas de Maiz");
-        extra3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                extra3ActionPerformed(evt);
-            }
-        });
 
         cantExt3.setFont(new java.awt.Font("Comfortaa Light", 0, 14)); // NOI18N
-        cantExt3.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+        cantExt3.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
         cantExt3.setPreferredSize(new java.awt.Dimension(85, 24));
-        cantExt3.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                setCantExt3(evt);
-            }
-        });
 
         extra4.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
         extra4.setForeground(new java.awt.Color(153, 255, 153));
         extra4.setText("Tortillas de Harina");
-        extra4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                extra4ActionPerformed(evt);
-            }
-        });
 
         cantExt4.setFont(new java.awt.Font("Comfortaa Light", 0, 14)); // NOI18N
-        cantExt4.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+        cantExt4.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
         cantExt4.setPreferredSize(new java.awt.Dimension(85, 24));
-        cantExt4.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                setCantExt4(evt);
-            }
-        });
 
         extra5.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
         extra5.setForeground(new java.awt.Color(153, 255, 153));
         extra5.setText("Puré de Papa");
-        extra5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                extra5ActionPerformed(evt);
-            }
-        });
 
         cantExt5.setFont(new java.awt.Font("Comfortaa Light", 0, 14)); // NOI18N
-        cantExt5.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+        cantExt5.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
         cantExt5.setPreferredSize(new java.awt.Dimension(85, 24));
-        cantExt5.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                setCantExt6(evt);
-            }
-        });
 
         jLabel2.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(153, 255, 153));
         jLabel2.setText("Extra:");
 
-        cantExt1.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
-        cantExt1.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                setCantExt1(evt);
-            }
-        });
+        cantExt1.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
 
         extra1.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
         extra1.setForeground(new java.awt.Color(153, 255, 153));
         extra1.setText("Salsa Y Cebolla");
-        extra1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                extra1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -565,19 +375,6 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
         buscarBoton.setFont(new java.awt.Font("Gayathri", 1, 8)); // NOI18N
         buscarBoton.setForeground(new java.awt.Color(153, 255, 204));
         buscarBoton.setText("Buscar");
-        buscarBoton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                buscarBotonMouseExited(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                buscarBotonMouseEntered(evt);
-            }
-        });
-        buscarBoton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscarBotonActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -598,7 +395,7 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
                     .addComponent(direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
+                .addContainerGap(13, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel3)
@@ -663,10 +460,12 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
 
         jLabel7.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(153, 255, 153));
-        jLabel7.setText("Total a Pagar");
+        jLabel7.setText("Total a Pagar    $");
 
+        totalPagar.setEditable(false);
         totalPagar.setBackground(new java.awt.Color(153, 255, 204));
         totalPagar.setFont(new java.awt.Font("Comfortaa Light", 0, 14)); // NOI18N
+        totalPagar.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         totalPagar.setPreferredSize(new java.awt.Dimension(12, 24));
 
         jLabel8.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
@@ -675,6 +474,7 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
 
         totalCliente.setBackground(new java.awt.Color(153, 255, 204));
         totalCliente.setFont(new java.awt.Font("Comfortaa Light", 0, 14)); // NOI18N
+        totalCliente.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         totalCliente.setPreferredSize(new java.awt.Dimension(12, 24));
 
         jLabel9.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
@@ -685,19 +485,6 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
         pagarBoton.setFont(new java.awt.Font("Gayathri", 1, 8)); // NOI18N
         pagarBoton.setForeground(new java.awt.Color(153, 255, 204));
         pagarBoton.setText("Pagar");
-        pagarBoton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                pagarBotonMouseExited(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                pagarBotonMouseEntered(evt);
-            }
-        });
-        pagarBoton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pagarBotonActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -706,7 +493,7 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel7)
-                .addGap(34, 34, 34)
+                .addGap(0, 0, 0)
                 .addComponent(totalPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(totalCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -743,20 +530,20 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(registroClienteTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(233, 233, 233)
+                .addGap(221, 221, 221)
                 .addComponent(regresarImagen)
-                .addContainerGap())
+                .addGap(18, 18, 18))
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(78, 78, 78))
+                .addGap(50, 50, 50))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -773,377 +560,34 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void regresarImagenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_regresarImagenMouseClicked
-        Icon icono = new ImageIcon(getClass().getResource("../imagenes/regreso.png"));
-        regresar.play();
-        if (JOptionPane.showConfirmDialog(null, "¿Desea regresar al menu principal?", "Regresar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icono) == 0) {
-            this.setVisible(false);
-            mPrincipal.setVisible(true);
-            limpiar();
-        }
-    }//GEN-LAST:event_regresarImagenMouseClicked
-
-    private void extra5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_extra5ActionPerformed
-        // TODO add your handling code here:
-        if (extra5.isSelected()) {
-            cantExt5.setEnabled(true);
-            calcular(10, Integer.parseInt(cantExt5.getValue().toString()));
-        } else {
-            cantExt5.setEnabled(false);
-            cantExt5.setValue(1);
-            calcular(10, 0);
-        }
-    }//GEN-LAST:event_extra5ActionPerformed
-
-    private void extra4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_extra4ActionPerformed
-        // TODO add your handling code here:
-        if (extra4.isSelected()) {
-            cantExt4.setEnabled(true);
-            calcular(9, Integer.parseInt(cantExt4.getValue().toString()));
-        } else {
-            cantExt4.setEnabled(false);
-            cantExt4.setValue(1);
-            calcular(9, 0);
-        }
-    }//GEN-LAST:event_extra4ActionPerformed
-
-    private void extra3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_extra3ActionPerformed
-        // TODO add your handling code here:
-        if (extra3.isSelected()) {
-            cantExt3.setEnabled(true);
-            calcular(8, Integer.parseInt(cantExt3.getValue().toString()));
-        } else {
-            cantExt3.setEnabled(false);
-            cantExt3.setValue(1);
-            calcular(8, 0);
-        }
-    }//GEN-LAST:event_extra3ActionPerformed
-
-    private void extra2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_extra2ActionPerformed
-        // TODO add your handling code here:
-        if (extra2.isSelected()) {
-            cantExt2.setEnabled(true);
-            calcular(7, Integer.parseInt(cantExt2.getValue().toString()));
-        } else {
-            cantExt2.setEnabled(false);
-            cantExt2.setValue(1);
-            calcular(7, 0);
-        }
-    }//GEN-LAST:event_extra2ActionPerformed
-
-    private void paq6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paq6ActionPerformed
-        // TODO add your handling code here:
-        if (paq6.isSelected()) {
-            cantPaq6.setEnabled(true);
-            calcular(5, Integer.parseInt(cantPaq6.getValue().toString()));
-        } else {
-            cantPaq6.setEnabled(false);
-            cantPaq6.setValue(1);
-            calcular(5, 0);
-        }
-    }//GEN-LAST:event_paq6ActionPerformed
-
-    private void paq5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paq5ActionPerformed
-        // TODO add your handling code here:
-        if (paq5.isSelected()) {
-            cantPaq5.setEnabled(true);
-            calcular(4, Integer.parseInt(cantPaq5.getValue().toString()));
-        } else {
-            cantPaq5.setEnabled(false);
-            cantPaq5.setValue(1);
-            calcular(4, 0);
-        }
-    }//GEN-LAST:event_paq5ActionPerformed
-
-    private void paq4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paq4ActionPerformed
-        // TODO add your handling code here:
-        if (paq4.isSelected()) {
-            cantPaq4.setEnabled(true);
-            calcular(3, Integer.parseInt(cantPaq4.getValue().toString()));
-        } else {
-            cantPaq4.setEnabled(false);
-            cantPaq4.setValue(1);
-            calcular(3, 0);
-        }
-    }//GEN-LAST:event_paq4ActionPerformed
-
-    private void paq3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paq3ActionPerformed
-        // TODO add your handling code here:
-        if (paq3.isSelected()) {
-            cantPaq3.setEnabled(true);
-            calcular(2, Integer.parseInt(cantPaq3.getValue().toString()));
-        } else {
-            cantPaq3.setEnabled(false);
-            cantPaq3.setValue(1);
-            calcular(2, 0);
-        }
-    }//GEN-LAST:event_paq3ActionPerformed
-
-    private void paq2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paq2ActionPerformed
-        // TODO add your handling code here:
-        if (paq2.isSelected()) {
-            cantPaq2.setEnabled(true);
-            calcular(1, Integer.parseInt(cantPaq2.getValue().toString()));
-        } else {
-            cantPaq2.setEnabled(false);
-            cantPaq2.setValue(1);
-            calcular(1, 0);
-        }
-    }//GEN-LAST:event_paq2ActionPerformed
-
-    private void paq1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paq1ActionPerformed
-        // TODO add your handling code here:
-        if (paq1.isSelected()) {
-            cantPaq1.setEnabled(true);
-            calcular(0, Integer.parseInt(cantPaq1.getValue().toString()));
-        } else {
-            cantPaq1.setEnabled(false);
-            cantPaq1.setValue(1);
-            calcular(0, 0);
-        }
-    }//GEN-LAST:event_paq1ActionPerformed
-
-    private void buscarBotonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarBotonMouseExited
-        buscarBoton.setBackground(new Color(0, 51, 51));
-    }//GEN-LAST:event_buscarBotonMouseExited
-
-    private void buscarBotonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarBotonMouseEntered
-        buscarBoton.setBackground(new Color(0, 102, 102));
-        sonidoBoton.play();
-    }//GEN-LAST:event_buscarBotonMouseEntered
-
-    private void buscarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarBotonActionPerformed
-        BDCliente clientes = new BDCliente();
-        Cliente cliente;
-        cliente = clientes.buscar(Integer.parseInt(numTelefono.getText()));
-        nombre.setText(cliente.getNombre());
-        apellido.setText(cliente.getApellido());
-        direccion.setText(cliente.getDireccion());
-    }//GEN-LAST:event_buscarBotonActionPerformed
-
-    private void pagarBotonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pagarBotonMouseExited
-        pagarBoton.setBackground(new Color(0, 51, 51));
-    }//GEN-LAST:event_pagarBotonMouseExited
-
-    private void pagarBotonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pagarBotonMouseEntered
-        pagarBoton.setBackground(new Color(0, 102, 102));
-        sonidoBoton.play();
-    }//GEN-LAST:event_pagarBotonMouseEntered
-
-    private void pagarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pagarBotonActionPerformed
-        Icon icono = new ImageIcon(getClass().getResource("../imagenes/pagar.png"));
-        if (JOptionPane.showConfirmDialog(null, "Se efectuara el pago,¿Desea confirmar?", "Confirmacion", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icono) == 0) {
-        }
-        if (!totalPagar.getText().isEmpty() && !totalCliente.getText().isEmpty()) {
-            int total = Integer.parseInt(totalCliente.getText()) - Integer.parseInt(totalPagar.getText());
-
-            if (total > 0) {
-                sonidoDePago.play();
-                total = abs(total);
-                JOptionPane.showMessageDialog(null, "Gracias por su Compra!\n" + "Cambio: " + total, "Pago Exitoso", JOptionPane.INFORMATION_MESSAGE, icono);
-                registrar();
-                limpiar();
-            } else if (total == 0) {
-                sonidoDePago.play();
-                JOptionPane.showMessageDialog(null, "Gracias por su Compra!", "Pago Exitoso", JOptionPane.INFORMATION_MESSAGE, icono);
-                registrar();
-                limpiar();
-            } else {
-                regresar.play();
-                JOptionPane.showMessageDialog(null, "No se ha completado el monto a pagar", "Error", JOptionPane.INFORMATION_MESSAGE);
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Verifique que todos los campos esten ingresados", "Datos faltantes", JOptionPane.INFORMATION_MESSAGE);
-        }
-    }//GEN-LAST:event_pagarBotonActionPerformed
-
-    private void setCantPaq2(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_setCantPaq2
-        // TODO add your handling code here:
-        if (paq2.isSelected()) {
-            calcular(1, Integer.parseInt(cantPaq2.getValue().toString()));
-        }
-    }//GEN-LAST:event_setCantPaq2
-
-    private void setCantPaq1(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_setCantPaq1
-        // TODO add your handling code here:
-        if (paq1.isSelected()) {
-            calcular(0, Integer.parseInt(cantPaq1.getValue().toString()));
-        }
-    }//GEN-LAST:event_setCantPaq1
-
-    private void extra1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_extra1ActionPerformed
-        // TODO add your handling code here:
-        if (extra1.isSelected()) {
-            cantExt1.setEnabled(true);
-            calcular(6, Integer.parseInt(cantExt1.getValue().toString()));
-        } else {
-            cantExt1.setEnabled(false);
-            cantExt1.setValue(1);
-            calcular(6, 0);
-        }
-    }//GEN-LAST:event_extra1ActionPerformed
-
-    private void setCantPaq3(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_setCantPaq3
-        // TODO add your handling code here:
-        if (paq3.isSelected()) {
-            calcular(2, Integer.parseInt(cantPaq3.getValue().toString()));
-        }
-    }//GEN-LAST:event_setCantPaq3
-
-    private void setCantPaq4(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_setCantPaq4
-        // TODO add your handling code here:
-        if (paq4.isSelected()) {
-            calcular(3, Integer.parseInt(cantPaq4.getValue().toString()));
-        }
-    }//GEN-LAST:event_setCantPaq4
-
-    private void setCantPaq5(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_setCantPaq5
-        // TODO add your handling code here:
-        if (paq5.isSelected()) {
-            calcular(4, Integer.parseInt(cantPaq5.getValue().toString()));
-        }
-    }//GEN-LAST:event_setCantPaq5
-
-    private void setCantPaq6(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_setCantPaq6
-        // TODO add your handling code here:
-        if (paq6.isSelected()) {
-            calcular(5, Integer.parseInt(cantPaq6.getValue().toString()));
-        }
-    }//GEN-LAST:event_setCantPaq6
-
-    private void setCantExt1(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_setCantExt1
-        // TODO add your handling code here:
-        if (extra1.isSelected()) {
-            calcular(6, Integer.parseInt(cantExt1.getValue().toString()));
-        }
-    }//GEN-LAST:event_setCantExt1
-
-    private void setCantExt2(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_setCantExt2
-        // TODO add your handling code here:
-        if (extra2.isSelected()) {
-            calcular(7, Integer.parseInt(cantExt2.getValue().toString()));
-        }
-    }//GEN-LAST:event_setCantExt2
-
-    private void setCantExt3(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_setCantExt3
-        // TODO add your handling code here:
-        if (extra3.isSelected()) {
-            calcular(8, Integer.parseInt(cantExt3.getValue().toString()));
-        }
-    }//GEN-LAST:event_setCantExt3
-
-    private void setCantExt4(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_setCantExt4
-        // TODO add your handling code here:
-        if (extra4.isSelected()) {
-            calcular(9, Integer.parseInt(cantExt4.getValue().toString()));
-        }
-    }//GEN-LAST:event_setCantExt4
-
-    private void setCantExt6(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_setCantExt6
-        // TODO add your handling code here:
-        if (extra5.isSelected()) {
-            calcular(10, Integer.parseInt(cantExt5.getValue().toString()));
-        }
-    }//GEN-LAST:event_setCantExt6
-
-    private void calcular(int pos, int valor) {
-        int totalPago = 0;
-        precios[pos] = valor * precioNeto[pos];
-
-        for (int i = 0; i < 11; i++) {
-            totalPago += precios[i];
-        }
-        this.totalPagar.setText(String.valueOf(totalPago));
-    }
-
-    private void registrar() {
-        BDPedido pedidos = new BDPedido();
-        int idCliente;
-        String paquete = validarPedido();
-        String extra = validarExtra();
-        long millis = System.currentTimeMillis();
-        Date fecha = new Date(millis);
-        if (numTelefono.getText().equals("")) {
-            idCliente = 1;
-        } else {
-            idCliente = Integer.parseInt(numTelefono.getText());
-        }
-        Pedido pedido = new Pedido(idCliente, paquete, extra, String.valueOf(fecha),Integer.parseInt(totalPagar.getText()));
-        pedidos.agregarDatos(pedido);
-    }
-
-    private String validarPedido() {
-        String cadena = "";
-        if (paq1.isSelected()) {
-            cadena += paq1.getText() + ": " + cantPaq1.getValue() + "\n";
-
-        }
-        if (paq2.isSelected()) {
-            cadena += paq2.getText()+ ": " + cantPaq2.getValue() + "\n";
-        }
-        if (paq3.isSelected()) {
-            cadena += paq3.getText() + ": " + cantPaq3.getValue() + "\n";
-        }
-        if (paq4.isSelected()) {
-            cadena += paq4.getText() + ": " + cantPaq4.getValue() + "\n";
-        }
-        if (paq5.isSelected()) {
-            cadena += paq5.getText() + ": " + cantPaq5.getValue() + "\n";
-        }
-        if (paq6.isSelected()) {
-            cadena += paq6.getText() + ": " + cantPaq6.getValue() + "\n";
-        }
-
-        return cadena;
-    }
-
-    private String validarExtra() {
-        String cadena = "";
-        if (extra1.isSelected()) {
-            cadena += extra1.getText() + ": " + cantExt1.getValue() + "\n";
-        }
-        if (extra2.isSelected()) {
-            cadena += extra2.getText() + ": " + cantExt2.getValue() + "\n";
-        }
-        if (extra3.isSelected()) {
-            cadena += extra3.getText() + ": " + cantExt3.getValue() + "\n";
-        }
-        if (extra4.isSelected()) {
-            cadena += extra4.getText() + ": " + cantExt4.getValue() + "\n";
-        }
-        if (extra5.isSelected()) {
-            cadena += extra5.getText() + ": " + cantExt5.getValue() + "\n";
-        }
-        return cadena;
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField apellido;
-    private javax.swing.JButton buscarBoton;
-    private javax.swing.JSpinner cantExt1;
-    private javax.swing.JSpinner cantExt2;
-    private javax.swing.JSpinner cantExt3;
-    private javax.swing.JSpinner cantExt4;
-    private javax.swing.JSpinner cantExt5;
-    private javax.swing.JSpinner cantPaq1;
-    private javax.swing.JSpinner cantPaq2;
-    private javax.swing.JSpinner cantPaq3;
-    private javax.swing.JSpinner cantPaq4;
-    private javax.swing.JSpinner cantPaq5;
-    private javax.swing.JSpinner cantPaq6;
-    private javax.swing.JTextField direccion;
-    private javax.swing.JCheckBox extra1;
-    private javax.swing.JCheckBox extra2;
-    private javax.swing.JCheckBox extra3;
-    private javax.swing.JCheckBox extra4;
-    private javax.swing.JCheckBox extra5;
+    public javax.swing.JTextField apellido;
+    public javax.swing.JButton buscarBoton;
+    public javax.swing.JSpinner cantExt1;
+    public javax.swing.JSpinner cantExt2;
+    public javax.swing.JSpinner cantExt3;
+    public javax.swing.JSpinner cantExt4;
+    public javax.swing.JSpinner cantExt5;
+    public javax.swing.JSpinner cantPaq1;
+    public javax.swing.JSpinner cantPaq2;
+    public javax.swing.JSpinner cantPaq3;
+    public javax.swing.JSpinner cantPaq4;
+    public javax.swing.JSpinner cantPaq5;
+    public javax.swing.JSpinner cantPaq6;
+    public javax.swing.JTextField direccion;
+    public javax.swing.JCheckBox extra1;
+    public javax.swing.JCheckBox extra2;
+    public javax.swing.JCheckBox extra3;
+    public javax.swing.JCheckBox extra4;
+    public javax.swing.JCheckBox extra5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -1159,21 +603,21 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel manejoOTexto;
-    private javax.swing.JTextField nombre;
-    private javax.swing.JTextField numTelefono;
-    private javax.swing.JButton pagarBoton;
-    private javax.swing.JCheckBox paq1;
-    private javax.swing.JCheckBox paq2;
-    private javax.swing.JCheckBox paq3;
-    private javax.swing.JCheckBox paq4;
-    private javax.swing.JCheckBox paq5;
-    private javax.swing.JCheckBox paq6;
+    public javax.swing.JTextField nombre;
+    public javax.swing.JTextField numTelefono;
+    public javax.swing.JButton pagarBoton;
+    public javax.swing.JCheckBox paq1;
+    public javax.swing.JCheckBox paq2;
+    public javax.swing.JCheckBox paq3;
+    public javax.swing.JCheckBox paq4;
+    public javax.swing.JCheckBox paq5;
+    public javax.swing.JCheckBox paq6;
     private javax.swing.JLabel pedidoTitulo;
     private javax.swing.JLabel pedidoTitulo1;
     private javax.swing.JLabel pedidoTitulo2;
     private javax.swing.JPanel registroClienteTitulo;
-    private javax.swing.JLabel regresarImagen;
-    private javax.swing.JTextField totalCliente;
-    private javax.swing.JTextField totalPagar;
+    public javax.swing.JLabel regresarImagen;
+    public javax.swing.JTextField totalCliente;
+    public javax.swing.JTextField totalPagar;
     // End of variables declaration//GEN-END:variables
 }
