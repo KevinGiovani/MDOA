@@ -1,25 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/**
+ * Ventana para mostrar al usuario una interacción visual, aunque solo
+ * muestra, ya que para esto contiene su controlador.
+ * */
 package vistas;
 
 import controladores.ControladorRegistrarPedido;
-import modelos.Pedido;
 import java.applet.AudioClip;
 import javax.swing.JPanel;
 
 /**
- *
  * @author kevin
+ * @version 16-04-2021
  */
 public class RegistrarPedidoPanel extends javax.swing.JPanel {
 
-    private final ControladorRegistrarPedido cPedido;
+    private final ControladorRegistrarPedido cPedido; //Atributo para utilizar el controlador
 
     /**
-     * Creates new form RegistrarPedidoFrame
+     *
+     * Constuctor para iniciar el panel de registrar pedido, el cual recibe el
+     * sonido para los botones, el sonido para regresar y le ventana del menú
+     * principal, componentes necesarios para utilizar el controlador.
      *
      * @param sonidoBoton
      * @param regresar
@@ -27,9 +28,8 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
      */
     public RegistrarPedidoPanel(AudioClip sonidoBoton, AudioClip regresar, JPanel mPrincipal) {
         initComponents();
-        cPedido= new ControladorRegistrarPedido(this,sonidoBoton,regresar,mPrincipal);
+        cPedido = new ControladorRegistrarPedido(this, sonidoBoton, regresar, mPrincipal);
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.

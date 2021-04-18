@@ -1,7 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Controlador encargado de realizar todas las acciones necesarias para 
+ * llevar a cabo la interaccion entre el cliente y el menu principal que se 
+ * estara mostrando.
+ * Para esto se implemento la clase de MouseListener y asi tener una interaccion 
+ * mas amigable con el cliente.
  */
 package controladores;
 
@@ -21,8 +23,8 @@ import vistas.PrincipalFrame;
 import modelos.Conexion;
 
 /**
- *
- * @author magdielo-pacheco
+ * @author Pacheco Magdiel
+ * @version 16-04-2021
  */
 public class ControladorMenuPrincipal implements MouseListener {
 
@@ -32,6 +34,16 @@ public class ControladorMenuPrincipal implements MouseListener {
     private final JPanel registrarPedido;
     private final JPanel registrarCliente;
 
+    /**
+     * Constructor de la clase con parametros inicializados
+     *
+     * @param menu Frame del menu principal
+     * @param sonidoBoton Sonido integrado al momento de pasar el cursos por un
+     * boton
+     * @param salir Sonido integrado al momento de salir de la interfaz
+     * @param registrarCliente JPanel utilizado para el registro del cliente
+     * @param registrarPedido JPanel utilizado para el registro del pedido
+     */
     public ControladorMenuPrincipal(PrincipalFrame menu, AudioClip sonidoBoton, AudioClip salir, JPanel registrarCliente, JPanel registrarPedido) {
         this.menu = menu;
         sonidoDeBoton = sonidoBoton;
@@ -41,8 +53,13 @@ public class ControladorMenuPrincipal implements MouseListener {
         iniciarlizar();
     }
 
+    /**
+     * Metodo principal para realizar la inicializacion de conexion hacia la
+     * base de datos al igual que la implementacion de MouseListeners para cada
+     * uno de los botones/imagenes inlcuidos
+     */
     private void iniciarlizar() {
-        Connection con=Conexion.getConnection();
+        Connection con = Conexion.getConnection();
         //Botones
         menu.registroPedidoBoton.addMouseListener(this);
         menu.registroClienteBoton.addMouseListener(this);
@@ -53,6 +70,16 @@ public class ControladorMenuPrincipal implements MouseListener {
         menu.salirImagen.addMouseListener(this);
     }
 
+    /**
+     * Metodo utilizado para los eventos relacionados con el click del mouse,
+     * dentro de el se presenta una condicion para diferenciar el estilo de
+     * componente Swing utilizado y asi aplicarle el evento especial para el.
+     * Para el caso de los botones se estara implementando el metodo
+     * eventosJButton y para el caso de los labels, se presentara un mensaje de
+     * confirmacion
+     *
+     * @param e Parametro utilizado para asignar el evento del mouse
+     */
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getSource().getClass().getTypeName().equalsIgnoreCase("javax.swing.JButton")) {
@@ -65,16 +92,20 @@ public class ControladorMenuPrincipal implements MouseListener {
             Icon icono = new ImageIcon(getClass().getResource("../imagenes/salir.png"));
             sonidoDeSalir.play();
             if (JOptionPane.showConfirmDialog(null, "¿Desea finalizar el programa?", "Salir", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icono) == 0) {
-            try {
-               Conexion.desconectar();
-            } catch (SQLException ex) {
-                Logger.getLogger(PrincipalFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                try {
+                    Conexion.desconectar();
+                } catch (SQLException ex) {
+                    Logger.getLogger(PrincipalFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 System.exit(0);
             }
         }
     }
 
+    /**
+     *
+     * @param e
+     */
     @Override
     public void mouseEntered(MouseEvent e) {
         if (e.getSource().equals(menu.registroPedidoBoton)) {
@@ -98,9 +129,9 @@ public class ControladorMenuPrincipal implements MouseListener {
             menu.registroPedidoBoton.setBackground(new Color(0, 51, 51));
         } else if (e.getSource().equals(menu.registroClienteBoton)) {
             menu.registroClienteBoton.setBackground(new Color(0, 51, 51));
-        }else if (e.getSource().equals(menu.consultarBoton)) {
+        } else if (e.getSource().equals(menu.consultarBoton)) {
             menu.consultarBoton.setBackground(new Color(0, 51, 51));
-        }else if (e.getSource().equals(menu.corteBoton)) {
+        } else if (e.getSource().equals(menu.corteBoton)) {
             menu.corteBoton.setBackground(new Color(0, 51, 51));
         }
     }
@@ -113,6 +144,14 @@ public class ControladorMenuPrincipal implements MouseListener {
     public void mouseReleased(MouseEvent e) {
     }
 
+    /**
+     * Metodo utilizado para ser asignado a cada uno de los botones, los cuales
+     * estaran presentando las diferentes vistas para el caso de Registrar
+     * Pedido al igual que para registrar clientes.
+     *
+     * @param e Parametro utilizado para asignar el evento del mouse
+     * @throws SQLException
+     */
     public void eventosJButton(MouseEvent e) throws SQLException {
         if (e.getSource().equals(menu.registroPedidoBoton)) {
             menu.getContentPane().add(registrarPedido);

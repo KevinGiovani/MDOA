@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Vista utilizada para el Registro de Clientes, dentro de esta vista se presentaran
+ * campos de texto donde se podra ingresar toda la informacion relacionada al cliente y asi
+ * esta podra ser subida hacia la base de datos
  */
 package vistas;
 
@@ -12,20 +12,26 @@ import javax.swing.JPanel;
 /**
  *
  * @author Inzunza Kevin
+ * @version 16-04-2021
  */
 public class RegistrarClientePanel extends javax.swing.JPanel {
 
     private final ControladorRegistrarCliente cCliente;
+
     /**
-     * Creates new form RegistrarPedidoFrame
+     * Constructor utilizado para inicializar todos los componentes del frame al
+     * igual que habilitar los sonidos para cada uno de los botones.
      *
      * @param mPrincipal
-     * @param regresar
-     * @param sonidoBoton
+     * @param regresar Parametro para el uso del sonido al momento de regresar a
+     * un panel anterior
+     * @param sonidoBoton Parametro para el uso del sonido al momento de
+     * utilizar un boton
+     *
      */
-    public RegistrarClientePanel(AudioClip sonidoBoton,AudioClip regresar,JPanel mPrincipal) {
+    public RegistrarClientePanel(AudioClip sonidoBoton, AudioClip regresar, JPanel mPrincipal) {
         initComponents();
-        cCliente=new ControladorRegistrarCliente(this,sonidoBoton,regresar,mPrincipal);
+        cCliente = new ControladorRegistrarCliente(this, sonidoBoton, regresar, mPrincipal);
     }
 
     /**
@@ -270,8 +276,7 @@ public class RegistrarClientePanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-    
-  
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton aceptarBoton;

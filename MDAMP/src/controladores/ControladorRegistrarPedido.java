@@ -1,8 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/**
+ * Este controlador se encarga de manejar los Mouse Listeners y Key Listeners,
+ * algunos aspectos visuales que normalmente se aplican en el JFrame.
+ * Además se encarga de registrar la información de los pedidos, calcular el total
+ * que el cliente debe pagar y también consultar el cliente que está realizando la compra.
+ * */
 package controladores;
 
 import java.applet.AudioClip;
@@ -33,19 +34,29 @@ import vistas.RegistrarPedidoPanel;
 /**
  *
  * @author kevin
+ * @version 16-04-2021
  */
 public class ControladorRegistrarPedido implements ActionListener, MouseListener, ChangeListener, KeyListener {
 
-    private RegistrarPedidoPanel registrarP;
-    private Pedido pedido;
-    private final AudioClip sonidoDePago;
-    private final AudioClip sonidoDeError;
-    private final AudioClip sonidoDeBoton;
-    private final AudioClip sonidoDeRegresar;
-    private JPanel principal;
+    private RegistrarPedidoPanel registrarP; //Referencia del panel visual de Registrar Pedido
+    private Pedido pedido; //Atributo que almacena la información del pedido
+    private final AudioClip sonidoDePago; //Sonido al pagar
+    private final AudioClip sonidoDeError; //Sonido al detectar algún error
+    private final AudioClip sonidoDeBoton; //Sonido al tocar un botón
+    private final AudioClip sonidoDeRegresar; //Sonido al regresar
+    private JPanel principal; //Panel del menú principal
 
+    /**
+     * Constuctor que recibe parámetros desde el JPanel de registrar pedido,
+     * además inicializa los eventos para el mouse y las teclas del computador.
+     *
+     * @param registrarP
+     * @param sonidoDeBoton
+     * @param sonidoDeRegresar
+     * @param principal
+     */
     public ControladorRegistrarPedido(RegistrarPedidoPanel registrarP, AudioClip sonidoDeBoton, AudioClip sonidoDeRegresar, JPanel principal) {
-        pedido= new Pedido();
+        pedido = new Pedido();
         sonidoDePago = java.applet.Applet.newAudioClip(getClass().getResource("../sonidos/pago-realizado.wav"));
         sonidoDeError = java.applet.Applet.newAudioClip(getClass().getResource("../sonidos/errorSonido.wav"));
         this.registrarP = registrarP;
@@ -55,6 +66,11 @@ public class ControladorRegistrarPedido implements ActionListener, MouseListener
         iniciar();
     }
 
+    /**
+     * Añade las acciones de los CheckBox, los cambios de los JSpinner, los
+     * eventos para el mouse de los botones y los eventos para las teclas de los
+     * campos de texto. Otra tarea es definir todo en nulo mediante otro método.
+     */
     public void iniciar() {
         //CheckBox
         registrarP.paq1.addActionListener(this);
@@ -93,6 +109,12 @@ public class ControladorRegistrarPedido implements ActionListener, MouseListener
         desactivar();
     }
 
+    /**
+     * Se utiliza para asignar un evento al método de eventosJCheckBox de todos
+     * los componentes swing.JCheckBox
+     *
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().getClass().getTypeName().equalsIgnoreCase("javax.swing.JCheckBox")) {
@@ -100,6 +122,13 @@ public class ControladorRegistrarPedido implements ActionListener, MouseListener
         }
     }
 
+    /**
+     * Se utiliza para asignar un evento al método eventosJButton de todos los
+     * componentes swing.JButton, el cual detecta cuando se realizó un clic
+     * sobre un botón.
+     *
+     * @param e
+     */
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getSource().getClass().getTypeName().equalsIgnoreCase("javax.swing.JButton")) {
@@ -111,6 +140,13 @@ public class ControladorRegistrarPedido implements ActionListener, MouseListener
         }
     }
 
+    /**
+     * Detecta si se presionó la etiqueta con la imagen de regresar, reproduce
+     * su respectido sonido y cierra la ventana en curso para abrir el menú
+     * principal.
+     *
+     * @param e
+     */
     @Override
     public void mousePressed(MouseEvent e) {
         if (e.getSource().equals(registrarP.regresarImagen)) {
@@ -128,6 +164,13 @@ public class ControladorRegistrarPedido implements ActionListener, MouseListener
     public void mouseReleased(MouseEvent e) {
     }
 
+    /**
+     * MouseEntered detectará cuando el mouse está sobre algún botón y cual de
+     * estos fue, cambiando el color de fondo del botón y reproduciendo un
+     * sonido.
+     *
+     * @param e
+     */
     @Override
     public void mouseEntered(MouseEvent e) {
         if (e.getSource().equals(registrarP.pagarBoton)) {
@@ -139,6 +182,12 @@ public class ControladorRegistrarPedido implements ActionListener, MouseListener
         }
     }
 
+    /**
+     * MouseExited detecta cuando el mouse ya no se encuentra dentro del botón
+     * por lo que regresará el estado en el que se encontraba originalmente
+     *
+     * @param e
+     */
     @Override
     public void mouseExited(MouseEvent e) {
         if (e.getSource().equals(registrarP.pagarBoton)) {
@@ -148,6 +197,13 @@ public class ControladorRegistrarPedido implements ActionListener, MouseListener
         }
     }
 
+    /**
+     * Detecta si se realizó un cambio sobre el valor de algún JSpinner, además
+     * se asignará el total de momento calculando el paquete seleccionado y
+     * cuantos de estos seleccionó.
+     *
+     * @param e
+     */
     @Override
     public void stateChanged(ChangeEvent e) {
         if (e.getSource().equals(registrarP.cantPaq1)) {
@@ -201,6 +257,10 @@ public class ControladorRegistrarPedido implements ActionListener, MouseListener
         }
     }
 
+    /**
+     * Desactiva cada uno de los JSpinner para que no puedan utilizarse si su
+     * checkBox correspondiente no ha sido seleccionado.
+     */
     public void desactivar() {
         registrarP.cantPaq1.setEnabled(false);
         registrarP.cantPaq2.setEnabled(false);
@@ -215,6 +275,10 @@ public class ControladorRegistrarPedido implements ActionListener, MouseListener
         registrarP.cantExt5.setEnabled(false);
     }
 
+    /**
+     * Regresa el estado nulo a todos los componentes de la ventana, así podrá
+     * realizar un nuevo pedido.
+     */
     public void limpiar() {
         desactivar();
         registrarP.paq1.setSelected(false);
@@ -249,6 +313,13 @@ public class ControladorRegistrarPedido implements ActionListener, MouseListener
         pedido.comenzarCosto();
     }
 
+    /**
+     * Detecta si se seleccionó algún paquete representado por un checkBox,
+     * además se asignará el total de momento calculando el paquete seleccionado
+     * y cuantos de estos seleccionó.
+     *
+     * @param e
+     */
     public void eventosJCheckBox(ActionEvent e) {
         if (e.getSource().equals(registrarP.paq1)) {
             if (registrarP.paq1.isSelected()) {
@@ -353,59 +424,87 @@ public class ControladorRegistrarPedido implements ActionListener, MouseListener
         }
     }
 
+    /**
+     * Verificará el botón que se haya sido presionado, además llamará a otro
+     * método para realizar la acción de pagar o buscar.
+     *
+     * @param e
+     * @throws SQLException
+     */
     public void eventosJButton(MouseEvent e) throws SQLException {
         if (e.getSource().equals(registrarP.pagarBoton)) {
-          accionPagar();
-        }else if (e.getSource().equals(registrarP.buscarBoton)){
-          accionBuscar();
+            accionPagar();
+        } else if (e.getSource().equals(registrarP.buscarBoton)) {
+            accionBuscar();
         }
     }
 
+    /**
+     * Verificará que los campos correspondientes no estén vacíos, de ser así
+     * solicitará que ingrese los datos faltanes, sino podrá verificar si el
+     * dinero que brinda el cliente es igual o mayor al total para determinar si
+     * es necesario regresar cambio. Además recolecta la información del pedido
+     * para almacenarlo dentro de la base de datos.
+     *
+     * @throws SQLException
+     */
     public void accionPagar() throws SQLException {
         Icon icono = new ImageIcon(getClass().getResource("../imagenes/pagar.png"));
         Icon icono2 = new ImageIcon(getClass().getResource("../imagenes/cancelar.png"));
         if (JOptionPane.showConfirmDialog(null, "Se efectuara el pago,¿Desea confirmar?", "Confirmacion", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icono) == 0) {
-        if (!registrarP.totalPagar.getText().isEmpty() && !registrarP.totalCliente.getText().isEmpty()&&!registrarP.totalPagar.getText().equals("0")) {
-            int total = Integer.parseInt(registrarP.totalCliente.getText()) - Integer.parseInt(registrarP.totalPagar.getText());
+            if (!registrarP.totalPagar.getText().isEmpty() && !registrarP.totalCliente.getText().isEmpty() && !registrarP.totalPagar.getText().equals("0")) {
+                int total = Integer.parseInt(registrarP.totalCliente.getText()) - Integer.parseInt(registrarP.totalPagar.getText());
 
-            if (total > 0) {
-                sonidoDePago.play();
-                total = abs(total);
-                JOptionPane.showMessageDialog(null, "Gracias por su Compra!\n" + "Cambio: " + total, "Pago Exitoso", JOptionPane.INFORMATION_MESSAGE, icono);
-                registrar();
-                limpiar();
-            } else if (total == 0) {
-                sonidoDePago.play();
-                JOptionPane.showMessageDialog(null, "Gracias por su Compra!", "Pago Exitoso", JOptionPane.INFORMATION_MESSAGE, icono);
-                registrar();
-                limpiar();
+                if (total > 0) {
+                    sonidoDePago.play();
+                    total = abs(total);
+                    JOptionPane.showMessageDialog(null, "Gracias por su Compra!\n" + "Cambio: " + total, "Pago Exitoso", JOptionPane.INFORMATION_MESSAGE, icono);
+                    registrar();
+                    limpiar();
+                } else if (total == 0) {
+                    sonidoDePago.play();
+                    JOptionPane.showMessageDialog(null, "Gracias por su Compra!", "Pago Exitoso", JOptionPane.INFORMATION_MESSAGE, icono);
+                    registrar();
+                    limpiar();
+                } else {
+                    sonidoDeError.play();
+                    JOptionPane.showMessageDialog(null, "No se ha completado el monto a pagar", "Error", JOptionPane.INFORMATION_MESSAGE, icono2);
+                }
             } else {
                 sonidoDeError.play();
-                JOptionPane.showMessageDialog(null, "No se ha completado el monto a pagar", "Error", JOptionPane.INFORMATION_MESSAGE, icono2);
+                JOptionPane.showMessageDialog(null, "Verifique que todos los campos esten ingresados", "Datos faltantes", JOptionPane.INFORMATION_MESSAGE, icono2);
             }
-        } else {
-            sonidoDeError.play();
-            JOptionPane.showMessageDialog(null, "Verifique que todos los campos esten ingresados", "Datos faltantes", JOptionPane.INFORMATION_MESSAGE, icono2);
-        }
         }
     }
-    
-    public void accionBuscar() throws SQLException{
+
+    /**
+     * Realizará la búsqueda del cliente con base al número de teléfono. Si el
+     * cliente no existe mostrará un mensaje informado sobre esto.
+     *
+     * @throws SQLException
+     */
+    public void accionBuscar() throws SQLException {
         BDCliente clientes = new BDCliente();
         Cliente cliente;
         cliente = clientes.buscar(Integer.parseInt(registrarP.numTelefono.getText()));
-        if(cliente.getTelefono() != null){
-        registrarP.nombre.setText(cliente.getNombre());
-        registrarP.apellido.setText(cliente.getApellido());
-        registrarP.direccion.setText(cliente.getDireccion());
-            
-        }else{
-            JOptionPane.showMessageDialog(null,"No existe un cliente con este número de teléfono","Consulta",JOptionPane.WARNING_MESSAGE);
+        if (cliente.getTelefono() != null) {
+            registrarP.nombre.setText(cliente.getNombre());
+            registrarP.apellido.setText(cliente.getApellido());
+            registrarP.direccion.setText(cliente.getDireccion());
+        } else {
+            JOptionPane.showMessageDialog(null, "No existe un cliente con este número de teléfono", "Consulta", JOptionPane.WARNING_MESSAGE);
         }
     }
 
+    /**
+     * Realizará el registro del pedido con base a la información recabada del
+     * pedido. Si en la búsqueda de cliente no ingresó nada, entonces asumirá
+     * los datos de Cliente predeterminado.
+     *
+     * @throws SQLException
+     */
     private void registrar() throws SQLException {
-        BDPedido pedidos = new BDPedido(); //ESTO NO VA AQUI!!!!
+        BDPedido pedidos = new BDPedido();
         String paquete = validarPedido();
         String extra = validarExtra();
         int idCliente;
@@ -423,6 +522,12 @@ public class ControladorRegistrarPedido implements ActionListener, MouseListener
         pedidos.agregarDatos(pedido);
     }
 
+    /**
+     * Validará la información del pedido de los paquetes para mandarla a la
+     * base de datos.
+     *
+     * @return
+     */
     private String validarPedido() {
         String cadena = "";
         if (registrarP.paq1.isSelected()) {
@@ -444,10 +549,15 @@ public class ControladorRegistrarPedido implements ActionListener, MouseListener
         if (registrarP.paq6.isSelected()) {
             cadena += registrarP.paq6.getText() + ": " + registrarP.cantPaq6.getValue() + "\n";
         }
-
         return cadena;
     }
 
+    /**
+     * Validará la información del pedido de los extras para mandarla a la base
+     * de datos.
+     *
+     * @return
+     */
     private String validarExtra() {
         String cadena = "";
         if (registrarP.extra1.isSelected()) {
@@ -468,6 +578,14 @@ public class ControladorRegistrarPedido implements ActionListener, MouseListener
         return cadena;
     }
 
+    /**
+     * KeyTyped primero verificará sobre que campo de texto se está escribiendo,
+     * dependiendo de esto permitirá el uso de solo números en el caso para el
+     * número de teléfono, letras y espacios para nombre y apellido, y en
+     * dirreción puede incluir números, letras, espacios y comas.
+     *
+     * @param e
+     */
     @Override
     public void keyTyped(KeyEvent e) {
         char car = e.getKeyChar();
@@ -484,9 +602,5 @@ public class ControladorRegistrarPedido implements ActionListener, MouseListener
 
     @Override
     public void keyPressed(KeyEvent e) {
-
     }
-    
-    
-
 }

@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Clase utilizada para realizar la conexion hacia la base de datos, para esto 
+ * se asigno la direccion URL, nombre de usuario al igual que la contraseña a utilizar
+ * para ingresar a esta base de datos antes mencionada por parte de MySQL.
  */
 package modelos;
 
@@ -11,29 +11,42 @@ import java.sql.SQLException;
 
 /**
  *
- * @author magdielo-pacheco
+ * @author Pacheco Magdiel
+ * @version 16-04-2021
  */
 public class Conexion {
-     private static Connection con=null;
-    
-    static{
-    String URL="jdbc:mysql://localhost:3306/MiPollo";
-    String USERNAME="CesarP";
-    String PASSWORD="AsaderoMP";
-     try{
-            Class.forName("com.mysql.jdbc.Driver");
-            con=(Connection) DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+    private static Connection con = null;
+
+    static {
+        String URL = "jdbc:mysql://localhost:3306/MiPollo"; //URL utilizado para el ingreso hacia la base de datos
+        String USERNAME = "CesarP"; //Usuario principal de la base de datos
+        String PASSWORD = "AsaderoMP"; //Contraseña para el usuario principal
+        try {
+            Class.forName("com.mysql.jdbc.Driver"); //Uso de la libreria jdbc especializada en la conexion de la base de datos
+            con = (Connection) DriverManager.getConnection(URL, USERNAME, PASSWORD);
             System.out.println("Conexion Exitosa");
-        }catch(ClassNotFoundException | SQLException e){
+        } catch (ClassNotFoundException | SQLException e) {
             System.out.println(e);
         }
     }
-    
-    public static Connection getConnection(){
+
+    /**
+     * Metodo estatico para establecer la conexion hacia la base de datos
+     *
+     * @return Regresa el estado de la conexion
+     */
+    public static Connection getConnection() {
         return con;
     }
-    
-    public static Connection desconectar() throws SQLException{
+
+    /**
+     * Metodo estatico para desconectarse de la base de datos
+     *
+     * @return Regresa el estado de la conexion
+     * @throws SQLException
+     */
+    public static Connection desconectar() throws SQLException {
         con.close();
         System.out.println("Adiós");
         return con;

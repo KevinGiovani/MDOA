@@ -1,43 +1,41 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Interfaz principal del programa, muestra en pantalla las opciones correspondientes
+ * a las interfaces a las cuales el usuario puede interacturar las cuales son:
+ * - Registrar un pedido
+ * - Registrar un cliente
+ * - Consultar
+ * - Realizar corte
  */
 package vistas;
 
 import controladores.ControladorMenuPrincipal;
 import java.applet.AudioClip;
-import java.awt.Color;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import modelos.Conexion;
 
 /**
  *
  * @author Inzunza Kevin
+ * @version 16-04-2021
  */
 public class PrincipalFrame extends javax.swing.JFrame {
+
     private final ControladorMenuPrincipal cMenu;
- private final AudioClip sonidoDeBoton;
+    private final AudioClip sonidoDeBoton;
     private final AudioClip sonidoDeSalir;
     private final JPanel registrarPedido;
     private final JPanel registrarCliente;
+
     /**
-     * Creates new form PrincipalFrame
+     * Constructor utilizado para inicializar todos los componentes del frame al
+     * igual que habilitar los sonidos para cada uno de los botones.
      */
     public PrincipalFrame() {
         initComponents();
-        sonidoDeBoton=java.applet.Applet.newAudioClip(getClass().getResource("../sonidos/sonido_boton.wav"));
-        sonidoDeSalir=java.applet.Applet.newAudioClip(getClass().getResource("../sonidos/salir.wav"));
-        this.registrarPedido = new RegistrarPedidoPanel(sonidoDeBoton,sonidoDeSalir,fondoJPanel);
-        this.registrarCliente = new RegistrarClientePanel(sonidoDeBoton,sonidoDeSalir,fondoJPanel);
-         cMenu=new ControladorMenuPrincipal(this,sonidoDeBoton,sonidoDeSalir,registrarCliente,registrarPedido);
+        sonidoDeBoton = java.applet.Applet.newAudioClip(getClass().getResource("../sonidos/sonido_boton.wav"));
+        sonidoDeSalir = java.applet.Applet.newAudioClip(getClass().getResource("../sonidos/salir.wav"));
+        this.registrarPedido = new RegistrarPedidoPanel(sonidoDeBoton, sonidoDeSalir, fondoJPanel);
+        this.registrarCliente = new RegistrarClientePanel(sonidoDeBoton, sonidoDeSalir, fondoJPanel);
+        cMenu = new ControladorMenuPrincipal(this, sonidoDeBoton, sonidoDeSalir, registrarCliente, registrarPedido);
     }
 
     /**
