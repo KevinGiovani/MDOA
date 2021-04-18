@@ -365,7 +365,7 @@ public class ControladorRegistrarPedido implements ActionListener, MouseListener
         Icon icono = new ImageIcon(getClass().getResource("../imagenes/pagar.png"));
         Icon icono2 = new ImageIcon(getClass().getResource("../imagenes/cancelar.png"));
         if (JOptionPane.showConfirmDialog(null, "Se efectuara el pago,¿Desea confirmar?", "Confirmacion", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icono) == 0) {
-        if (!registrarP.totalPagar.getText().isEmpty() && !registrarP.totalCliente.getText().isEmpty()) {
+        if (!registrarP.totalPagar.getText().isEmpty() && !registrarP.totalCliente.getText().isEmpty()&&!registrarP.totalPagar.getText().equals("0")) {
             int total = Integer.parseInt(registrarP.totalCliente.getText()) - Integer.parseInt(registrarP.totalPagar.getText());
 
             if (total > 0) {
@@ -394,9 +394,14 @@ public class ControladorRegistrarPedido implements ActionListener, MouseListener
         BDCliente clientes = new BDCliente();
         Cliente cliente;
         cliente = clientes.buscar(Integer.parseInt(registrarP.numTelefono.getText()));
+        if(cliente.getTelefono() != null){
         registrarP.nombre.setText(cliente.getNombre());
         registrarP.apellido.setText(cliente.getApellido());
         registrarP.direccion.setText(cliente.getDireccion());
+            
+        }else{
+            JOptionPane.showMessageDialog(null,"No existe un cliente con este número de teléfono","Consulta",JOptionPane.WARNING_MESSAGE);
+        }
     }
 
     private void registrar() throws SQLException {
@@ -406,7 +411,7 @@ public class ControladorRegistrarPedido implements ActionListener, MouseListener
         int idCliente;
         long millis = System.currentTimeMillis();
         Date fecha = new Date(millis);
-        if (registrarP.numTelefono.getText().equals("")) {
+        if (registrarP.nombre.getText().equals("")) {
             idCliente = 1;
         } else {
             idCliente = Integer.parseInt(registrarP.numTelefono.getText());

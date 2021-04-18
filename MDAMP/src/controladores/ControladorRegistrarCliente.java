@@ -92,9 +92,14 @@ public class ControladorRegistrarCliente implements MouseListener,KeyListener{
             if(JOptionPane.showConfirmDialog(null, "¿Esta seguro que desea registrarse?", "Confirmacion", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,icono)==0){
             BDCliente clientes = new BDCliente(); //ESTE NO VA AQUI!!!!
             Cliente cliente = new Cliente(registrarC.nombre.getText(), registrarC.apellido.getText(), registrarC.numTelefono.getText(), registrarC.direccion.getText());
+            Cliente busqueda=clientes.buscar(Integer.parseInt(cliente.getTelefono()));
+            if(busqueda.getTelefono()!=null&&busqueda.getTelefono().equals(cliente.getTelefono())){
+               JOptionPane.showMessageDialog(null, "Este número de teléfono ya existe", "consulta", JOptionPane.WARNING_MESSAGE); 
+            }else{
             clientes.agregarDatos(cliente);
             JOptionPane.showMessageDialog(null, "Operación Exitosa", "Datos agregados", JOptionPane.INFORMATION_MESSAGE, icono);
             limpiar();
+            }
             }
         } else {
             Icon icono = new ImageIcon(getClass().getResource("../imagenes/cancelar.png"));
