@@ -57,17 +57,17 @@ public class BDCliente {
      * @return cliente Retorna el cliente obtenido desde la base de datos
      * @throws SQLException
      */
-    public Cliente buscar(int tel) throws SQLException {
+    public Cliente buscar(long tel) throws SQLException {
         cliente = new Cliente();
         PreparedStatement ps;
         ResultSet res;
         ps = con.prepareStatement("Select * From Cliente where Telefono=?");
-        ps.setInt(1, tel);
+        ps.setLong(1, tel);
         res = ps.executeQuery();
         if (res.next()) {
             cliente.setNombre(res.getString("Nombre"));
             cliente.setApellido(res.getString("Apellido"));
-            cliente.setTelefono(String.valueOf(res.getInt("Telefono")));
+            cliente.setTelefono(String.valueOf(res.getLong("Telefono")));
             cliente.setDireccion(res.getString("Direccion"));
         }
         return cliente;

@@ -486,7 +486,7 @@ public class ControladorRegistrarPedido implements ActionListener, MouseListener
     public void accionBuscar() throws SQLException {
         BDCliente clientes = new BDCliente();
         Cliente cliente;
-        cliente = clientes.buscar(Integer.parseInt(registrarP.numTelefono.getText()));
+        cliente = clientes.buscar(Long.parseLong(registrarP.numTelefono.getText()));
         if (cliente.getTelefono() != null) {
             registrarP.nombre.setText(cliente.getNombre());
             registrarP.apellido.setText(cliente.getApellido());

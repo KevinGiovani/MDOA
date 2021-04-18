@@ -127,9 +127,9 @@ public class ControladorRegistrarCliente implements MouseListener, KeyListener {
         if (!registrarC.nombre.getText().isEmpty() && !registrarC.apellido.getText().isEmpty() && !registrarC.numTelefono.getText().isEmpty() && !registrarC.direccion.getText().isEmpty()) {
             Icon icono = new ImageIcon(getClass().getResource("../imagenes/usuarioOk.png"));
             if (JOptionPane.showConfirmDialog(null, "¿Esta seguro que desea registrarse?", "Confirmacion", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icono) == 0) {
-                BDCliente clientes = new BDCliente(); //ESTE NO VA AQUI!!!!
+                BDCliente clientes = new BDCliente();
                 Cliente cliente = new Cliente(registrarC.nombre.getText(), registrarC.apellido.getText(), registrarC.numTelefono.getText(), registrarC.direccion.getText());
-                Cliente busqueda = clientes.buscar(Integer.parseInt(cliente.getTelefono()));
+                Cliente busqueda = clientes.buscar(Long.parseLong(cliente.getTelefono()));
                 if (busqueda.getTelefono() != null && busqueda.getTelefono().equals(cliente.getTelefono())) {
                     JOptionPane.showMessageDialog(null, "Este número de teléfono ya existe", "consulta", JOptionPane.WARNING_MESSAGE);
                 } else {
