@@ -24,6 +24,7 @@ public class PrincipalFrame extends javax.swing.JFrame {
     private final AudioClip sonidoDeSalir;
     private final JPanel registrarPedido;
     private final JPanel registrarCliente;
+    private final JPanel menuConsultar;
 
     /**
      * Constructor utilizado para inicializar todos los componentes del frame al
@@ -35,7 +36,8 @@ public class PrincipalFrame extends javax.swing.JFrame {
         sonidoDeSalir = java.applet.Applet.newAudioClip(getClass().getResource("../sonidos/salir.wav"));
         this.registrarPedido = new RegistrarPedidoPanel(sonidoDeBoton, sonidoDeSalir, fondoJPanel);
         this.registrarCliente = new RegistrarClientePanel(sonidoDeBoton, sonidoDeSalir, fondoJPanel);
-        cMenu = new ControladorMenuPrincipal(this, sonidoDeBoton, sonidoDeSalir, registrarCliente, registrarPedido);
+        this.menuConsultar = new MenuConsultarPanel(sonidoDeBoton,sonidoDeSalir,fondoJPanel);
+        cMenu = new ControladorMenuPrincipal(this, sonidoDeBoton, sonidoDeSalir, registrarCliente, registrarPedido,menuConsultar);
     }
 
     /**

@@ -33,6 +33,7 @@ public class ControladorMenuPrincipal implements MouseListener {
     private final AudioClip sonidoDeSalir;
     private final JPanel registrarPedido;
     private final JPanel registrarCliente;
+    private final JPanel menuConsultar;
 
     /**
      * Constructor de la clase con parametros inicializados
@@ -43,13 +44,15 @@ public class ControladorMenuPrincipal implements MouseListener {
      * @param salir Sonido integrado al momento de salir de la interfaz
      * @param registrarCliente JPanel utilizado para el registro del cliente
      * @param registrarPedido JPanel utilizado para el registro del pedido
+     * @param menuConsultar
      */
-    public ControladorMenuPrincipal(PrincipalFrame menu, AudioClip sonidoBoton, AudioClip salir, JPanel registrarCliente, JPanel registrarPedido) {
+    public ControladorMenuPrincipal(PrincipalFrame menu, AudioClip sonidoBoton, AudioClip salir, JPanel registrarCliente, JPanel registrarPedido,JPanel menuConsultar) {
         this.menu = menu;
         sonidoDeBoton = sonidoBoton;
         sonidoDeSalir = salir;
         this.registrarCliente = registrarCliente;
         this.registrarPedido = registrarPedido;
+        this.menuConsultar = menuConsultar;
         iniciarlizar();
     }
 
@@ -173,7 +176,10 @@ public class ControladorMenuPrincipal implements MouseListener {
             menu.fondoJPanel.setVisible(false);
             registrarCliente.setVisible(true);
         } else if (e.getSource().equals(menu.consultarBoton)) {
-
+            menu.getContentPane().add(menuConsultar);
+            menuConsultar.setSize(1045, 533); //Tamaño de la ventana asignada al JPanel
+            menu.fondoJPanel.setVisible(false);
+            menuConsultar.setVisible(true);
         } else if (e.getSource().equals(menu.corteBoton)) {
 
         }

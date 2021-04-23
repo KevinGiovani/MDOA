@@ -20,7 +20,7 @@ public class Conexion {
 
     static {
         String URL = "jdbc:mysql://localhost:3306/MiPollo"; //URL utilizado para el ingreso hacia la base de datos
-        String USERNAME = "CesarP"; //Usuario principal de la base de datos
+        String USERNAME = "cesarP"; //Usuario principal de la base de datos
         String PASSWORD = "AsaderoMP"; //Contraseña para el usuario principal
         try {
             Class.forName("com.mysql.jdbc.Driver"); //Uso de la libreria jdbc especializada en la conexion de la base de datos
@@ -48,7 +48,7 @@ public class Conexion {
      */
     public static Connection desconectar() throws SQLException {
         con.close();
-        System.out.println("Adiós");
+        System.out.println("Conexion finalizada");
         return con;
     }
 }
