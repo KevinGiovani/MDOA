@@ -7,6 +7,7 @@ package vistas;
 
 import controladores.ControladorMenuConsultar;
 import java.applet.AudioClip;
+import java.sql.SQLException;
 import javax.swing.JPanel;
 
 /**
@@ -23,7 +24,7 @@ public class MenuConsultarPanel extends javax.swing.JPanel {
      * @param menuPrincipal
      * @param principal
      */
-    public MenuConsultarPanel(AudioClip sonidoBoton, AudioClip regresar,PrincipalFrame principal) {
+    public MenuConsultarPanel(AudioClip sonidoBoton, AudioClip regresar,PrincipalFrame principal) throws SQLException {
         initComponents();
         cMConsultar = new ControladorMenuConsultar(this,sonidoBoton,regresar,principal);
     }

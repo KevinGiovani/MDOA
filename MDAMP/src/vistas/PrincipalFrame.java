@@ -10,6 +10,9 @@ package vistas;
 
 import controladores.ControladorMenuPrincipal;
 import java.applet.AudioClip;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 
 /**
@@ -30,7 +33,7 @@ public class PrincipalFrame extends javax.swing.JFrame {
      * Constructor utilizado para inicializar todos los componentes del frame al
      * igual que habilitar los sonidos para cada uno de los botones.
      */
-    public PrincipalFrame() {
+    public PrincipalFrame() throws SQLException {
         initComponents();
         sonidoDeBoton = java.applet.Applet.newAudioClip(getClass().getResource("../sonidos/sonido_boton.wav"));
         sonidoDeSalir = java.applet.Applet.newAudioClip(getClass().getResource("../sonidos/salir.wav"));
@@ -333,7 +336,11 @@ public class PrincipalFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PrincipalFrame().setVisible(true);
+                try {
+                    new PrincipalFrame().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(PrincipalFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
