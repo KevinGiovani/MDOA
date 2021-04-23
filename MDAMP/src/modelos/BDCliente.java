@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -71,5 +72,22 @@ public class BDCliente {
             cliente.setDireccion(res.getString("Direccion"));
         }
         return cliente;
+    }
+
+    public ArrayList<Cliente> consultar() throws SQLException {
+        ArrayList<Cliente> clientes = new ArrayList<>();
+        PreparedStatement ps;
+        ResultSet res;
+        ps = con.prepareStatement("Select * From Cliente");
+        res = ps.executeQuery();
+        while (res.next()) {
+            cliente = new Cliente();
+            cliente.setNombre(res.getString("Nombre"));
+            cliente.setApellido(res.getString("Apellido"));
+            cliente.setTelefono(String.valueOf(res.getLong("Telefono")));
+            cliente.setDireccion(res.getString("Direccion"));
+            clientes.add(cliente);
+        }
+        return clientes;
     }
 }

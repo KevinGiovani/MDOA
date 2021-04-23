@@ -9,12 +9,14 @@ import java.applet.AudioClip;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.SQLException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import vistas.ConsultarClientePanel;
 import vistas.MenuConsultarPanel;
+import vistas.PrincipalFrame;
 
 /**
  *
@@ -24,11 +26,11 @@ public class ControladorMenuConsultar implements MouseListener {
 
     private final AudioClip sonidoDeBoton; //Audio para los botones
     private final AudioClip sonidoDeRegresar; //Audio reproducido para salir
-    private final JPanel principal; //Panel de la ventana de menú principal
+    private final PrincipalFrame principal; //Panel de la ventana de menú principal
     private final MenuConsultarPanel menuConsultar;
     private final ConsultarClientePanel cClienteP;
 
-    public ControladorMenuConsultar(MenuConsultarPanel menuConsultar, AudioClip sonidoDeBoton, AudioClip sonidoDeRegresar, JPanel principal) {
+    public ControladorMenuConsultar(MenuConsultarPanel menuConsultar, AudioClip sonidoDeBoton, AudioClip sonidoDeRegresar, PrincipalFrame principal) throws SQLException {
         this.menuConsultar = menuConsultar;
         this.principal = principal;
         this.sonidoDeBoton = sonidoDeBoton;
@@ -55,18 +57,18 @@ public class ControladorMenuConsultar implements MouseListener {
             sonidoDeRegresar.play();
             if (JOptionPane.showConfirmDialog(null, "¿Desea regresar al menu principal?", "Regresar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icono) == 0) {
                 menuConsultar.setVisible(false);
-                principal.setVisible(true);
+                principal.fondoJPanel.setVisible(true);
             }
         }
     }
     
     public void tipoConsulta(MouseEvent e){
-        if(e.getSource().getClass().getTypeName().equals(menuConsultar.izquierdaJPanel)){
-         principal.;
+        if(e.getSource().equals(menuConsultar.izquierdaJPanel)){
+         principal.getContentPane().add(cClienteP);
          cClienteP.setSize(1045, 533); //Tamaño de la ventana asignada al JPanel
          menuConsultar.setVisible(false);
          cClienteP.setVisible(true);
-        }else if(e.getSource().getClass().getTypeName().equals(menuConsultar.derechaJPanel)){
+        }else if(e.getSource().equals(menuConsultar.derechaJPanel)){
             
         }
     }

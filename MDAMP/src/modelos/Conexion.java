@@ -23,9 +23,8 @@ public class Conexion {
         String USERNAME = "cesarP"; //Usuario principal de la base de datos
         String PASSWORD = "AsaderoMP"; //Contraseña para el usuario principal
         try {
-            Class.forName("com.mysql.jdbc.Driver"); //Uso de la libreria jdbc especializada en la conexion de la base de datos
+            Class.forName("com.mysql.cj.jdbc.Driver"); //Uso de la libreria jdbc especializada en la conexion de la base de datos
             con = (Connection) DriverManager.getConnection(URL, USERNAME, PASSWORD);
-            System.out.println("Conexion Exitosa");
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println(e);
         }
@@ -48,7 +47,6 @@ public class Conexion {
      */
     public static Connection desconectar() throws SQLException {
         con.close();
-        System.out.println("Conexion finalizada");
         return con;
     }
 }

@@ -21,11 +21,11 @@ public class MenuConsultarPanel extends javax.swing.JPanel {
      * @param sonidoBoton
      * @param regresar
      * @param menuPrincipal
+     * @param principal
      */
-    public MenuConsultarPanel(AudioClip sonidoBoton, AudioClip regresar, JPanel menuPrincipal) {
+    public MenuConsultarPanel(AudioClip sonidoBoton, AudioClip regresar,PrincipalFrame principal) {
         initComponents();
-        cMConsultar = new ControladorMenuConsultar(this,sonidoBoton,regresar,menuPrincipal);
-        
+        cMConsultar = new ControladorMenuConsultar(this,sonidoBoton,regresar,principal);
     }
 
     /**
