@@ -19,7 +19,7 @@ public class ConsultarClientePanel extends javax.swing.JPanel {
 
     /**
      *
-     * Constuctor para iniciar el panel de registrar pedido, el cual recibe el
+     * Constuctor para iniciar el panel de consultar cliente, el cual recibe el
      * sonido para los botones, el sonido para regresar y le ventana del menú
      * principal, componentes necesarios para utilizar el controlador.
      *
@@ -32,6 +32,10 @@ public class ConsultarClientePanel extends javax.swing.JPanel {
       initComponents();
       cConsultarC = new ControladorConsultarCliente(this, sonidoBoton, regresar, mConsultar);
      }
+    
+    public ControladorConsultarCliente getCConsulta(){
+        return cConsultarC;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -42,16 +46,19 @@ public class ConsultarClientePanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         registroClienteTitulo = new javax.swing.JPanel();
         manejoOTexto = new javax.swing.JLabel();
         regresarImagen = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaClientes = new javax.swing.JTable();
+        tablaConsultas = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        campo = new javax.swing.JLabel();
         telefono = new javax.swing.JTextField();
         buscar = new javax.swing.JButton();
         cancelar = new javax.swing.JButton();
+        nPedido = new javax.swing.JRadioButton();
+        nTelefono = new javax.swing.JRadioButton();
 
         setBackground(new java.awt.Color(0, 153, 51));
         setForeground(new java.awt.Color(255, 255, 0));
@@ -80,7 +87,7 @@ public class ConsultarClientePanel extends javax.swing.JPanel {
         regresarImagen.setBackground(new java.awt.Color(0, 153, 204));
         regresarImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/regreso.png"))); // NOI18N
 
-        tablaClientes.setModel(new javax.swing.table.DefaultTableModel(
+        tablaConsultas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null}
             },
@@ -96,18 +103,18 @@ public class ConsultarClientePanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tablaClientes);
-        if (tablaClientes.getColumnModel().getColumnCount() > 0) {
-            tablaClientes.getColumnModel().getColumn(0).setPreferredWidth(10);
-            tablaClientes.getColumnModel().getColumn(1).setPreferredWidth(10);
-            tablaClientes.getColumnModel().getColumn(2).setPreferredWidth(10);
+        jScrollPane1.setViewportView(tablaConsultas);
+        if (tablaConsultas.getColumnModel().getColumnCount() > 0) {
+            tablaConsultas.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tablaConsultas.getColumnModel().getColumn(1).setPreferredWidth(10);
+            tablaConsultas.getColumnModel().getColumn(2).setPreferredWidth(10);
         }
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
 
-        jLabel3.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(153, 255, 153));
-        jLabel3.setText("Numero de Telefono:");
+        campo.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
+        campo.setForeground(new java.awt.Color(153, 255, 153));
+        campo.setText("Numero de Telefono:");
 
         telefono.setBackground(new java.awt.Color(153, 255, 204));
 
@@ -127,7 +134,7 @@ public class ConsultarClientePanel extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(56, 56, 56)
-                .addComponent(jLabel3)
+                .addComponent(campo)
                 .addGap(71, 71, 71)
                 .addComponent(telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
@@ -141,12 +148,18 @@ public class ConsultarClientePanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(26, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                    .addComponent(campo)
                     .addComponent(telefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buscar)
                     .addComponent(cancelar))
                 .addGap(16, 16, 16))
         );
+
+        buttonGroup1.add(nPedido);
+        nPedido.setText("Num Pedido");
+
+        buttonGroup1.add(nTelefono);
+        nTelefono.setText("Telefono");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -163,7 +176,11 @@ public class ConsultarClientePanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1))
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nPedido)
+                    .addComponent(nTelefono))
+                .addGap(46, 46, 46))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,8 +190,13 @@ public class ConsultarClientePanel extends javax.swing.JPanel {
                     .addComponent(registroClienteTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(regresarImagen))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(nPedido)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(nTelefono)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41))
         );
@@ -183,14 +205,17 @@ public class ConsultarClientePanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton buscar;
+    public javax.swing.ButtonGroup buttonGroup1;
+    public javax.swing.JLabel campo;
     public javax.swing.JButton cancelar;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel manejoOTexto;
+    public javax.swing.JLabel manejoOTexto;
+    public javax.swing.JRadioButton nPedido;
+    public javax.swing.JRadioButton nTelefono;
     private javax.swing.JPanel registroClienteTitulo;
     public javax.swing.JLabel regresarImagen;
-    public javax.swing.JTable tablaClientes;
+    public javax.swing.JTable tablaConsultas;
     public javax.swing.JTextField telefono;
     // End of variables declaration//GEN-END:variables
 }

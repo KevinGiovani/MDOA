@@ -11,7 +11,7 @@ package modelos;
  */
 public class Pedido {
     private int idPedido; //Clave para el pedido
-    private int idCliente; //Clave referencia del cliente obtenida del teléfono
+    private long idCliente; //Clave referencia del cliente obtenida del teléfono
     private String paquete; //Cadena de los paquetes y cantidad de estos
     private String extra; //Cadena de los extras y cantidad de estos
     private String fecha; //Fecha en que se realizó el pedido
@@ -28,7 +28,7 @@ public class Pedido {
      * @param fecha
      * @param total
      */
-    public Pedido(int idPedido, int idCliente, String paquete, String extra, String fecha,int total) {
+    public Pedido(int idPedido, long idCliente, String paquete, String extra, String fecha,int total) {
         this.idPedido = idPedido;
         this.idCliente = idCliente;
         this.paquete = paquete;
@@ -54,7 +54,7 @@ public class Pedido {
      * @param fecha
      * @param total
      */
-    public Pedido(int idCliente, String paquete, String extra, String fecha,int total){
+    public Pedido(long idCliente, String paquete, String extra, String fecha,int total){
         this.idCliente = idCliente;
         this.paquete = paquete;
         this.extra = extra;
@@ -83,7 +83,7 @@ public class Pedido {
      * Regresa la información actual del id del cliente
      * @return
      */
-    public int getIdCliente() {
+    public long getIdCliente() {
         return idCliente;
     }
 
@@ -91,7 +91,7 @@ public class Pedido {
      * Ingresa un nuevo id del cliente
      * @param idCliente
      */
-    public void setIdCliente(int idCliente) {
+    public void setIdCliente(long idCliente) {
         this.idCliente = idCliente;
     }
 
@@ -204,6 +204,11 @@ public class Pedido {
         }
         setTotal(totalPago);
         return totalPago;
+    }
+
+    @Override
+    public String toString() {
+        return idPedido + idCliente + paquete + extra +  fecha + total ;
     }
 
 

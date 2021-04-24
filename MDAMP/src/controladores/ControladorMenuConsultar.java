@@ -10,6 +10,8 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -29,6 +31,7 @@ public class ControladorMenuConsultar implements MouseListener {
     private final PrincipalFrame principal; //Panel de la ventana de menú principal
     private final MenuConsultarPanel menuConsultar;
     private final ConsultarClientePanel cClienteP;
+    
 
     public ControladorMenuConsultar(MenuConsultarPanel menuConsultar, AudioClip sonidoDeBoton, AudioClip sonidoDeRegresar, PrincipalFrame principal) throws SQLException {
         this.menuConsultar = menuConsultar;
@@ -51,7 +54,11 @@ public class ControladorMenuConsultar implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getSource().getClass().getTypeName().equalsIgnoreCase("javax.swing.JPanel")) {
-            tipoConsulta(e);
+            try {
+                tipoConsulta(e);
+            } catch (SQLException ex) {
+                Logger.getLogger(ControladorMenuConsultar.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else if (e.getSource().getClass().getTypeName().equalsIgnoreCase("javax.swing.JLabel")) {
             Icon icono = new ImageIcon(getClass().getResource("../imagenes/regreso.png"));
             sonidoDeRegresar.play();
@@ -62,14 +69,21 @@ public class ControladorMenuConsultar implements MouseListener {
         }
     }
     
-    public void tipoConsulta(MouseEvent e){
+    public void tipoConsulta(MouseEvent e) throws SQLException{
         if(e.getSource().equals(menuConsultar.izquierdaJPanel)){
          principal.getContentPane().add(cClienteP);
          cClienteP.setSize(1045, 533); //Tamaño de la ventana asignada al JPanel
          menuConsultar.setVisible(false);
+         mostrar(false,"Número de Teléfono","Consultar Cliente");
          cClienteP.setVisible(true);
+         cClienteP.getCConsulta().inicializar(true);
         }else if(e.getSource().equals(menuConsultar.derechaJPanel)){
-            
+         mostrar(true,"Campo de búsqueda","Consultar Pedido");
+         principal.getContentPane().add(cClienteP);
+         menuConsultar.setVisible(false);
+         cClienteP.setSize(1045, 533); //Tamaño de la ventana asignada al JPanel
+         cClienteP.setVisible(true);
+         cClienteP.getCConsulta().inicializar(false);
         }
     }
 
@@ -101,4 +115,10 @@ public class ControladorMenuConsultar implements MouseListener {
         }
     }
 
+    public void mostrar(Boolean estado,String campo,String titulo){
+        cClienteP.nPedido.setVisible(estado);
+        cClienteP.nTelefono.setVisible(estado);
+        cClienteP.campo.setText(campo);
+        cClienteP.manejoOTexto.setText(titulo);
+    }
 }

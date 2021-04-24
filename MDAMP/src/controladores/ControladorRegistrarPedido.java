@@ -507,13 +507,13 @@ public class ControladorRegistrarPedido implements ActionListener, MouseListener
         BDPedido pedidos = new BDPedido();
         String paquete = validarPedido();
         String extra = validarExtra();
-        int idCliente;
+        long idCliente;
         long millis = System.currentTimeMillis();
         Date fecha = new Date(millis);
         if (registrarP.nombre.getText().equals("")) {
             idCliente = 1;
         } else {
-            idCliente = Integer.parseInt(registrarP.numTelefono.getText());
+            idCliente = Long.parseLong(registrarP.numTelefono.getText());
         }
         pedido.setIdCliente(idCliente);
         pedido.setFecha(String.valueOf(fecha));
