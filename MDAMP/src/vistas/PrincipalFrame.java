@@ -9,7 +9,9 @@
 package vistas;
 
 import controladores.ControladorMenuPrincipal;
+import controladores.ControladorPDF;
 import java.applet.AudioClip;
+import java.io.File;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,6 +30,8 @@ public class PrincipalFrame extends javax.swing.JFrame {
     private final JPanel registrarPedido;
     private final JPanel registrarCliente;
     private final JPanel menuConsultar;
+    private final CortePanel corte;
+    private ControladorPDF ts;
 
     /**
      * Constructor utilizado para inicializar todos los componentes del frame al
@@ -40,7 +44,10 @@ public class PrincipalFrame extends javax.swing.JFrame {
         this.registrarPedido = new RegistrarPedidoPanel(sonidoDeBoton, sonidoDeSalir, fondoJPanel);
         this.registrarCliente = new RegistrarClientePanel(sonidoDeBoton, sonidoDeSalir, fondoJPanel);
         this.menuConsultar = new MenuConsultarPanel(sonidoDeBoton,sonidoDeSalir,this);
-        cMenu = new ControladorMenuPrincipal(this, sonidoDeBoton, sonidoDeSalir, registrarCliente, registrarPedido,menuConsultar);
+        this.corte = new CortePanel(sonidoDeBoton, sonidoDeSalir, fondoJPanel);
+        cMenu = new ControladorMenuPrincipal(this, sonidoDeBoton, sonidoDeSalir, registrarCliente, registrarPedido,menuConsultar,corte);
+        
+   
     }
 
     /**

@@ -70,7 +70,7 @@ public class PedidoTest {
         Pedido instance = new Pedido();
         int expResult = 345;
         instance.setIdCliente(345);
-        int result = instance.getIdCliente();
+        int result = (int) instance.getIdCliente();
         assertEquals(expResult, result);
     }
 

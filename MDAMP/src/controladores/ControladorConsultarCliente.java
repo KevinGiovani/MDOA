@@ -44,12 +44,6 @@ public class ControladorConsultarCliente implements MouseListener, KeyListener {
         this.mConsultar = mConsultar;
         this.sonidoDeBoton = sonidoDeBoton;
         this.sonidoDeRegresar = sonidoDeRegresar;
-    }
-
-    public void inicializar(Boolean tipoConsulta) throws SQLException {
-        this.tipoConsulta = tipoConsulta;
-        iniciarTabla();
-
         //Botones
         consultarCliente.buscar.addMouseListener(this);
         consultarCliente.cancelar.addMouseListener(this);
@@ -59,6 +53,11 @@ public class ControladorConsultarCliente implements MouseListener, KeyListener {
         consultarCliente.telefono.addKeyListener(this);
         //Tabla
         consultarCliente.tablaConsultas.addMouseListener(this);
+    }
+
+    public void inicializar(Boolean tipoConsulta) throws SQLException {
+        this.tipoConsulta = tipoConsulta;
+        iniciarTabla();
     }
 
     @Override

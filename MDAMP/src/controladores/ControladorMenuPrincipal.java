@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import vistas.PrincipalFrame;
 import modelos.Conexion;
+import vistas.CortePanel;
 
 /**
  * @author Pacheco Magdiel
@@ -34,6 +35,7 @@ public class ControladorMenuPrincipal implements MouseListener {
     private final JPanel registrarPedido;
     private final JPanel registrarCliente;
     private final JPanel menuConsultar;
+    private final CortePanel corte;
 
     /**
      * Constructor de la clase con parametros inicializados
@@ -46,14 +48,15 @@ public class ControladorMenuPrincipal implements MouseListener {
      * @param registrarPedido JPanel utilizado para el registro del pedido
      * @param menuConsultar
      */
-    public ControladorMenuPrincipal(PrincipalFrame menu, AudioClip sonidoBoton, AudioClip salir, JPanel registrarCliente, JPanel registrarPedido,JPanel menuConsultar) {
+    public ControladorMenuPrincipal(PrincipalFrame menu, AudioClip sonidoBoton, AudioClip salir, JPanel registrarCliente, JPanel registrarPedido, JPanel menuConsultar, CortePanel corte) {
         this.menu = menu;
         sonidoDeBoton = sonidoBoton;
         sonidoDeSalir = salir;
         this.registrarCliente = registrarCliente;
         this.registrarPedido = registrarPedido;
         this.menuConsultar = menuConsultar;
-        iniciarlizar();
+        this.corte = corte;
+        inicializar();
     }
 
     /**
@@ -61,7 +64,7 @@ public class ControladorMenuPrincipal implements MouseListener {
      * base de datos al igual que la implementacion de MouseListeners para cada
      * uno de los botones/imagenes inlcuidos
      */
-    private void iniciarlizar() {
+    private void inicializar() {
         Connection con = Conexion.getConnection();
         //Botones
         menu.registroPedidoBoton.addMouseListener(this);
@@ -181,7 +184,16 @@ public class ControladorMenuPrincipal implements MouseListener {
             menu.fondoJPanel.setVisible(false);
             menuConsultar.setVisible(true);
         } else if (e.getSource().equals(menu.corteBoton)) {
-
+            corte.cCorte.iniciarTabla();
+            if (corte.tablaCorte.getRowCount() != 0) {
+                menu.getContentPane().add(corte);
+                corte.setSize(1045, 533); //Tamaño de la ventana asignada al JPanel
+                menu.fondoJPanel.setVisible(false);
+                corte.setVisible(true);
+            } else {
+                Icon icono = new ImageIcon(getClass().getResource("../imagenes/cancelar.png"));
+                JOptionPane.showMessageDialog(null, "No se han registrado pedidos", "Sin pedidos", JOptionPane.INFORMATION_MESSAGE, icono);
+            }
         }
     }
 }
