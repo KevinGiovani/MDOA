@@ -15,8 +15,7 @@ import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import vistas.ConsultarClientePanel;
+import vistas.ConsultarPanel;
 import vistas.MenuConsultarPanel;
 import vistas.PrincipalFrame;
 
@@ -30,15 +29,14 @@ public class ControladorMenuConsultar implements MouseListener {
     private final AudioClip sonidoDeRegresar; //Audio reproducido para salir
     private final PrincipalFrame principal; //Panel de la ventana de menú principal
     private final MenuConsultarPanel menuConsultar;
-    private final ConsultarClientePanel cClienteP;
-    
+    private final ConsultarPanel cClienteP;
 
     public ControladorMenuConsultar(MenuConsultarPanel menuConsultar, AudioClip sonidoDeBoton, AudioClip sonidoDeRegresar, PrincipalFrame principal) throws SQLException {
         this.menuConsultar = menuConsultar;
         this.principal = principal;
         this.sonidoDeBoton = sonidoDeBoton;
         this.sonidoDeRegresar = sonidoDeRegresar;
-        cClienteP = new ConsultarClientePanel(sonidoDeBoton,sonidoDeRegresar,menuConsultar);
+        cClienteP = new ConsultarPanel(sonidoDeBoton, sonidoDeRegresar, menuConsultar);
         inicializar();
     }
 
@@ -46,7 +44,7 @@ public class ControladorMenuConsultar implements MouseListener {
         //JPanel
         menuConsultar.derechaJPanel.addMouseListener(this);
         menuConsultar.izquierdaJPanel.addMouseListener(this);
-        
+
         //Imagen
         menuConsultar.regresarImagen.addMouseListener(this);
     }
@@ -68,22 +66,33 @@ public class ControladorMenuConsultar implements MouseListener {
             }
         }
     }
-    
-    public void tipoConsulta(MouseEvent e) throws SQLException{
-        if(e.getSource().equals(menuConsultar.izquierdaJPanel)){
-         principal.getContentPane().add(cClienteP);
-         cClienteP.setSize(1045, 533); //Tamaño de la ventana asignada al JPanel
-         menuConsultar.setVisible(false);
-         mostrar(false,"Número de Teléfono","Consultar Cliente");
-         cClienteP.setVisible(true);
-         cClienteP.getCConsulta().inicializar(true);
-        }else if(e.getSource().equals(menuConsultar.derechaJPanel)){
-         mostrar(true,"Campo de búsqueda","Consultar Pedido");
-         principal.getContentPane().add(cClienteP);
-         menuConsultar.setVisible(false);
-         cClienteP.setSize(1045, 533); //Tamaño de la ventana asignada al JPanel
-         cClienteP.setVisible(true);
-         cClienteP.getCConsulta().inicializar(false);
+
+    public void tipoConsulta(MouseEvent e) throws SQLException {
+        if (e.getSource().equals(menuConsultar.izquierdaJPanel)) {
+            cClienteP.getCConsulta().inicializar(true);
+            if (cClienteP.tablaConsultas.getRowCount() != 0) {
+                principal.getContentPane().add(cClienteP);
+                cClienteP.setSize(1045, 533); //Tamaño de la ventana asignada al JPanel
+                menuConsultar.setVisible(false);
+                mostrar(false, "Número de Teléfono", "Consultar Cliente");
+                cClienteP.setVisible(true);
+            } else {
+                Icon icono = new ImageIcon(getClass().getResource("../imagenes/cancelar.png"));
+                JOptionPane.showMessageDialog(null, "No se han registrado clientes", "Sin registro", JOptionPane.INFORMATION_MESSAGE, icono);
+            }
+
+        } else if (e.getSource().equals(menuConsultar.derechaJPanel)) {
+            cClienteP.getCConsulta().inicializar(false);
+            if (cClienteP.tablaConsultas.getRowCount() != 0) {
+                mostrar(true, "Campo de búsqueda", "Consultar Pedido");
+                principal.getContentPane().add(cClienteP);
+                menuConsultar.setVisible(false);
+                cClienteP.setSize(1045, 533); //Tamaño de la ventana asignada al JPanel
+                cClienteP.setVisible(true);
+            } else {
+                Icon icono = new ImageIcon(getClass().getResource("../imagenes/cancelar.png"));
+                JOptionPane.showMessageDialog(null, "No se han registrado pedidos", "Sin registro", JOptionPane.INFORMATION_MESSAGE, icono);
+            }
         }
     }
 
@@ -115,7 +124,7 @@ public class ControladorMenuConsultar implements MouseListener {
         }
     }
 
-    public void mostrar(Boolean estado,String campo,String titulo){
+    public void mostrar(Boolean estado, String campo, String titulo) {
         cClienteP.nPedido.setVisible(estado);
         cClienteP.nTelefono.setVisible(estado);
         cClienteP.campo.setText(campo);

@@ -531,23 +531,23 @@ public class ControladorRegistrarPedido implements ActionListener, MouseListener
     private String validarPedido() {
         String cadena = "";
         if (registrarP.paq1.isSelected()) {
-            cadena += registrarP.paq1.getText() + ": " + registrarP.cantPaq1.getValue() + "\n";
+            cadena += registrarP.paq1.getText() + ": " + registrarP.cantPaq1.getValue() + " orden(es) \n";
 
         }
         if (registrarP.paq2.isSelected()) {
-            cadena += registrarP.paq2.getText() + ": " + registrarP.cantPaq2.getValue() + "\n";
+            cadena += registrarP.paq2.getText() + ": " + registrarP.cantPaq2.getValue() + " orden(es) \n";
         }
         if (registrarP.paq3.isSelected()) {
-            cadena += registrarP.paq3.getText() + ": " + registrarP.cantPaq3.getValue() + "\n";
+            cadena += registrarP.paq3.getText() + ": " + registrarP.cantPaq3.getValue() + " orden(es) \n";
         }
         if (registrarP.paq4.isSelected()) {
-            cadena += registrarP.paq4.getText() + ": " + registrarP.cantPaq4.getValue() + "\n";
+            cadena += registrarP.paq4.getText() + ": " + registrarP.cantPaq4.getValue() + " orden(es) \n";
         }
         if (registrarP.paq5.isSelected()) {
-            cadena += registrarP.paq5.getText() + ": " + registrarP.cantPaq5.getValue() + "\n";
+            cadena += registrarP.paq5.getText() + ": " + registrarP.cantPaq5.getValue() + " orden(es) \n";
         }
         if (registrarP.paq6.isSelected()) {
-            cadena += registrarP.paq6.getText() + ": " + registrarP.cantPaq6.getValue() + "\n";
+            cadena += registrarP.paq6.getText() + ": " + registrarP.cantPaq6.getValue() + " orden(es) \n";
         }
         return cadena;
     }
@@ -561,19 +561,19 @@ public class ControladorRegistrarPedido implements ActionListener, MouseListener
     private String validarExtra() {
         String cadena = "";
         if (registrarP.extra1.isSelected()) {
-            cadena += registrarP.extra1.getText() + ": " + registrarP.cantExt1.getValue() + "\n";
+            cadena += registrarP.extra1.getText() + ": " + registrarP.cantExt1.getValue() + " orden(es) \n";
         }
         if (registrarP.extra2.isSelected()) {
-            cadena += registrarP.extra2.getText() + ": " + registrarP.cantExt2.getValue() + "\n";
+            cadena += registrarP.extra2.getText() + ": " + registrarP.cantExt2.getValue() + " orden(es) \n";
         }
         if (registrarP.extra3.isSelected()) {
-            cadena += registrarP.extra3.getText() + ": " + registrarP.cantExt3.getValue() + "\n";
+            cadena += registrarP.extra3.getText() + ": " + registrarP.cantExt3.getValue() + " orden(es) \n";
         }
         if (registrarP.extra4.isSelected()) {
-            cadena += registrarP.extra4.getText() + ": " + registrarP.cantExt4.getValue() + "\n";
+            cadena += registrarP.extra4.getText() + ": " + registrarP.cantExt4.getValue() + " orden(es) \n";
         }
         if (registrarP.extra5.isSelected()) {
-            cadena += registrarP.extra5.getText() + ": " + registrarP.cantExt5.getValue() + "\n";
+            cadena += registrarP.extra5.getText() + ": " + registrarP.cantExt5.getValue() + " orden(es) \n";
         }
         return cadena;
     }

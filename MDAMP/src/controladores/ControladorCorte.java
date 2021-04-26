@@ -5,11 +5,13 @@
  */
 package controladores;
 
+import com.itextpdf.text.DocumentException;
 import java.applet.AudioClip;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,13 +20,13 @@ import java.util.logging.Logger;
 import javax.swing.JPanel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import modelos.BDPedido;
 import modelos.Pedido;
 import vistas.CortePanel;
-
-
 
 /**
  *
@@ -60,6 +62,10 @@ public class ControladorCorte implements MouseListener {
                 eventosJButton(e);
             } catch (SQLException ex) {
                 Logger.getLogger(ControladorCorte.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(ControladorCorte.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (DocumentException ex) {
+                Logger.getLogger(ControladorCorte.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (e.getSource().getClass().getTypeName().equalsIgnoreCase("javax.swing.JLabel")) {
             Icon icono = new ImageIcon(getClass().getResource("../imagenes/regreso.png"));
@@ -70,7 +76,8 @@ public class ControladorCorte implements MouseListener {
             }
         } else if (e.getSource().getClass().getTypeName().equalsIgnoreCase("javax.swing.JTable")) {
             if (cortePanel.tablaCorte.getSelectedColumn() == 1 || cortePanel.tablaCorte.getSelectedColumn() == 2) {
-                JOptionPane.showMessageDialog(null, cortePanel.tablaCorte.getValueAt(cortePanel.tablaCorte.getSelectedRow(), cortePanel.tablaCorte.getSelectedColumn()));
+              if(!cortePanel.tablaCorte.getValueAt(cortePanel.tablaCorte.getSelectedRow(),cortePanel.tablaCorte.getSelectedColumn()).equals(""))
+                JOptionPane.showMessageDialog(null, cortePanel.tablaCorte.getValueAt(cortePanel.tablaCorte.getSelectedRow(), cortePanel.tablaCorte.getSelectedColumn()),"Informacion",JOptionPane.INFORMATION_MESSAGE);
             }
         }
     }
@@ -114,10 +121,11 @@ public class ControladorCorte implements MouseListener {
     public void iniciarTabla() throws SQLException {
         modelo = new DefaultTableModel();
         cortePanel.tablaCorte.setModel(modelo);
+        cortePanel.tablaCorte.setDefaultEditor(Object.class, null);
         modelo.addColumn("Id_Pedido");
         modelo.addColumn("Paquete");
         modelo.addColumn("Extra");
-        modelo.addColumn("Total");
+        modelo.addColumn("Subtotal");
         for (int i = 0; i < 4; i++) {
             cortePanel.tablaCorte.getColumnModel().getColumn(i).setMinWidth(140);
             cortePanel.tablaCorte.getColumnModel().getColumn(i).setMaxWidth(230);
@@ -125,7 +133,7 @@ public class ControladorCorte implements MouseListener {
         consultar();
     }
 
-    public void eventosJButton(MouseEvent e) throws SQLException {
+    public void eventosJButton(MouseEvent e) throws SQLException, IOException, DocumentException {
         if (e.getSource().equals(cortePanel.generar)) {
             crearArchivo();
         }
@@ -144,11 +152,29 @@ public class ControladorCorte implements MouseListener {
         Date fecha = new Date(millis);
         return pedido.getFecha().equals(String.valueOf(fecha));
     }
-    
-    public void crearArchivo(){
+
+    public void crearArchivo() throws IOException, DocumentException {
+        long millis = System.currentTimeMillis();
+        Date fecha = new Date(millis);
+
         cPDF = new ControladorPDF(cortePanel.tablaCorte);
-        File nuevo;
-        nuevo = new File("C:/Users/Saul/Desktop/prueba.pdf");
-        cPDF.createPDF(nuevo);
+        JFileChooser guardar = new JFileChooser();
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter(".pdf", "pdf");
+        guardar.setFileFilter(filtro);
+        guardar.setSelectedFile(new File("Corte-AsaderoMiPollo_" + String.valueOf(fecha) + ".pdf"));
+        int op=guardar.showSaveDialog(null);
+        guardar.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        if (op == JFileChooser.APPROVE_OPTION) {
+            String nombre = guardar.getSelectedFile().toString();
+            if (!nombre.endsWith(".pdf")) {
+                nombre += ".pdf";
+                guardar.setSelectedFile(new File(nombre));
+            }
+            File archivo = guardar.getSelectedFile();
+            cPDF.createPDF(archivo);
+            cPDF.watermark(archivo);
+            
+        JOptionPane.showMessageDialog(null, "El archivo pdf ha sido generado", "PDF", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 }

@@ -11,7 +11,6 @@ package vistas;
 import controladores.ControladorMenuPrincipal;
 import controladores.ControladorPDF;
 import java.applet.AudioClip;
-import java.io.File;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -46,8 +45,6 @@ public class PrincipalFrame extends javax.swing.JFrame {
         this.menuConsultar = new MenuConsultarPanel(sonidoDeBoton,sonidoDeSalir,this);
         this.corte = new CortePanel(sonidoDeBoton, sonidoDeSalir, fondoJPanel);
         cMenu = new ControladorMenuPrincipal(this, sonidoDeBoton, sonidoDeSalir, registrarCliente, registrarPedido,menuConsultar,corte);
-        
-   
     }
 
     /**

@@ -64,14 +64,13 @@ public class MenuConsultarPanel extends javax.swing.JPanel {
         derechaJPanelLayout.setHorizontalGroup(
             derechaJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(derechaJPanelLayout.createSequentialGroup()
-                .addContainerGap(130, Short.MAX_VALUE)
-                .addGroup(derechaJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, derechaJPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(139, 139, 139))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, derechaJPanelLayout.createSequentialGroup()
-                        .addComponent(textoCPedidos)
-                        .addGap(100, 100, 100))))
+                .addGap(165, 165, 165)
+                .addComponent(jLabel3)
+                .addGap(129, 129, 129))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, derechaJPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(textoCPedidos)
+                .addGap(112, 112, 112))
         );
         derechaJPanelLayout.setVerticalGroup(
             derechaJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -80,7 +79,7 @@ public class MenuConsultarPanel extends javax.swing.JPanel {
                 .addComponent(jLabel3)
                 .addGap(48, 48, 48)
                 .addComponent(textoCPedidos)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addGap(54, 54, 54))
         );
 
         registroClienteTitulo.setBackground(new java.awt.Color(0, 153, 153));
@@ -137,7 +136,7 @@ public class MenuConsultarPanel extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(51, 51, 51)
                 .addComponent(textoCClientes)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -145,7 +144,7 @@ public class MenuConsultarPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(350, Short.MAX_VALUE)
                 .addComponent(registroClienteTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(281, 281, 281)
                 .addComponent(regresarImagen)
@@ -153,9 +152,9 @@ public class MenuConsultarPanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(72, 72, 72)
                 .addComponent(izquierdaJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addGap(42, 42, 42)
                 .addComponent(derechaJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(72, 72, 72))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

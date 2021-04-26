@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
-import vistas.ConsultarClientePanel;
+import vistas.ConsultarPanel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -30,16 +30,16 @@ import modelos.Pedido;
  *
  * @author kevin
  */
-public class ControladorConsultarCliente implements MouseListener, KeyListener {
+public class ControladorConsultar implements MouseListener, KeyListener {
 
     private final AudioClip sonidoDeBoton; //Audio para los botones
     private final AudioClip sonidoDeRegresar; //Audio reproducido para salir
     private final JPanel mConsultar; //Panel de la ventana de menú principal
-    private final ConsultarClientePanel consultarCliente;
+    private final ConsultarPanel consultarCliente;
     private DefaultTableModel modelo;
     private Boolean tipoConsulta;
 
-    public ControladorConsultarCliente(ConsultarClientePanel consultarCliente, AudioClip sonidoDeBoton, AudioClip sonidoDeRegresar, JPanel mConsultar) throws SQLException {
+    public ControladorConsultar(ConsultarPanel consultarCliente, AudioClip sonidoDeBoton, AudioClip sonidoDeRegresar, JPanel mConsultar) throws SQLException {
         this.consultarCliente = consultarCliente;
         this.mConsultar = mConsultar;
         this.sonidoDeBoton = sonidoDeBoton;
@@ -66,7 +66,7 @@ public class ControladorConsultarCliente implements MouseListener, KeyListener {
             try {
                 eventosJButton(e);
             } catch (SQLException ex) {
-                Logger.getLogger(ControladorConsultarCliente.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ControladorConsultar.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (e.getSource().getClass().getTypeName().equalsIgnoreCase("javax.swing.JLabel")) {
             Icon icono = new ImageIcon(getClass().getResource("../imagenes/regreso.png"));
@@ -76,17 +76,17 @@ public class ControladorConsultarCliente implements MouseListener, KeyListener {
                 try {
                     cancelar();
                 } catch (SQLException ex) {
-                    Logger.getLogger(ControladorConsultarCliente.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ControladorConsultar.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 mConsultar.setVisible(true);
             }
         } else if (e.getSource().getClass().getTypeName().equalsIgnoreCase("javax.swing.JTable")) {
             if(!tipoConsulta){
             if (consultarCliente.tablaConsultas.getSelectedColumn() == 2 || consultarCliente.tablaConsultas.getSelectedColumn() == 3) {
-                JOptionPane.showMessageDialog(null, consultarCliente.tablaConsultas.getValueAt(consultarCliente.tablaConsultas.getSelectedRow(), consultarCliente.tablaConsultas.getSelectedColumn()));
+                if(!consultarCliente.tablaConsultas.getValueAt(consultarCliente.tablaConsultas.getSelectedRow(), consultarCliente.tablaConsultas.getSelectedColumn()).equals(""))
+                JOptionPane.showMessageDialog(null, consultarCliente.tablaConsultas.getValueAt(consultarCliente.tablaConsultas.getSelectedRow(), consultarCliente.tablaConsultas.getSelectedColumn()),"Informacion",JOptionPane.INFORMATION_MESSAGE);
             }
             }
-
         }
     }
 
@@ -143,6 +143,7 @@ public class ControladorConsultarCliente implements MouseListener, KeyListener {
     public void iniciarTabla() throws SQLException {
         modelo = new DefaultTableModel();
         consultarCliente.tablaConsultas.setModel(modelo);
+        consultarCliente.tablaConsultas.setDefaultEditor(Object.class, null);
         if (tipoConsulta) {
             modelo.addColumn("Nombre");
             modelo.addColumn("Apellido");
@@ -158,7 +159,7 @@ public class ControladorConsultarCliente implements MouseListener, KeyListener {
             modelo.addColumn("Paquete");
             modelo.addColumn("Extra");
             modelo.addColumn("Fecha");
-            modelo.addColumn("Total");
+            modelo.addColumn("Subtotal");
             for (int i = 0; i < 6; i++) {
                 consultarCliente.tablaConsultas.getColumnModel().getColumn(i).setMinWidth(140);
                 consultarCliente.tablaConsultas.getColumnModel().getColumn(i).setMaxWidth(150);
@@ -200,8 +201,7 @@ public class ControladorConsultarCliente implements MouseListener, KeyListener {
                 JOptionPane.showMessageDialog(null, "No existe un pedido con este número", "Consulta", JOptionPane.WARNING_MESSAGE);
             }  
             }else{
-               JOptionPane.showMessageDialog(null, "No seleccionaste ninguna opción", "Consulta", JOptionPane.WARNING_MESSAGE);
-
+               JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna opción del tipo de consulta", "Consulta", JOptionPane.WARNING_MESSAGE);
             }
         }
     }

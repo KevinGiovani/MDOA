@@ -4,7 +4,7 @@
  * */
 package vistas;
 
-import controladores.ControladorConsultarCliente;
+import controladores.ControladorConsultar;
 import java.applet.AudioClip;
 import java.sql.SQLException;
 import javax.swing.JPanel;
@@ -13,9 +13,9 @@ import javax.swing.JPanel;
  * @author kevin
  * @version 16-04-2021
  */
-public class ConsultarClientePanel extends javax.swing.JPanel {
+public class ConsultarPanel extends javax.swing.JPanel {
 
-   private final ControladorConsultarCliente cConsultarC; //Atributo para utilizar el controlador
+   private final ControladorConsultar cConsultarC; //Atributo para utilizar el controlador
 
     /**
      *
@@ -28,12 +28,12 @@ public class ConsultarClientePanel extends javax.swing.JPanel {
      * @param mConsultar
      * @param principal
      */
-    public ConsultarClientePanel(AudioClip sonidoBoton, AudioClip regresar, JPanel mConsultar) throws SQLException {
+    public ConsultarPanel(AudioClip sonidoBoton, AudioClip regresar, JPanel mConsultar) throws SQLException {
       initComponents();
-      cConsultarC = new ControladorConsultarCliente(this, sonidoBoton, regresar, mConsultar);
+      cConsultarC = new ControladorConsultar(this, sonidoBoton, regresar, mConsultar);
      }
     
-    public ControladorConsultarCliente getCConsulta(){
+    public ControladorConsultar getCConsulta(){
         return cConsultarC;
     }
 
@@ -87,6 +87,9 @@ public class ConsultarClientePanel extends javax.swing.JPanel {
         regresarImagen.setBackground(new java.awt.Color(0, 153, 204));
         regresarImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/regreso.png"))); // NOI18N
 
+        tablaConsultas.setBackground(new java.awt.Color(215, 215, 215));
+        tablaConsultas.setFont(new java.awt.Font("Comfortaa Light", 0, 12)); // NOI18N
+        tablaConsultas.setForeground(new java.awt.Color(0, 0, 0));
         tablaConsultas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null}
@@ -103,6 +106,9 @@ public class ConsultarClientePanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tablaConsultas.setSelectionBackground(new java.awt.Color(0, 102, 102));
+        tablaConsultas.setSelectionForeground(new java.awt.Color(153, 255, 153));
+        tablaConsultas.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablaConsultas);
         if (tablaConsultas.getColumnModel().getColumnCount() > 0) {
             tablaConsultas.getColumnModel().getColumn(0).setPreferredWidth(10);
@@ -156,30 +162,35 @@ public class ConsultarClientePanel extends javax.swing.JPanel {
         );
 
         buttonGroup1.add(nPedido);
+        nPedido.setFont(new java.awt.Font("Comfortaa Light", 1, 12)); // NOI18N
+        nPedido.setForeground(new java.awt.Color(153, 255, 204));
         nPedido.setText("Num Pedido");
 
         buttonGroup1.add(nTelefono);
+        nTelefono.setFont(new java.awt.Font("Comfortaa Light", 1, 12)); // NOI18N
+        nTelefono.setForeground(new java.awt.Color(153, 255, 204));
         nTelefono.setText("Telefono");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(registroClienteTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(221, 221, 221)
-                .addComponent(regresarImagen)
-                .addGap(18, 18, 18))
             .addGroup(layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nPedido)
-                    .addComponent(nTelefono))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(registroClienteTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(193, 193, 193)
+                        .addComponent(regresarImagen))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nPedido)
+                            .addComponent(nTelefono))))
                 .addGap(46, 46, 46))
         );
         layout.setVerticalGroup(
@@ -190,15 +201,16 @@ public class ConsultarClientePanel extends javax.swing.JPanel {
                     .addComponent(registroClienteTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(regresarImagen))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
                         .addComponent(nPedido)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(nTelefono)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
