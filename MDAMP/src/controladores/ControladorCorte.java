@@ -157,7 +157,7 @@ public class ControladorCorte implements MouseListener {
         long millis = System.currentTimeMillis();
         Date fecha = new Date(millis);
 
-        cPDF = new ControladorPDF(cortePanel.tablaCorte);
+        cPDF = new ControladorPDF(cortePanel.tablaCorte,total);
         JFileChooser guardar = new JFileChooser();
         FileNameExtensionFilter filtro = new FileNameExtensionFilter(".pdf", "pdf");
         guardar.setFileFilter(filtro);
@@ -173,6 +173,7 @@ public class ControladorCorte implements MouseListener {
             File archivo = guardar.getSelectedFile();
             cPDF.createPDF(archivo);
             cPDF.watermark(archivo);
+            cPDF.manipulatePdf(archivo);
             
         JOptionPane.showMessageDialog(null, "El archivo pdf ha sido generado", "PDF", JOptionPane.INFORMATION_MESSAGE);
         }

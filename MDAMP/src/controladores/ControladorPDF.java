@@ -13,6 +13,8 @@ import java.nio.file.*;
 import javax.swing.JTable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -23,18 +25,21 @@ public class ControladorPDF {
     private static final Font chapterFont = FontFactory.getFont(FontFactory.HELVETICA, 26, Font.BOLDITALIC);
     private static final Font subcategoryFont = new Font(Font.FontFamily.TIMES_ROMAN, 16, Font.BOLD);
     private final JTable tabla;
+    private final int total;
 
-    public ControladorPDF(JTable tabla) {
+    public ControladorPDF(JTable tabla,int total) {
         this.tabla = tabla;
+        this.total=total;
     }
 
     public void createPDF(File pdfNewFile) {
+        PdfWriter writer=null;
         // Creamos el documento e indicamos el nombre del fichero.
         try {
             Document document = new Document();
             try {
 
-                PdfWriter.getInstance(document, new FileOutputStream(pdfNewFile));
+              writer=PdfWriter.getInstance(document, new FileOutputStream(pdfNewFile));
 
             } catch (FileNotFoundException fileNotFoundException) {
                 System.out.println("No se encontró el fichero para generar el pdf" + fileNotFoundException);
@@ -48,7 +53,7 @@ public class ControladorPDF {
             document.addTitle("Corte(" + objSDF.format(objDate) + ") Asadero Mi Pollo");
             document.addSubject("Obtener informacion recabada de los pedidos realizados el dia que se genero este archivo"); //Asunto
             document.addKeywords("Asadero,Mi Pollo,Corte,Local Familiar");
-            document.addAuthor("Dueño de Asadero Mi Pollo: Cesar Pacheco");
+            document.addAuthor("Dueño de Asadero Mi Pollo: Cesar Pacheco Robles");
 
             // Primera página 
             Chunk chunk = new Chunk("Asadero Mi Pollo", chapterFont);
@@ -56,7 +61,22 @@ public class ControladorPDF {
             // Let's create de first Chapter (Creemos el primer capítulo)
             Chapter chapter = new Chapter(new Paragraph(chunk), 1);
             chapter.setNumberDepth(0);
-
+            
+            Image image;
+            try {
+                //image = Image.getInstance("src/imagenes/logoPDF.png");
+                image = Image.getInstance(getClass().getResource("../imagenes/MiPolloLogo.png"));
+                getClass().getResource("../imagenes/regreso.png");
+                image.setAbsolutePosition(440, 735);
+                image.scaleAbsolute(140, 120);
+                chapter.add(image);
+            } catch (BadElementException ex) {
+                Logger.getLogger(ControladorPDF.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(ControladorPDF.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            //image.setAbsolutePosition(5, 5);
+            
             // Utilización de PdfPTable
             // We use various elements to add title and subtitle
             // Usamos varios elementos para añadir título y subtítulo
@@ -81,7 +101,7 @@ public class ControladorPDF {
                 table.addCell(columnHeader);
             }
             table.setHeaderRows(1);
-            // (rellenamos las filas de la tabla).                
+            // (rellenamos las filas de la tabla). 
             for (int row = 0; row < numRows; row++) {
                 for (int column = 0; column < numColumns; column++) {
                     table.addCell(String.valueOf(tabla.getValueAt(row, column)));
@@ -89,6 +109,8 @@ public class ControladorPDF {
             }
             // (Añadimos la tabla)
             paragraphLorem.add(table);
+            paragraphLorem.add("\nEl total del día de hoy es de $"+total+".00");
+            paragraphLorem.setAlignment(Element.ALIGN_RIGHT);
             //(Añadimos el elemento con la tabla).
             document.add(chapter);
             document.add(paragraphLorem);
@@ -130,13 +152,32 @@ public class ControladorPDF {
             over.setGState(state);
 
             // add watermark text and image
-            ColumnText.showTextAligned(over, Element.ALIGN_CENTER, p, x, y, 45);
-
+            ColumnText.showTextAligned(over, Element.ALIGN_CENTER, p, x, y, 45);  
             over.restoreState();
         }
         stamper.close();
         reader.close();
 
+        Path source = Paths.get(temp.getAbsolutePath());
+
+        Files.move(source, source.resolveSibling(pdf.getAbsolutePath()),
+                StandardCopyOption.REPLACE_EXISTING);
+    }
+    
+    public void manipulatePdf(File pdf) throws IOException, DocumentException {
+        PdfReader reader = new PdfReader(pdf.getAbsolutePath());
+        int n = reader.getNumberOfPages();
+        File temp = new File("TEMP.pdf");
+        PdfStamper stamper = new PdfStamper(reader, new FileOutputStream(temp.getAbsoluteFile()));
+        PdfContentByte pagecontent;
+        for (int i = 0; i < n; ) {
+            pagecontent = stamper.getOverContent(++i);
+            ColumnText.showTextAligned(pagecontent, Element.ALIGN_LEFT,
+                    new Phrase(String.format("page %s of %s", i, n)), 500, 20, 0);
+        }
+        stamper.close();
+        reader.close();
+        
         Path source = Paths.get(temp.getAbsolutePath());
 
         Files.move(source, source.resolveSibling(pdf.getAbsolutePath()),
