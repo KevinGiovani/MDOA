@@ -1,7 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Este controlador se encarga de manejar los MouseListeners y KeyListeners,
+ * algunos aspectos visuales que normalmente se aplican en el JFrame.
+ * También permite realizar las consultas de pedido a partir del numero de identificacion que se le
+ * asigno a su orden o realizar su busqueda a partir del num. de telefono del cliente, 
+ * y por ultimo, permite realizar la consulta de datos de un cliente a partir del numero de telefono.
  */
 package controladores;
 
@@ -28,7 +30,10 @@ import modelos.Pedido;
 
 /**
  *
- * @author kevin
+ * @author Inzunza Kevin
+ * @author De La Cruz Joel
+ * @author Pacheco Cesar
+ * @version 23-04-2021
  */
 public class ControladorConsultar implements MouseListener, KeyListener {
 
@@ -38,7 +43,17 @@ public class ControladorConsultar implements MouseListener, KeyListener {
     private final ConsultarPanel consultarCliente;
     private DefaultTableModel modelo;
     private Boolean tipoConsulta;
-
+    
+    
+    /**
+     * Constuctor que recibe parámetros desde el controlador menu consultar ,
+     * además inicializa los eventos para el mouse y las teclas del computador.
+     * @param consultarCliente
+     * @param sonidoDeBoton
+     * @param sonidoDeRegresar
+     * @param mConsultar
+     * @throws SQLException 
+     */
     public ControladorConsultar(ConsultarPanel consultarCliente, AudioClip sonidoDeBoton, AudioClip sonidoDeRegresar, JPanel mConsultar) throws SQLException {
         this.consultarCliente = consultarCliente;
         this.mConsultar = mConsultar;
@@ -54,12 +69,21 @@ public class ControladorConsultar implements MouseListener, KeyListener {
         //Tabla
         consultarCliente.tablaConsultas.addMouseListener(this);
     }
-
+    
+    /**
+     * 
+     * @param tipoConsulta
+     * @throws SQLException 
+     */
     public void inicializar(Boolean tipoConsulta) throws SQLException {
         this.tipoConsulta = tipoConsulta;
         iniciarTabla();
     }
-
+    
+    /**
+     * 
+     * @param e 
+     */
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getSource().getClass().getTypeName().equalsIgnoreCase("javax.swing.JButton")) {
@@ -97,7 +121,11 @@ public class ControladorConsultar implements MouseListener, KeyListener {
     @Override
     public void mouseReleased(MouseEvent e) {
     }
-
+    
+    /**
+     * 
+     * @param e 
+     */
     @Override
     public void mouseEntered(MouseEvent e) {
         if (e.getSource().equals(consultarCliente.buscar)) {
@@ -108,7 +136,11 @@ public class ControladorConsultar implements MouseListener, KeyListener {
             sonidoDeBoton.play();
         }
     }
-
+    
+    /**
+     * 
+     * @param e 
+     */
     @Override
     public void mouseExited(MouseEvent e) {
         if (e.getSource().equals(consultarCliente.buscar)) {
@@ -117,7 +149,11 @@ public class ControladorConsultar implements MouseListener, KeyListener {
             consultarCliente.cancelar.setBackground(new Color(0, 51, 51));
         }
     }
-
+    
+    /**
+     * 
+     * @throws SQLException 
+     */
     public void consultar() throws SQLException {
         if (tipoConsulta == true) {
             BDCliente bd = new BDCliente();
@@ -139,7 +175,11 @@ public class ControladorConsultar implements MouseListener, KeyListener {
         }
 
     }
-
+    
+    /**
+     * 
+     * @throws SQLException 
+     */
     public void iniciarTabla() throws SQLException {
         modelo = new DefaultTableModel();
         consultarCliente.tablaConsultas.setModel(modelo);
@@ -168,6 +208,11 @@ public class ControladorConsultar implements MouseListener, KeyListener {
         consultar();
     }
 
+    /**
+     * 
+     * @param tel
+     * @throws SQLException 
+     */
     public void buscar(long tel) throws SQLException {
         if (tipoConsulta) {
             BDCliente bd = new BDCliente();
@@ -206,12 +251,20 @@ public class ControladorConsultar implements MouseListener, KeyListener {
         }
     }
 
+    /**
+     * 
+     * @throws SQLException 
+     */
     public void cancelar() throws SQLException {
         modelo.setRowCount(0);
         consultarCliente.telefono.setText(null);
         consultar();
     }
-
+    
+    /**
+     * 
+     * @throws SQLException 
+     */
     public void buscarCliente() throws SQLException {
         if (!consultarCliente.telefono.getText().isEmpty()) {
             buscar(Long.parseLong(consultarCliente.telefono.getText()));
@@ -221,7 +274,12 @@ public class ControladorConsultar implements MouseListener, KeyListener {
             JOptionPane.showMessageDialog(null, "Verifique los datos ingresados", "Datos faltantes", JOptionPane.INFORMATION_MESSAGE, icono);
         }
     }
-
+    
+    /**
+     * 
+     * @param e
+     * @throws SQLException 
+     */
     public void eventosJButton(MouseEvent e) throws SQLException {
         if (e.getSource().equals(consultarCliente.buscar)) {
             buscarCliente();
@@ -229,7 +287,11 @@ public class ControladorConsultar implements MouseListener, KeyListener {
             cancelar();
         }
     }
-
+    
+    /**
+     * 
+     * @param e 
+     */
     @Override
     public void keyTyped(KeyEvent e) {
         char car = e.getKeyChar();

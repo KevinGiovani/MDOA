@@ -9,7 +9,7 @@
 package vistas;
 
 import controladores.ControladorMenuPrincipal;
-import controladores.ControladorPDF;
+import modelos.CreadorPDF;
 import java.applet.AudioClip;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -30,7 +30,7 @@ public class PrincipalFrame extends javax.swing.JFrame {
     private final JPanel registrarCliente;
     private final JPanel menuConsultar;
     private final CortePanel corte;
-    private ControladorPDF ts;
+    private CreadorPDF ts;
 
     /**
      * Constructor utilizado para inicializar todos los componentes del frame al

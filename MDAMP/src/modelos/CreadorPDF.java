@@ -1,9 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package controladores;
+/**
+ * Permite la creacion de un archivo en formato PDF para que el usuario pueda
+ * realizar una visualizacion de la informacion que se recapitulo del corte del dia
+ * y de esta conforma poder consultar de manera posterior.
+ * 
+*/
+
+
+package modelos;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.*;
@@ -18,20 +21,34 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Saul
+ * @author Inzunza Kevin
+ * @author De La Cruz Joel
+ * @author Pacheco Cesar
+ * @version 25-04-2021
  */
-public class ControladorPDF {
+public class CreadorPDF {
 
     private static Font chapterFont;
     private final JTable tabla;
     private final int total;
 
-    public ControladorPDF(JTable tabla, int total) {
+    /**
+     * Constuctor que recibe parámetros desde el JPanel del menu principal,
+     * además inicializa los eventos para el Mouse Listener.
+     * 
+     * @param tabla
+     * @param total 
+     */
+    public CreadorPDF(JTable tabla, int total) {
         chapterFont = FontFactory.getFont(FontFactory.HELVETICA, 26, Font.BOLDITALIC);
         this.tabla = tabla;
         this.total = total;
     }
 
+    /**
+     * 
+     * @param pdfNewFile 
+     */
     public void createPDF(File pdfNewFile) {
         // Creamos el documento e indicamos el nombre del fichero.
         try {
@@ -57,7 +74,7 @@ public class ControladorPDF {
             // Primera página 
             Chunk chunk = new Chunk("Asadero Mi Pollo", chapterFont);
             chunk.setBackground(BaseColor.YELLOW);
-            // Let's create de first Chapter (Creemos el primer capítulo)
+            // Creemos el primer capítulo
             Chapter chapter = new Chapter(new Paragraph(chunk), 1);
             chapter.setNumberDepth(0);
 
@@ -67,10 +84,8 @@ public class ControladorPDF {
                 image.setAbsolutePosition(485, 754);
                 image.scaleAbsolute(100, 80);
                 chapter.add(image);
-            } catch (BadElementException ex) {
-                Logger.getLogger(ControladorPDF.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(ControladorPDF.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (BadElementException | IOException ex) {
+                Logger.getLogger(CreadorPDF.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             // Utilización de PdfPTable
@@ -82,12 +97,11 @@ public class ControladorPDF {
 
             Integer numColumns = tabla.getColumnCount();
             Integer numRows = tabla.getRowCount();
-            // We create the table (Creamos la tabla).
+            // Creamos la tabla
             PdfPTable table = new PdfPTable(numColumns);
-            // Now we fill the PDF table 
             // Ahora llenamos la tabla del PDF
             PdfPCell columnHeader;
-            // Fill table rows (rellenamos las filas de la tabla).                
+            // Rellenamos las filas de la tabla                
             for (int column = 0; column < numColumns; column++) {
                 columnHeader = new PdfPCell(new Phrase(tabla.getColumnName(column)));
                 columnHeader.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -100,7 +114,7 @@ public class ControladorPDF {
                     table.addCell(String.valueOf(tabla.getValueAt(row, column)));
                 }
             }
-            // (Añadimos la tabla)
+            // (Añadimos la tabla)ill table rows (r
             paragraphLorem.add(table);
             paragraphLorem.add("\nEl total del día de hoy es de $" + total + ".00");
             paragraphLorem.setAlignment(Element.ALIGN_RIGHT);
@@ -113,6 +127,12 @@ public class ControladorPDF {
         }
     }
 
+    /**
+     * 
+     * @param pdf
+     * @throws IOException
+     * @throws DocumentException 
+     */
     public void watermark(File pdf) throws IOException, DocumentException {
         PdfReader reader = new PdfReader(pdf.getAbsolutePath());
         File temp = new File("TEMP.pdf");
@@ -156,6 +176,12 @@ public class ControladorPDF {
                 StandardCopyOption.REPLACE_EXISTING);
     }
 
+    /**
+     * 
+     * @param pdf
+     * @throws IOException
+     * @throws DocumentException 
+     */
     public void manipulatePdf(File pdf) throws IOException, DocumentException {
         PdfReader reader = new PdfReader(pdf.getAbsolutePath());
         int n = reader.getNumberOfPages();

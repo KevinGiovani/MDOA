@@ -1,7 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Este controlador se encarga de manejar los MouseListeners,
+ * algunos aspectos visuales que normalmente se aplican en el JFrame.
+ * También permite realizar la seleccion de el tipo de consulta que se plantea 
+ * realizar para ser observada en la vista de consultas.
  */
 package controladores;
 
@@ -21,7 +22,10 @@ import vistas.PrincipalFrame;
 
 /**
  *
- * @author kevin
+ * @author Inzunza Kevin
+ * @author De La Cruz Joel
+ * @author Pacheco Cesar
+ * @version 23-04-2021
  */
 public class ControladorMenuConsultar implements MouseListener {
 
@@ -31,6 +35,16 @@ public class ControladorMenuConsultar implements MouseListener {
     private final MenuConsultarPanel menuConsultar;
     private final ConsultarPanel cClienteP;
 
+    /**
+     * Constuctor que recibe parámetros desde el JPanel del menu principal,
+     * además inicializa los eventos para el Mouse Listener.
+     * 
+     * @param menuConsultar
+     * @param sonidoDeBoton
+     * @param sonidoDeRegresar
+     * @param principal
+     * @throws SQLException
+     */
     public ControladorMenuConsultar(MenuConsultarPanel menuConsultar, AudioClip sonidoDeBoton, AudioClip sonidoDeRegresar, PrincipalFrame principal) throws SQLException {
         this.menuConsultar = menuConsultar;
         this.principal = principal;
@@ -39,7 +53,10 @@ public class ControladorMenuConsultar implements MouseListener {
         cClienteP = new ConsultarPanel(sonidoDeBoton, sonidoDeRegresar, menuConsultar);
         inicializar();
     }
-
+    
+        /**
+         * 
+         */
     public void inicializar() {
         //JPanel
         menuConsultar.derechaJPanel.addMouseListener(this);
@@ -48,7 +65,10 @@ public class ControladorMenuConsultar implements MouseListener {
         //Imagen
         menuConsultar.regresarImagen.addMouseListener(this);
     }
-
+    /**
+     * 
+     * @param e 
+     */
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getSource().getClass().getTypeName().equalsIgnoreCase("javax.swing.JPanel")) {
@@ -66,7 +86,12 @@ public class ControladorMenuConsultar implements MouseListener {
             }
         }
     }
-
+    
+    /**
+     * 
+     * @param e
+     * @throws SQLException 
+     */
     public void tipoConsulta(MouseEvent e) throws SQLException {
         if (e.getSource().equals(menuConsultar.izquierdaJPanel)) {
             cClienteP.getCConsulta().inicializar(true);
@@ -104,6 +129,10 @@ public class ControladorMenuConsultar implements MouseListener {
     public void mouseReleased(MouseEvent e) {
     }
 
+    /**
+     * 
+     * @param e 
+     */
     @Override
     public void mouseEntered(MouseEvent e) {
         if (e.getSource().equals(menuConsultar.derechaJPanel)) {
@@ -114,7 +143,11 @@ public class ControladorMenuConsultar implements MouseListener {
             sonidoDeBoton.play();
         }
     }
-
+    
+    /**
+     * 
+     * @param e 
+     */
     @Override
     public void mouseExited(MouseEvent e) {
         if (e.getSource().equals(menuConsultar.derechaJPanel)) {
@@ -124,6 +157,12 @@ public class ControladorMenuConsultar implements MouseListener {
         }
     }
 
+    /**
+     * 
+     * @param estado
+     * @param campo
+     * @param titulo 
+     */
     public void mostrar(Boolean estado, String campo, String titulo) {
         cClienteP.nPedido.setVisible(estado);
         cClienteP.nTelefono.setVisible(estado);

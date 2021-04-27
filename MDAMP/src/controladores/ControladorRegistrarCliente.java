@@ -1,5 +1,5 @@
 /**
- * Este controlador se encarga de manejar los Mouse Listeners y Key Listeners,
+ * Este controlador se encarga de manejar los Mouse Listeners y KeyListeners,
  * algunos aspectos visuales que normalmente se aplican en el JFrame.
  * También permite realizar el registro de la información de un nuevo cliente
  * hacia una base de datos manejado por MySQL.
@@ -29,7 +29,7 @@ import vistas.RegistrarClientePanel;
  */
 public class ControladorRegistrarCliente implements MouseListener, KeyListener {
 
-    private RegistrarClientePanel registrarC; //Referencia del panel visual de Cliente
+    private final RegistrarClientePanel registrarC; //Referencia del panel visual de Cliente
     private final AudioClip sonidoDeBoton; //Audio para los botones
     private final AudioClip sonidoDeRegresar; //Audio reproducido para salir
     private final JPanel principal; //Panel de la ventana de menú principal

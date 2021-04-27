@@ -9,11 +9,12 @@ import java.applet.AudioClip;
 import java.sql.SQLException;
 import javax.swing.JPanel;
 
-
-
 /**
- * @author kevin
- * @version 16-04-2021
+ *
+ * @author Inzunza Kevin
+ * @author De La Cruz Joel
+ * @author Pacheco Cesar
+ * @version 25-04-2021
  */
 public class CortePanel extends javax.swing.JPanel {
 
@@ -27,8 +28,8 @@ public class CortePanel extends javax.swing.JPanel {
      *
      * @param sonidoBoton
      * @param regresar
-     * @param mConsultar
-     * @param principal
+     * @param mPrincipal
+     * @throws java.sql.SQLException
      */
     public CortePanel(AudioClip sonidoBoton, AudioClip regresar,JPanel mPrincipal) throws SQLException {
       initComponents();
@@ -37,7 +38,6 @@ public class CortePanel extends javax.swing.JPanel {
 
     public ControladorCorte getcCorte() {
         return cCorte;
-        
     }
     
     /**

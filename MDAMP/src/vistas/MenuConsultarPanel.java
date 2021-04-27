@@ -8,11 +8,13 @@ package vistas;
 import controladores.ControladorMenuConsultar;
 import java.applet.AudioClip;
 import java.sql.SQLException;
-import javax.swing.JPanel;
 
 /**
  *
- * @author kevin
+ * @author Inzunza Kevin
+ * @author De La Cruz Joel
+ * @author Pacheco Cesar
+ * @version 23-04-2021
  */
 public class MenuConsultarPanel extends javax.swing.JPanel {
      private final ControladorMenuConsultar cMConsultar;
@@ -21,8 +23,8 @@ public class MenuConsultarPanel extends javax.swing.JPanel {
      * Creates new form MenuConsultarPanel
      * @param sonidoBoton
      * @param regresar
-     * @param menuPrincipal
      * @param principal
+     * @throws java.sql.SQLException
      */
     public MenuConsultarPanel(AudioClip sonidoBoton, AudioClip regresar,PrincipalFrame principal) throws SQLException {
         initComponents();

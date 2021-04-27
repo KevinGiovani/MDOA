@@ -1,10 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Este controlador se encarga de manejar los MouseListeners,
+ * algunos aspectos visuales que normalmente se aplican en el JFrame.
+ * También permite conocer los pedidos generados el dia en que se realiza el corte
+ * e incluye tambien el total que se genero, por ultimo, tambien se permite
+ * la creacion del archivo pdf del la informacion recabada del corte
+ * 
  */
 package controladores;
 
+import modelos.CreadorPDF;
 import com.itextpdf.text.DocumentException;
 import java.applet.AudioClip;
 import java.awt.Color;
@@ -30,7 +34,10 @@ import vistas.CortePanel;
 
 /**
  *
- * @author kevin
+ * @author Inzunza Kevin
+ * @author De La Cruz Joel
+ * @author Pacheco Cesar
+ * @version 24-04-2021
  */
 public class ControladorCorte implements MouseListener {
 
@@ -40,8 +47,18 @@ public class ControladorCorte implements MouseListener {
     private final CortePanel cortePanel;
     private DefaultTableModel modelo;
     private int total;
-    private ControladorPDF cPDF;
-
+    private CreadorPDF cPDF;
+    
+    /**
+     * Constuctor que recibe parámetros desde el JPanel del menu principal,
+     * además inicializa los eventos para el Mouse Listener.
+     * 
+     * @param cortePanel
+     * @param sonidoDeBoton
+     * @param sonidoDeRegresar
+     * @param mPrincipal
+     * @throws SQLException 
+     */
     public ControladorCorte(CortePanel cortePanel, AudioClip sonidoDeBoton, AudioClip sonidoDeRegresar, JPanel mPrincipal) throws SQLException {
         this.cortePanel = cortePanel;
         this.mPrincipal = mPrincipal;
@@ -55,6 +72,10 @@ public class ControladorCorte implements MouseListener {
         cortePanel.tablaCorte.addMouseListener(this);
     }
 
+    /**
+     * 
+     * @param e 
+     */
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getSource().getClass().getTypeName().equalsIgnoreCase("javax.swing.JButton")) {
@@ -91,6 +112,10 @@ public class ControladorCorte implements MouseListener {
     public void mouseReleased(MouseEvent e) {
     }
 
+    /**
+     * 
+     * @param e 
+     */
     @Override
     public void mouseEntered(MouseEvent e) {
         if (e.getSource().equals(cortePanel.generar)) {
@@ -99,13 +124,20 @@ public class ControladorCorte implements MouseListener {
         }
     }
 
+    /**
+     * 
+     * @param e 
+     */
     @Override
     public void mouseExited(MouseEvent e) {
         if (e.getSource().equals(cortePanel.generar)) {
             cortePanel.generar.setBackground(new Color(0, 51, 51));
         }
     }
-
+    /**
+     * 
+     * @throws SQLException 
+     */
     public void consultar() throws SQLException {
         BDPedido bd = new BDPedido();
         ArrayList<Pedido> pedidos;
@@ -118,7 +150,11 @@ public class ControladorCorte implements MouseListener {
         }
         calcular();
     }
-
+    
+    /**
+     * 
+     * @throws SQLException 
+     */
     public void iniciarTabla() throws SQLException {
         modelo = new DefaultTableModel();
         cortePanel.tablaCorte.setModel(modelo);
@@ -133,13 +169,23 @@ public class ControladorCorte implements MouseListener {
         }
         consultar();
     }
-
+    
+    /**
+     * 
+     * @param e
+     * @throws SQLException
+     * @throws IOException
+     * @throws DocumentException 
+     */
     public void eventosJButton(MouseEvent e) throws SQLException, IOException, DocumentException {
         if (e.getSource().equals(cortePanel.generar)) {
             crearArchivo();
         }
     }
-
+    
+    /**
+     * 
+     */
     public void calcular() {
         total = 0;
         for (int i = 0; i < cortePanel.tablaCorte.getRowCount(); i++) {
@@ -147,18 +193,28 @@ public class ControladorCorte implements MouseListener {
         }
         cortePanel.totalCorte.setText("$ " + String.valueOf(total));
     }
-
+    
+    /**
+     * 
+     * @param pedido
+     * @return 
+     */
     public Boolean verificarFecha(Pedido pedido) {
         long millis = System.currentTimeMillis();
         Date fecha = new Date(millis);
         return pedido.getFecha().equals(String.valueOf(fecha));
     }
 
+    /**
+     * 
+     * @throws IOException
+     * @throws DocumentException 
+     */
     public void crearArchivo() throws IOException, DocumentException {
         long millis = System.currentTimeMillis();
         Date fecha = new Date(millis);
         boolean opcion;
-        cPDF = new ControladorPDF(cortePanel.tablaCorte, total);
+        cPDF = new CreadorPDF(cortePanel.tablaCorte, total);
         JFileChooser guardar = new JFileChooser();
         FileNameExtensionFilter filtro = new FileNameExtensionFilter(".pdf", "pdf");
         guardar.setFileFilter(filtro);
@@ -187,6 +243,12 @@ public class ControladorCorte implements MouseListener {
         } while (opcion);
     }
 
+    /**
+     * 
+     * @param guardar
+     * @throws IOException
+     * @throws DocumentException 
+     */
     public void generarArchivo(JFileChooser guardar) throws IOException, DocumentException {
         File archivo = guardar.getSelectedFile();
         cPDF.createPDF(archivo);

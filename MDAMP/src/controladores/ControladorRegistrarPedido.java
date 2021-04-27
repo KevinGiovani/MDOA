@@ -1,9 +1,9 @@
 /**
- * Este controlador se encarga de manejar los Mouse Listeners y Key Listeners,
+ * Este controlador se encarga de manejar los Mouse Listeners,ChangeListener,ActionListener y KeyListeners,
  * algunos aspectos visuales que normalmente se aplican en el JFrame.
  * Además se encarga de registrar la información de los pedidos, calcular el total
  * que el cliente debe pagar y también consultar el cliente que está realizando la compra.
- * */
+ **/
 package controladores;
 
 import java.applet.AudioClip;
@@ -33,18 +33,18 @@ import vistas.RegistrarPedidoPanel;
 
 /**
  *
- * @author kevin
+ * @author Inzunza Kevin
  * @version 16-04-2021
  */
 public class ControladorRegistrarPedido implements ActionListener, MouseListener, ChangeListener, KeyListener {
 
-    private RegistrarPedidoPanel registrarP; //Referencia del panel visual de Registrar Pedido
-    private Pedido pedido; //Atributo que almacena la información del pedido
+    private final RegistrarPedidoPanel registrarP; //Referencia del panel visual de Registrar Pedido
+    private final Pedido pedido; //Atributo que almacena la información del pedido
     private final AudioClip sonidoDePago; //Sonido al pagar
     private final AudioClip sonidoDeError; //Sonido al detectar algún error
     private final AudioClip sonidoDeBoton; //Sonido al tocar un botón
     private final AudioClip sonidoDeRegresar; //Sonido al regresar
-    private JPanel principal; //Panel del menú principal
+    private final JPanel principal; //Panel del menú principal
 
     /**
      * Constuctor que recibe parámetros desde el JPanel de registrar pedido,

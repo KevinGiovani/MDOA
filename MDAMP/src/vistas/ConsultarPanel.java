@@ -9,9 +9,13 @@ import java.applet.AudioClip;
 import java.sql.SQLException;
 import javax.swing.JPanel;
 
+
 /**
- * @author kevin
- * @version 16-04-2021
+ *
+ * @author Inzunza Kevin
+ * @author De La Cruz Joel
+ * @author Pacheco Cesar
+ * @version 24-04-2021
  */
 public class ConsultarPanel extends javax.swing.JPanel {
 
@@ -26,7 +30,7 @@ public class ConsultarPanel extends javax.swing.JPanel {
      * @param sonidoBoton
      * @param regresar
      * @param mConsultar
-     * @param principal
+     * @throws java.sql.SQLException
      */
     public ConsultarPanel(AudioClip sonidoBoton, AudioClip regresar, JPanel mConsultar) throws SQLException {
       initComponents();
