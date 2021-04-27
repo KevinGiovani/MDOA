@@ -76,8 +76,9 @@ public class ControladorCorte implements MouseListener {
             }
         } else if (e.getSource().getClass().getTypeName().equalsIgnoreCase("javax.swing.JTable")) {
             if (cortePanel.tablaCorte.getSelectedColumn() == 1 || cortePanel.tablaCorte.getSelectedColumn() == 2) {
-              if(!cortePanel.tablaCorte.getValueAt(cortePanel.tablaCorte.getSelectedRow(),cortePanel.tablaCorte.getSelectedColumn()).equals(""))
-                JOptionPane.showMessageDialog(null, cortePanel.tablaCorte.getValueAt(cortePanel.tablaCorte.getSelectedRow(), cortePanel.tablaCorte.getSelectedColumn()),"Informacion",JOptionPane.INFORMATION_MESSAGE);
+                if (!cortePanel.tablaCorte.getValueAt(cortePanel.tablaCorte.getSelectedRow(), cortePanel.tablaCorte.getSelectedColumn()).equals("")) {
+                    JOptionPane.showMessageDialog(null, cortePanel.tablaCorte.getValueAt(cortePanel.tablaCorte.getSelectedRow(), cortePanel.tablaCorte.getSelectedColumn()), "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                }
             }
         }
     }
@@ -156,26 +157,42 @@ public class ControladorCorte implements MouseListener {
     public void crearArchivo() throws IOException, DocumentException {
         long millis = System.currentTimeMillis();
         Date fecha = new Date(millis);
-
-        cPDF = new ControladorPDF(cortePanel.tablaCorte,total);
+        boolean opcion;
+        cPDF = new ControladorPDF(cortePanel.tablaCorte, total);
         JFileChooser guardar = new JFileChooser();
         FileNameExtensionFilter filtro = new FileNameExtensionFilter(".pdf", "pdf");
         guardar.setFileFilter(filtro);
-        guardar.setSelectedFile(new File("Corte-AsaderoMiPollo_" + String.valueOf(fecha) + ".pdf"));
-        int op=guardar.showSaveDialog(null);
-        guardar.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-        if (op == JFileChooser.APPROVE_OPTION) {
-            String nombre = guardar.getSelectedFile().toString();
-            if (!nombre.endsWith(".pdf")) {
-                nombre += ".pdf";
-                guardar.setSelectedFile(new File(nombre));
+        do {
+            guardar.setSelectedFile(new File("Corte-AsaderoMiPollo_" + String.valueOf(fecha) + ".pdf"));
+            opcion = false;
+            int op = guardar.showSaveDialog(null);
+            guardar.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+            if (op == JFileChooser.APPROVE_OPTION) {
+                String nombre = guardar.getSelectedFile().toString();
+                if (!nombre.endsWith(".pdf")) {
+                    nombre += ".pdf";
+                    guardar.setSelectedFile(new File(nombre));
+                }
+                if (guardar.getSelectedFile().exists()) {
+                    op = JOptionPane.showConfirmDialog(null, "¿Desea sobrescribir el archivo pdf?", "Mensaje de Confirmación", JOptionPane.YES_NO_OPTION);
+                    if (op == JOptionPane.YES_OPTION) {
+                        generarArchivo(guardar);
+                    } else {
+                        opcion = true;
+                    }
+                } else {
+                    generarArchivo(guardar);
+                }
             }
-            File archivo = guardar.getSelectedFile();
-            cPDF.createPDF(archivo);
-            cPDF.watermark(archivo);
-            cPDF.manipulatePdf(archivo);
-            
+        } while (opcion);
+    }
+
+    public void generarArchivo(JFileChooser guardar) throws IOException, DocumentException {
+        File archivo = guardar.getSelectedFile();
+        cPDF.createPDF(archivo);
+        cPDF.watermark(archivo);
+        cPDF.manipulatePdf(archivo);
+
         JOptionPane.showMessageDialog(null, "El archivo pdf ha sido generado", "PDF", JOptionPane.INFORMATION_MESSAGE);
-        }
     }
 }
