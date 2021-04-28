@@ -74,6 +74,12 @@ public class BDCliente {
         return cliente;
     }
 
+    /**
+     * Metodo utilizado para buscar a todos los clientes registrados 
+     * dentro de la base de datos
+     * @return ArrayList de Clientes
+     * @throws SQLException 
+     */
     public ArrayList<Cliente> consultar() throws SQLException {
         ArrayList<Cliente> clientes = new ArrayList<>();
         PreparedStatement ps;

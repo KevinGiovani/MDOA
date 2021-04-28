@@ -50,6 +50,11 @@ public class BDPedido {
 
     }
     
+    /**
+     * Metodo utilizado para obtener todos los pedidos realizados dentro de la base de datos
+     * @return Arraylist de pedido
+     * @throws SQLException 
+     */
     public ArrayList<Pedido> consultar() throws SQLException {
         ArrayList<Pedido> pedidos = new ArrayList<>();
         PreparedStatement ps;
@@ -69,6 +74,12 @@ public class BDPedido {
         return pedidos;
     }
     
+    /**
+     * Metodo utilizado para buscar un pedido en especifico
+     * @param busqueda
+     * @return pedido
+     * @throws SQLException 
+     */
     public Pedido buscar(String busqueda) throws SQLException {
         pedido = new Pedido();
         PreparedStatement ps;
@@ -89,9 +100,9 @@ public class BDPedido {
     }
     
     /**
-     * 
+     * Metodo utilizado para obtener todos los pedidos de un cliente en especifico
      * @param busqueda
-     * @return
+     * @return Arraylist de pedidos
      * @throws SQLException 
      */
     public ArrayList<Pedido> consultarPedidosPorNumTel(String busqueda) throws SQLException {

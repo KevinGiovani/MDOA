@@ -208,9 +208,9 @@ public class ControladorConsultar implements MouseListener, KeyListener {
             modelo.addColumn("Apellido");
             modelo.addColumn("Teléfono");
             modelo.addColumn("Dirección");
-            for (int i = 0; i < 3; i++) {
-                consultarCliente.tablaConsultas.getColumnModel().getColumn(i).setMinWidth(100);
-                consultarCliente.tablaConsultas.getColumnModel().getColumn(i).setMaxWidth(100);
+            for (int i = 0; i < consultarCliente.tablaConsultas.getColumnCount(); i++) {
+                consultarCliente.tablaConsultas.getColumnModel().getColumn(i).setMinWidth(220);
+                consultarCliente.tablaConsultas.getColumnModel().getColumn(i).setMaxWidth(220);
             }
         } else {
             modelo.addColumn("Id_Pedido");
@@ -219,7 +219,7 @@ public class ControladorConsultar implements MouseListener, KeyListener {
             modelo.addColumn("Extra");
             modelo.addColumn("Fecha");
             modelo.addColumn("Subtotal");
-            for (int i = 0; i < 6; i++) {
+            for (int i = 0; i < consultarCliente.tablaConsultas.getColumnCount(); i++) {
                 consultarCliente.tablaConsultas.getColumnModel().getColumn(i).setMinWidth(140);
                 consultarCliente.tablaConsultas.getColumnModel().getColumn(i).setMaxWidth(150);
             }

@@ -4,8 +4,6 @@
  * y de esta conforma poder consultar de manera posterior.
  * 
 */
-
-
 package modelos;
 
 import com.itextpdf.text.Document;
@@ -46,7 +44,8 @@ public class CreadorPDF {
     }
 
     /**
-     * 
+     * Metodo utilizado para crear el nuevo archivo PDF a estar modificando 
+     * con ayuda de metodos dentro de la libreria ITextPDF
      * @param pdfNewFile 
      */
     public void createPDF(File pdfNewFile) {
@@ -108,17 +107,17 @@ public class CreadorPDF {
                 table.addCell(columnHeader);
             }
             table.setHeaderRows(1);
-            // (rellenamos las filas de la tabla). 
+            // Llenamos las filas de la tabla
             for (int row = 0; row < numRows; row++) {
                 for (int column = 0; column < numColumns; column++) {
                     table.addCell(String.valueOf(tabla.getValueAt(row, column)));
                 }
             }
-            // (Añadimos la tabla)ill table rows (r
+            // Añadimos la tabla
             paragraphLorem.add(table);
             paragraphLorem.add("\nEl total del día de hoy es de $" + total + ".00");
             paragraphLorem.setAlignment(Element.ALIGN_RIGHT);
-            //(Añadimos el elemento con la tabla).
+            //Añadimos el elemento con la tabla
             document.add(chapter);
             document.add(paragraphLorem);
             document.close();
@@ -128,7 +127,8 @@ public class CreadorPDF {
     }
 
     /**
-     * 
+     * Metodo utilizado para agregar una marca de agua a las hojas del archivo
+     * pdf creado. 
      * @param pdf
      * @throws IOException
      * @throws DocumentException 
@@ -138,32 +138,32 @@ public class CreadorPDF {
         File temp = new File("TEMP.pdf");
         PdfStamper stamper = new PdfStamper(reader, new FileOutputStream(temp.getAbsoluteFile()));
 
-        // text watermark
+        // Marca de Agua a utilizar (Texto)
         Font FONT = new Font(Font.FontFamily.HELVETICA, 34, Font.BOLD, new GrayColor(0.5f));
         Phrase p = new Phrase("Asadero Mi Pollo", FONT);
 
-        // properties
+        // Propiedades de la hoja
         PdfContentByte over;
         Rectangle pagesize;
         float x, y;
 
-        // loop over every page
+        // Ciclo para recorrer cada hoja del archivo
         int n = reader.getNumberOfPages();
         for (int i = 1; i <= n; i++) {
 
-            // get page size and position
+            // Obtener el tamaño y posicion de la hoja
             pagesize = reader.getPageSizeWithRotation(i);
             x = (pagesize.getLeft() + pagesize.getRight()) / 2;
             y = (pagesize.getTop() + pagesize.getBottom()) / 2;
             over = stamper.getOverContent(i);
             over.saveState();
 
-            // set transparency
+            // Agregar transparencia a nuestro texto
             PdfGState state = new PdfGState();
             state.setFillOpacity(0.2f);
             over.setGState(state);
 
-            // add watermark text and image
+            // Agregamos la marca de agua
             ColumnText.showTextAligned(over, Element.ALIGN_CENTER, p, x, y, 45);
             over.restoreState();
         }
@@ -172,22 +172,25 @@ public class CreadorPDF {
 
         Path source = Paths.get(temp.getAbsolutePath());
 
+        // Reemplazamos el archivo viejo con el nuevo el cual contiene la marca de agua
         Files.move(source, source.resolveSibling(pdf.getAbsolutePath()),
                 StandardCopyOption.REPLACE_EXISTING);
     }
 
     /**
-     * 
+     * Metodo para agregar footer a las paginas del archivo pdf
      * @param pdf
      * @throws IOException
      * @throws DocumentException 
      */
     public void manipulatePdf(File pdf) throws IOException, DocumentException {
         PdfReader reader = new PdfReader(pdf.getAbsolutePath());
-        int n = reader.getNumberOfPages();
-        File temp = new File("TEMP.pdf");
+        int n = reader.getNumberOfPages(); // Numero de paginas en el archivo
+        File temp = new File("TEMP.pdf"); // Archivo temporal
         PdfStamper stamper = new PdfStamper(reader, new FileOutputStream(temp.getAbsoluteFile()));
         PdfContentByte pagecontent;
+        
+        // Se recorren todas las paginas del archivo pdf para agregar el footer
         for (int i = 0; i < n;) {
             pagecontent = stamper.getOverContent(++i);
             ColumnText.showTextAligned(pagecontent, Element.ALIGN_LEFT,
@@ -198,6 +201,7 @@ public class CreadorPDF {
 
         Path source = Paths.get(temp.getAbsolutePath());
 
+        // Reemplazamos el archivo viejo con el nuevo el cual contiene los footers
         Files.move(source, source.resolveSibling(pdf.getAbsolutePath()),
                 StandardCopyOption.REPLACE_EXISTING);
     }

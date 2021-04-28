@@ -526,7 +526,7 @@ public class ControladorRegistrarPedido implements ActionListener, MouseListener
      * Validará la información del pedido de los paquetes para mandarla a la
      * base de datos.
      *
-     * @return
+     * @return cadena
      */
     private String validarPedido() {
         String cadena = "";
@@ -556,7 +556,7 @@ public class ControladorRegistrarPedido implements ActionListener, MouseListener
      * Validará la información del pedido de los extras para mandarla a la base
      * de datos.
      *
-     * @return
+     * @return cadena
      */
     private String validarExtra() {
         String cadena = "";
