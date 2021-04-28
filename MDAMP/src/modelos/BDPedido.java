@@ -46,7 +46,7 @@ public class BDPedido {
         ps.setString(3, pedido.getExtra());
         ps.setString(4, pedido.getFecha());
         ps.setInt(5, pedido.getTotal());
-        int res = ps.executeUpdate();
+        ps.executeUpdate();
 
     }
     
@@ -69,17 +69,13 @@ public class BDPedido {
         return pedidos;
     }
     
-    public Pedido buscar(String busqueda,Boolean tipo) throws SQLException {
+    public Pedido buscar(String busqueda) throws SQLException {
         pedido = new Pedido();
         PreparedStatement ps;
         ResultSet res;
-        if(tipo==true){
-        ps = con.prepareStatement("Select * From Pedido where Id_Cliente=?");
-        ps.setLong(1, Long.parseLong(busqueda));
-        }else{
         ps = con.prepareStatement("Select * From Pedido where Id_Pedido=?");
         ps.setInt(1, Integer.parseInt(busqueda));
-        }
+        
         res = ps.executeQuery();
         if (res.next()) {
             pedido.setIdPedido(res.getInt("Id_Pedido"));
@@ -90,6 +86,31 @@ public class BDPedido {
             pedido.setTotal(res.getInt("Total"));
         }
         return pedido;
+    }
+    
+    /**
+     * 
+     * @param busqueda
+     * @return
+     * @throws SQLException 
+     */
+    public ArrayList<Pedido> consultarPedidosPorNumTel(String busqueda) throws SQLException {
+        ArrayList<Pedido> pedidos = new ArrayList<>();
+        PreparedStatement ps = con.prepareStatement("Select * From Pedido where Id_Cliente=?");;
+        ResultSet res;
+        ps.setLong(1, Long.parseLong(busqueda));
+        res = ps.executeQuery();
+        while (res.next()) {
+            pedido = new Pedido();
+            pedido.setIdPedido(res.getInt("Id_Pedido"));
+            pedido.setIdCliente(res.getLong("Id_Cliente"));
+            pedido.setPaquete(res.getString("Paquete"));
+            pedido.setExtra(res.getString("Extra"));
+            pedido.setFecha(res.getString("Fecha"));
+            pedido.setTotal(res.getInt("Total"));
+            pedidos.add(pedido);
+        }
+        return pedidos;
     }
     
     

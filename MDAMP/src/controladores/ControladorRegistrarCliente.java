@@ -91,6 +91,7 @@ public class ControladorRegistrarCliente implements MouseListener, KeyListener {
             if (JOptionPane.showConfirmDialog(null, "¿Desea regresar al menu principal?", "Regresar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icono) == 0) {
                 registrarC.setVisible(false);
                 principal.setVisible(true);
+                limpiar();
             }
         }
     }

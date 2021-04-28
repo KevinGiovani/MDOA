@@ -47,6 +47,7 @@ public class ControladorMenuPrincipal implements MouseListener {
      * @param registrarCliente JPanel utilizado para el registro del cliente
      * @param registrarPedido JPanel utilizado para el registro del pedido
      * @param menuConsultar
+     * @param corte
      */
     public ControladorMenuPrincipal(PrincipalFrame menu, AudioClip sonidoBoton, AudioClip salir, JPanel registrarCliente, JPanel registrarPedido, JPanel menuConsultar, CortePanel corte) {
         this.menu = menu;
@@ -65,7 +66,7 @@ public class ControladorMenuPrincipal implements MouseListener {
      * uno de los botones/imagenes inlcuidos
      */
     private void inicializar() {
-        Connection con = Conexion.getConnection();
+        Conexion.getConnection();
         //Botones
         menu.registroPedidoBoton.addMouseListener(this);
         menu.registroClienteBoton.addMouseListener(this);

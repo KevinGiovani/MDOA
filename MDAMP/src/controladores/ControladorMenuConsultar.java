@@ -129,9 +129,12 @@ public class ControladorMenuConsultar implements MouseListener {
     public void mouseReleased(MouseEvent e) {
     }
 
-    /**
-     * 
-     * @param e 
+     /**
+     * MouseEntered detectará cuando el mouse está sobre algún botón y cual de
+     * estos fue, cambiando el color de fondo del botón y reproduciendo un
+     * sonido.
+     *
+     * @param e
      */
     @Override
     public void mouseEntered(MouseEvent e) {
@@ -145,8 +148,10 @@ public class ControladorMenuConsultar implements MouseListener {
     }
     
     /**
-     * 
-     * @param e 
+     * MouseExited detecta cuando el mouse ya no se encuentra dentro del botón
+     * por lo que regresará el estado en el que se encontraba originalmente
+     *
+     * @param e
      */
     @Override
     public void mouseExited(MouseEvent e) {
