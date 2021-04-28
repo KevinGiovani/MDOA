@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Es una ventana de menú que se mostrará al usuario para que pueda elegir entre dos opciones
+ * de consulta que son: Consultar Cliente y Consultar Pedido
  */
 package vistas;
 
@@ -20,7 +19,9 @@ public class MenuConsultarPanel extends javax.swing.JPanel {
      private final ControladorMenuConsultar cMConsultar;
 
     /**
-     * Creates new form MenuConsultarPanel
+     * Constuctor para iniciar el panel de menú consultar , el cual recibe el
+     * sonido para los botones, el sonido para regresar y le ventana del menú
+     * principal, componentes necesarios para utilizar el controlador.
      * @param sonidoBoton
      * @param regresar
      * @param principal

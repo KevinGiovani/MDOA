@@ -55,7 +55,7 @@ public class ControladorMenuConsultar implements MouseListener {
     }
     
         /**
-         * 
+         * Da inicio a los eventos que pueden ser realizados por el mouse
          */
     public void inicializar() {
         //JPanel
@@ -66,7 +66,10 @@ public class ControladorMenuConsultar implements MouseListener {
         menuConsultar.regresarImagen.addMouseListener(this);
     }
     /**
-     * 
+     *  Este método detecta a que botón hizo clic llamando a otro método para los
+     * eventos de botón, si no fue el caso verificará si hizo clic hacia la
+     * etiqueta que representa regresar al menú principal.
+     *
      * @param e 
      */
     @Override
@@ -88,7 +91,8 @@ public class ControladorMenuConsultar implements MouseListener {
     }
     
     /**
-     * 
+     * Detectará cual fue la consulta seleccionada por el usuario con el propósito
+     * de preparar la ventana para mostrar los datos que está buscando.
      * @param e
      * @throws SQLException 
      */
@@ -129,12 +133,12 @@ public class ControladorMenuConsultar implements MouseListener {
     public void mouseReleased(MouseEvent e) {
     }
 
-     /**
-     * MouseEntered detectará cuando el mouse está sobre algún botón y cual de
+    /**
+     *  MouseEntered detectará cuando el mouse está sobre algún botón y cual de
      * estos fue, cambiando el color de fondo del botón y reproduciendo un
      * sonido.
      *
-     * @param e
+     * @param e 
      */
     @Override
     public void mouseEntered(MouseEvent e) {
@@ -150,8 +154,7 @@ public class ControladorMenuConsultar implements MouseListener {
     /**
      * MouseExited detecta cuando el mouse ya no se encuentra dentro del botón
      * por lo que regresará el estado en el que se encontraba originalmente
-     *
-     * @param e
+     * @param e 
      */
     @Override
     public void mouseExited(MouseEvent e) {
@@ -163,7 +166,8 @@ public class ControladorMenuConsultar implements MouseListener {
     }
 
     /**
-     * 
+     * Se determinará que elementos serán visibles y que se mostrará en pantalla,
+     * esto dependiendo de la elección del usuario
      * @param estado
      * @param campo
      * @param titulo 

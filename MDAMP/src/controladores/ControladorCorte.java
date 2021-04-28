@@ -44,10 +44,10 @@ public class ControladorCorte implements MouseListener {
     private final AudioClip sonidoDeBoton; //Audio para los botones
     private final AudioClip sonidoDeRegresar; //Audio reproducido para salir
     private final JPanel mPrincipal; //Panel de la ventana de menú principal
-    private final CortePanel cortePanel;
-    private DefaultTableModel modelo;
-    private int total;
-    private CreadorPDF cPDF;
+    private final CortePanel cortePanel; //Panel de la ventana de corte
+    private DefaultTableModel modelo; // Modelo de la tabla de corte
+    private int total; //Ganancia total del día
+    private CreadorPDF cPDF; //Generar documento PDF
     
     /**
      * Constuctor que recibe parámetros desde el JPanel del menu principal,
@@ -73,15 +73,22 @@ public class ControladorCorte implements MouseListener {
     }
 
     /**
-     * 
-     * @param e 
+     * Este método detecta a que botón hizo clic llamando a otro método para los
+     * eventos de botón, si no fue el caso verificará si hizo clic hacia la
+     * etiqueta que representa regresar al menú principal.
+     *
+     * @param e
      */
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getSource().getClass().getTypeName().equalsIgnoreCase("javax.swing.JButton")) {
             try {
                 eventosJButton(e);
-            } catch (SQLException | IOException | DocumentException ex) {
+            } catch (SQLException ex) {
+                Logger.getLogger(ControladorCorte.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(ControladorCorte.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (DocumentException ex) {
                 Logger.getLogger(ControladorCorte.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (e.getSource().getClass().getTypeName().equalsIgnoreCase("javax.swing.JLabel")) {
@@ -136,7 +143,9 @@ public class ControladorCorte implements MouseListener {
         }
     }
     /**
-     * 
+     * Este método buscará toda la información de los pedidos que se encuentre
+     * dentro de la base de datos y así mostrarlo dentro de una tabla los
+     * datos de cada pedido realizado
      * @throws SQLException 
      */
     public void consultar() throws SQLException {
@@ -153,7 +162,9 @@ public class ControladorCorte implements MouseListener {
     }
     
     /**
-     * 
+     * Se crea un modelo para la tabla, la cual contiene las columnas de
+     * Id_Pedido, Paquete, Extra y subtotal, además se ajustan los valores del largo
+     * de cada columna
      * @throws SQLException 
      */
     public void iniciarTabla() throws SQLException {
@@ -172,7 +183,8 @@ public class ControladorCorte implements MouseListener {
     }
     
     /**
-     * 
+     * Realiza una detección de algún evento realizado gracias al clic del mouse
+     * con el propósito de generar el archivo PDF para el dueño
      * @param e
      * @throws SQLException
      * @throws IOException
@@ -185,7 +197,8 @@ public class ControladorCorte implements MouseListener {
     }
     
     /**
-     * 
+     * Este método tomará el valor de subtotal de cada pedido para sumarlos y obtener
+     * la total del día.
      */
     public void calcular() {
         total = 0;
@@ -196,7 +209,8 @@ public class ControladorCorte implements MouseListener {
     }
     
     /**
-     * 
+     * Evaluará la fecha de cada pedido contra la fecha del día en curso, esto con
+     * el propósito de mostrar los pedidos de ese mismo día y calcular el total.
      * @param pedido
      * @return 
      */
@@ -207,7 +221,8 @@ public class ControladorCorte implements MouseListener {
     }
 
     /**
-     * 
+     * Solicitará al usuario donde quisiera aguardar el archivo PDF y además
+     * el como desea nombrarlo.
      * @throws IOException
      * @throws DocumentException 
      */
@@ -245,7 +260,8 @@ public class ControladorCorte implements MouseListener {
     }
 
     /**
-     * 
+     * Se realizará la creación de un archivo PDF para el dueño del asadero, este
+     * contendrá la información mostrada en la ventana de corte.
      * @param guardar
      * @throws IOException
      * @throws DocumentException 

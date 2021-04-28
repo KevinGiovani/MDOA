@@ -37,6 +37,7 @@ public class ConsultarPanel extends javax.swing.JPanel {
       cConsultarC = new ControladorConsultar(this, sonidoBoton, regresar, mConsultar);
      }
     
+    //Obtención del atributo de cConsultarC, que es el controlador de consulta.
     public ControladorConsultar getCConsulta(){
         return cConsultarC;
     }
