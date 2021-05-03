@@ -5,10 +5,7 @@
  */
 package controladores;
 
-import java.awt.event.MouseEvent;
-import javax.swing.JFileChooser;
 import javax.swing.JPanel;
-import javax.swing.JTable;
 import modelos.CreadorPDF;
 import modelos.Pedido;
 import org.junit.After;
@@ -34,7 +31,6 @@ public class ControladorCorteTest {
     private final JPanel mPrincipal;
     private final CortePanel cortePanel;
     private DefaultTableModel modelo; // Modelo de la tabla de corte
-    private int total;
     private CreadorPDF cPDF;
     private final Pedido pedido;
     private final ControladorCorte instance;
@@ -46,7 +42,6 @@ public class ControladorCorteTest {
         cortePanel = new CortePanel(sonidoDeBoton, sonidoDeRegresar, mPrincipal);
         pedido = new Pedido(0, "", "", String.valueOf(new Date(System.currentTimeMillis())), 0);
         instance = new ControladorCorte(cortePanel, sonidoDeBoton, sonidoDeRegresar, mPrincipal);
-
     }
     
     @BeforeClass
@@ -69,17 +64,24 @@ public class ControladorCorteTest {
 
     /**
      * Test of consultar method, of class ControladorCorte.
+     * @throws java.lang.Exception
      */
     @Test
     public void testConsultar() throws Exception {
         System.out.println("consultar");
         instance.consultar();
-        assertTrue(modelo.getColumnCount() != 0);
+        int total = 0;
+        for (int i = 0; i < cortePanel.tablaCorte.getRowCount(); i++) {
+            total = total + (int) cortePanel.tablaCorte.getValueAt(i, 3);
+        }
+        String expResult = "$ " + String.valueOf(total);
+        assertEquals(cortePanel.totalCorte.getText(), expResult);
         
     }
 
     /**
      * Test of iniciarTabla method, of class ControladorCorte.
+     * @throws java.lang.Exception
      */
     @Test
     public void testIniciarTabla() throws Exception {
@@ -90,16 +92,6 @@ public class ControladorCorteTest {
                         getColumn(3).getMinWidth() > 139
                 && cortePanel.tablaCorte.getColumnModel().
                         getColumn(3).getMaxWidth() < 231);
-    }
-
-    /**
-     * Test of calcular method, of class ControladorCorte.
-     */
-    @Test
-    public void testCalcular() {
-        System.out.println("calcular");
-        instance.calcular();
-        assertNotNull(cortePanel.totalCorte.getText());
     }
 
     /**
