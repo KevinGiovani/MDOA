@@ -38,11 +38,10 @@ public class ControladorCorteTest {
     private CreadorPDF cPDF;
     private final Pedido pedido;
     private final ControladorCorte instance;
-    
-    
-    
-    public ControladorCorteTest(AudioClip sonidoDeBoton, AudioClip sonidoDeRegresar) throws SQLException {
-        
+    AudioClip sonidoDeBoton; 
+    AudioClip sonidoDeRegresar;
+
+    public ControladorCorteTest() throws SQLException {
         mPrincipal = new JPanel();
         cortePanel = new CortePanel(sonidoDeBoton, sonidoDeRegresar, mPrincipal);
         pedido = new Pedido(0, "", "", String.valueOf(new Date(System.currentTimeMillis())), 0);
