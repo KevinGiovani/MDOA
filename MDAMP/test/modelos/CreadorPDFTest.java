@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Prueba Unitaria aplicada al modelo 'CreadorPDF'
  */
 package modelos;
 
@@ -18,8 +16,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
- * @author kevin
+ * @author Inzunza Kevin
+ * @version 29-04-2021
  */
 public class CreadorPDFTest {
 
@@ -66,7 +64,8 @@ public class CreadorPDFTest {
     }
 
     /**
-     * Test of createPDF method, of class CreadorPDF.
+     * Test del metodo createPDF de la clase BDCliente para verificar que se ha
+     * creado un nuevo pdf de la manera correcta
      */
     @Test
     public void testCreatePDF() {
@@ -76,7 +75,8 @@ public class CreadorPDFTest {
     }
 
     /**
-     * Test of watermark method, of class CreadorPDF.
+     * Test del metodo watermark de la clase BDCliente para verificar que se ha
+     * agregado una marca de agua al documento pdf existente.
      *
      * @throws java.lang.Exception
      */
@@ -92,7 +92,8 @@ public class CreadorPDFTest {
     }
 
     /**
-     * Test of manipulatePdf method, of class CreadorPDF.
+     * Test del metodo manipulatePDF de la clase BDCliente para verificar que se ha
+     * agregado un pie de pagina al documento pdf existente.
      *
      * @throws java.lang.Exception
      */

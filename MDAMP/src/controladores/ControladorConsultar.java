@@ -208,9 +208,9 @@ public class ControladorConsultar implements MouseListener, KeyListener {
             modelo.addColumn("Apellido");
             modelo.addColumn("Teléfono");
             modelo.addColumn("Dirección");
-            for (int i = 0; i < consultarCliente.tablaConsultas.getColumnCount(); i++) {
-                consultarCliente.tablaConsultas.getColumnModel().getColumn(i).setMinWidth(220);
-                consultarCliente.tablaConsultas.getColumnModel().getColumn(i).setMaxWidth(220);
+            for (int i = 0; i < consultarCliente.tablaConsultas.getColumnCount()-1; i++) {
+                consultarCliente.tablaConsultas.getColumnModel().getColumn(i).setMinWidth(140);
+                consultarCliente.tablaConsultas.getColumnModel().getColumn(i).setMaxWidth(140);
             }
         } else {
             modelo.addColumn("Id_Pedido");

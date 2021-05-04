@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Prueba Unitara aplicada al modelo 'Conexion'
  */
 package modelos;
 
@@ -14,8 +12,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
- * @author kevin
+ * @author Inzunza Kevin
+ * @version 29-04-2021
  */
 public class ConexionTest {
     
@@ -39,7 +37,8 @@ public class ConexionTest {
     }
 
     /**
-     * Test of getConnection method, of class Conexion.
+     * Test del metodo getConnection de la clase Conexion para verificar que se
+     * establece la conexion a la base de datos correctamente.
      */
     @Test
     public void testGetConnection() {
@@ -50,7 +49,9 @@ public class ConexionTest {
     }
 
     /**
-     * Test of desconectar method, of class Conexion.
+     * Test del metodo desconectar de la clase Conexion para verificar que se
+     * finalizo la conexion a la base de datos correctamente.
+     * @throws java.lang.Exception
      */
     @Test
     public void testDesconectar() throws Exception {

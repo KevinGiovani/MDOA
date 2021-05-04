@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Prueba de Integracion aplicada al modelo 'BDPedido'
  */
 package modelos;
 
@@ -14,8 +12,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
- * @author kevin
+ * @author Inzunza Kevin
+ * @version 29-04-2021
  */
 public class BDPedidoIT {
     
@@ -39,7 +37,9 @@ public class BDPedidoIT {
     }
 
     /**
-     * Test of agregarDatos method, of class BDPedido.
+     * Test del metodo agregarDatos de la clase BDPedido para verificar que se registro
+     * un nuevo pedido en la base de datos.
+     * @throws java.lang.Exception
      */
     @Test
     public void testAgregarDatos() throws Exception {
@@ -50,7 +50,9 @@ public class BDPedidoIT {
     }
 
     /**
-     * Test of consultar method, of class BDPedido.
+     * Test del metodo consultar de la clase BDPedido para verificar que se obtienem
+     * los pedido desde la base de datos.
+     * @throws java.lang.Exception
      */
     @Test
     public void testConsultar() throws Exception {
@@ -61,7 +63,9 @@ public class BDPedidoIT {
     }
 
     /**
-     * Test of buscar method, of class BDPedido.
+     * Test del metodo buscar de la clase BDPedido para verificar que se puede
+     * encontrar un pedido alojado en la base de datos.
+     * @throws java.lang.Exception
      */
     @Test
     public void testBuscar() throws Exception {
@@ -73,7 +77,10 @@ public class BDPedidoIT {
     }
 
     /**
-     * Test of consultarPedidosPorNumTel method, of class BDPedido.
+     * Test del metodo consultarPedidosPorNumTel de la clase BDPedido para verificar
+     * que se obtienen todos los pedidos asociados por un cliente desde la base de 
+     * datos.
+     * @throws java.lang.Exception
      */
     @Test
     public void testConsultarPedidosPorNumTel() throws Exception {

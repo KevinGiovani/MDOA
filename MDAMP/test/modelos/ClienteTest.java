@@ -37,7 +37,8 @@ public class ClienteTest {
     }
 
     /**
-     * Test of getNombre method, of class Cliente.
+     * Test del metodo getNombre de la clase Cliente para verificar que se obtiene
+     * el nombre asignado.
      */
     @Test
     public void testGetNombre() {
@@ -50,7 +51,8 @@ public class ClienteTest {
     }
 
     /**
-     * Test of setNombre method, of class Cliente.
+     * Test del metodo setNombre de la clase Cliente para verificar que se agrega
+     * el nombre correctamente.
      */
     @Test
     public void testSetNombre() {
@@ -62,7 +64,8 @@ public class ClienteTest {
     }
 
     /**
-     * Test of getApellido method, of class Cliente.
+     * Test del metodo getApellido de la clase Cliente para verificar que se obtiene
+     * el apellido asignado.
      */
     @Test
     public void testGetApellido() {
@@ -75,7 +78,8 @@ public class ClienteTest {
     }
 
     /**
-     * Test of setApellido method, of class Cliente.
+     * Test del metodo setApellido de la clase Cliente para verificar que se agrega
+     * el apellido correctamente.
      */
     @Test
     public void testSetApellido() {
@@ -87,7 +91,8 @@ public class ClienteTest {
     }
 
     /**
-     * Test of getTelefono method, of class Cliente.
+     * Test del metodo getTelefono de la clase Cliente para verificar que se obtiene
+     * el telefono asignado.
      */
     @Test
     public void testGetTelefono() {
@@ -100,7 +105,8 @@ public class ClienteTest {
     }
 
     /**
-     * Test of setTelefono method, of class Cliente.
+     * Test del metodo setTelefono de la clase Cliente para verificar que se agrega
+     * el telefono correctamente.
      */
     @Test
     public void testSetTelefono() {
@@ -113,7 +119,8 @@ public class ClienteTest {
     }
 
     /**
-     * Test of getDireccion method, of class Cliente.
+     * Test del metodo getDireccion de la clase Cliente para verificar que se obtiene
+     * la direccion asignada.
      */
     @Test
     public void testGetDireccion() {
@@ -126,7 +133,8 @@ public class ClienteTest {
     }
 
     /**
-     * Test of setDireccion method, of class Cliente.
+     * Test del metodo setDireccion de la clase Cliente para verificar que se agrega
+     * la direccion correctamente.
      */
     @Test
     public void testSetDireccion() {

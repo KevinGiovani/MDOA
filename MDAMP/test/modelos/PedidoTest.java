@@ -11,8 +11,9 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
  * @author Inzunza Kevin
+ * @author De La Cruz Joel
+ * @author Pacheco Cesar
  * @version 17-04-2021
  */
 public class PedidoTest {
@@ -37,7 +38,8 @@ public class PedidoTest {
     }
 
     /**
-     * Test of getIdPedido method, of class Pedido.
+     * Test del método getIdPedido de la clase Pedido para verificar que reciba
+     * correctamente el número del pedido.
      */
     @Test
     public void testGetIdPedido() {
@@ -50,7 +52,8 @@ public class PedidoTest {
     }
 
     /**
-     * Test of setIdPedido method, of class Pedido.
+     * Test del método setIdPedido de la clase Pedido para verificar que
+     * se asigne correctamente el valor del pedido.
      */
     @Test
     public void testSetIdPedido() {
@@ -62,7 +65,8 @@ public class PedidoTest {
     }
 
     /**
-     * Test of getIdCliente method, of class Pedido.
+     * Test del método getIdCliente de la clase Pedido para verificar que reciba
+     * correctamente el número del cliente.
      */
     @Test
     public void testGetIdCliente() {
@@ -75,7 +79,8 @@ public class PedidoTest {
     }
 
     /**
-     * Test of setIdCliente method, of class Pedido.
+     * Test del método setIdCliente de la clase Pedido para verificar que asigne
+     * correctamente el valor del id del cliente
      */
     @Test
     public void testSetIdCliente() {
@@ -87,7 +92,8 @@ public class PedidoTest {
     }
 
     /**
-     * Test of getPaquete method, of class Pedido.
+     * Test del método getPaquete de la clase Pedido para verificar que reciba
+     * correctamente la cadena de paquetes.
      */
     @Test
     public void testGetPaquete() {
@@ -100,7 +106,8 @@ public class PedidoTest {
     }
 
     /**
-     * Test of setPaquete method, of class Pedido.
+     * Test del método setPaquete de la clase Pedido para verificar que asigne
+     * correctamente la cadena de paquetes
      */
     @Test
     public void testSetPaquete() {
@@ -112,7 +119,8 @@ public class PedidoTest {
     }
 
     /**
-     * Test of getExtra method, of class Pedido.
+     * Test del método getExtra de la clase Pedido para verificar que reciba
+     * correctamente la cadena de extras.
      */
     @Test
     public void testGetExtra() {
@@ -125,7 +133,8 @@ public class PedidoTest {
     }
 
     /**
-     * Test of setExtra method, of class Pedido.
+     * Test del método setExtra de la clase Pedido para verificar que asigne
+     * correctamente la cadena de extras
      */
     @Test
     public void testSetExtra() {
@@ -137,7 +146,8 @@ public class PedidoTest {
     }
 
     /**
-     * Test of getFecha method, of class Pedido.
+     * Test del método getFecha de la clase Pedido para verificar que reciba
+     * correctamente la fecha
      */
     @Test
     public void testGetFecha() {
@@ -151,7 +161,8 @@ public class PedidoTest {
     }
 
     /**
-     * Test of setFecha method, of class Pedido.
+     * Test del método setFecha de la clase Pedido para verificar que asigne
+     * correctamente la fecha en curso
      */
     @Test
     public void testSetFecha() {
@@ -163,7 +174,8 @@ public class PedidoTest {
     }
 
     /**
-     * Test of getTotal method, of class Pedido.
+     * Test del método getTotal de la clase Pedido para verificar que reciba
+     * correctamente el total
      */
     @Test
     public void testGetTotal() {
@@ -176,7 +188,8 @@ public class PedidoTest {
     }
 
     /**
-     * Test of setTotal method, of class Pedido.
+     * Test del método setTotal de la clase Pedido para verificar que asigne
+     * correctamente el total
      */
     @Test
     public void testSetTotal() {
@@ -188,7 +201,8 @@ public class PedidoTest {
     }
 
     /**
-     * Test of calcular method, of class Pedido.
+     * Test del método calcular de la clase Pedido para calcular correctamente 
+     * el total del pedido
      */
     @Test
     public void testCalcular() {

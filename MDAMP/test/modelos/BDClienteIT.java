@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Prueba de Integracion aplicada al modelo 'BDCliente'
  */
 package modelos;
 
@@ -14,8 +12,10 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
- * @author kevin
+ * @author Inzunza Kevin
+ * @author De La Cruz Joel
+ * @author Pacheco Cesar
+ * @version 29-04-2021
  */
 public class BDClienteIT {
 
@@ -39,7 +39,8 @@ public class BDClienteIT {
     }
 
     /**
-     * Test of agregarDatos method, of class BDCliente.
+     * Test del metodo agregarDatos de la clase BDCliente para verificar que se ha
+     * ingresado un nuevo cliente a la base de datos.
      *
      * @throws java.lang.Exception
      */
@@ -55,7 +56,8 @@ public class BDClienteIT {
     }
 
     /**
-     * Test of buscar method, of class BDCliente.
+     * Test del metodo buscar de la clase BDCliente para verificar que se 
+     * encuentra un cliente desde la base de datos.
      *
      * @throws java.lang.Exception
      */
@@ -69,7 +71,8 @@ public class BDClienteIT {
     }
 
     /**
-     * Test of consultar method, of class BDCliente.
+     * Test del metodo consultar de la clase BDCliente para verificar que
+     * el metodo nos devuelve la lista de clientes en la base de datos.
      *
      * @throws java.lang.Exception
      */
