@@ -235,43 +235,80 @@ public class ControladorConsultar implements MouseListener, KeyListener {
      * @param tel
      * @throws SQLException
      */
-    public void buscar(long tel) throws SQLException {
+    public void busqueda(long tel) throws SQLException {
         if (tipoConsulta) {
             BDCliente bd = new BDCliente();
-            Cliente cliente = bd.buscar(tel);
-            if (cliente.getTelefono() != null) {
-                Object info[] = {cliente.getNombre(), cliente.getApellido(), cliente.getTelefono(), cliente.getDireccion()};
+            ArrayList<Cliente> clientes = bd.buscarDinamico(tel);
+            if (!clientes.isEmpty()) {
                 modelo.setRowCount(0);
-                modelo.addRow(info);
+                for (int i = 0; i < clientes.size(); i++) {
+                    Object info[] = {
+                        clientes.get(i).getNombre(),
+                        clientes.get(i).getApellido(),
+                        clientes.get(i).getTelefono(),
+                        clientes.get(i).getDireccion()
+                    };
+                    modelo.addRow(info);
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "No existe un cliente con este número de teléfono", "Consulta", JOptionPane.WARNING_MESSAGE);
             }
         } else {
             if (consultarCliente.nTelefono.isSelected()) {
                 BDPedido bd = new BDPedido();
-                ArrayList<Pedido> pedidos;
-                pedidos = bd.consultarPedidosPorNumTel(consultarCliente.telefono.getText());
+                ArrayList<Pedido> pedidos = bd.consultarPedidosPorNumTel(consultarCliente.telefono.getText());
                 if (!pedidos.isEmpty()) {
                     modelo.setRowCount(0);
                     for (int i = 0; i < pedidos.size(); i++) {
-                        Object info[] = {pedidos.get(i).getIdPedido(), pedidos.get(i).getIdCliente(), pedidos.get(i).getPaquete(), pedidos.get(i).getExtra(), pedidos.get(i).getFecha(), pedidos.get(i).getTotal()};
+                        Object info[] = {
+                            pedidos.get(i).getIdPedido(),
+                            pedidos.get(i).getIdCliente(),
+                            pedidos.get(i).getPaquete(),
+                            pedidos.get(i).getExtra(),
+                            pedidos.get(i).getFecha(),
+                            pedidos.get(i).getTotal()
+                        };
                         modelo.addRow(info);
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "El cliente no está asociado a ningun pedido", "Consulta", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "El cliente no está asociado a ningun pedido",
+                            "Consulta",
+                            JOptionPane.WARNING_MESSAGE
+                    );
                 }
             } else if (consultarCliente.nPedido.isSelected()) {
                 BDPedido bd = new BDPedido();
-                Pedido pedido = bd.buscar(consultarCliente.telefono.getText());
-                if (pedido.getPaquete() != null) {
-                    Object info[] = {pedido.getIdPedido(), pedido.getIdCliente(), pedido.getPaquete(), pedido.getExtra(), pedido.getFecha(), pedido.getTotal()};
+                ArrayList<Pedido> pedidos = bd.buscar(consultarCliente.telefono.getText());
+                if (!pedidos.isEmpty()) {
                     modelo.setRowCount(0);
-                    modelo.addRow(info);
+                    for(int i = 0; i < pedidos.size(); i++){
+                        Object info[] = {
+                            pedidos.get(i).getIdPedido(),
+                            pedidos.get(i).getIdCliente(),
+                            pedidos.get(i).getPaquete(),
+                            pedidos.get(i).getExtra(),
+                            pedidos.get(i).getFecha(),
+                            pedidos.get(i).getTotal()
+                        };
+                        modelo.addRow(info);
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(null, "No existe un pedido con este número", "Consulta", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "No existe un pedido con este número",
+                            "Consulta",
+                            JOptionPane.WARNING_MESSAGE
+                    );
                 }                
             } else {
-                JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna opción del tipo de consulta", "Consulta", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(
+                        null,
+                        "No se ha seleccionado ninguna opción del tipo de consulta",
+                        "Consulta",
+                        JOptionPane.WARNING_MESSAGE
+                );
             }
         }
     }
@@ -291,31 +328,36 @@ public class ControladorConsultar implements MouseListener, KeyListener {
 
     /**
      * Si el textField cuenta con el ingreso de la informacion necesaria para la
-     * busqueda del cliente se procede a llamar el metodo buscar(), caso
-     * contrario, muestra mensaje en pantalla de que no se procedio a realizar
-     * la consulta debido a informacion faltante.
+ busqueda del cliente se procede a llamar el metodo busqueda(), caso
+ contrario, muestra mensaje en pantalla de que no se procedio a realizar
+ la consulta debido a informacion faltante.
      *
      * @throws SQLException
      */
-    public void buscarCliente() throws SQLException {
+    public void buscar() throws SQLException {
         if (!consultarCliente.telefono.getText().isEmpty()) {
-            buscar(Long.parseLong(consultarCliente.telefono.getText())); 
+            busqueda(Long.parseLong(consultarCliente.telefono.getText())); 
         } else {
-            Icon icono = new ImageIcon(getClass().getResource("../imagenes/cancelar.png"));
-            JOptionPane.showMessageDialog(null, "Verifique los datos ingresados", "Datos faltantes", JOptionPane.INFORMATION_MESSAGE, icono);
+            cancelar();
         }
     }
 
     /**
      * Segun el boton que se haya presionado, el MouseEvent se encarga de
-     * compararlo para saber cual fue escogido y entra a una condicion para
-     * proceder a otra el metodo buscarCliente() o cancelar()
+ compararlo para saber cual fue escogido y entra a una condicion para
+ proceder a otra el metodo buscar() o cancelar()
      */
     public void eventosJButton(MouseEvent e) throws SQLException {
         if (e.getSource().equals(consultarCliente.buscar)) {
-            buscarCliente();
+            buscar();
         } else if (e.getSource().equals(consultarCliente.cancelar)) {
             cancelar();
+        }
+    }
+    
+    public void eventBusquedaDinamica(KeyEvent e) throws SQLException{
+        if(e.getSource().equals(consultarCliente.telefono)){
+            buscar();
         }
     }
 
@@ -324,8 +366,10 @@ public class ControladorConsultar implements MouseListener, KeyListener {
      * teléfono o numero de pedido con el cual se plantea la busqueda
      *
      * @param e
+     * @throws java.sql.SQLException
      */
-    public void keyTyped(KeyEvent e) {
+    @Override
+    public void keyTyped(KeyEvent e){
         char car = e.getKeyChar();
         if (e.getSource().equals(consultarCliente.telefono)) {
             if (!Character.isDigit(car)) {
@@ -333,13 +377,33 @@ public class ControladorConsultar implements MouseListener, KeyListener {
             }
         }
     }
-    
-    @Override
-    public void keyPressed(KeyEvent e) {
-    }
-    
+
+    /**
+     * keyReleased verifica que cada vez que se le agregue un numero al campo
+     * telefono se haga la busqueda sin necesidad de presionar en buscar
+     * @param e 
+     */
     @Override
     public void keyReleased(KeyEvent e) {
+        char car = e.getKeyChar();
+        if (e.getSource().equals(consultarCliente.telefono)) {
+            if (Character.isDigit(car)) {
+                try {
+                    if (tipoConsulta) {
+                        eventBusquedaDinamica(e);
+                    }else{
+                        
+                    }
+                        
+                } catch (SQLException ex) {
+                    Logger.getLogger(ControladorConsultar.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
     }
     
 }

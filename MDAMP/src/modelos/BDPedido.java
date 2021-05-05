@@ -80,23 +80,26 @@ public class BDPedido {
      * @return pedido
      * @throws SQLException 
      */
-    public Pedido buscar(String busqueda) throws SQLException {
-        pedido = new Pedido();
+    public ArrayList<Pedido> buscar(String busqueda) throws SQLException {
+        ArrayList<Pedido> pedidos = new ArrayList<>();
         PreparedStatement ps;
         ResultSet res;
-        ps = con.prepareStatement("Select * From Pedido where Id_Pedido=?");
-        ps.setInt(1, Integer.parseInt(busqueda));
-        
+        ps = con.prepareStatement(
+                "Select * From Pedido where Id_Pedido like ?"
+        );
+        ps.setString(1, String.valueOf(busqueda) + "%");
         res = ps.executeQuery();
-        if (res.next()) {
+        while (res.next()) {
+            pedido = new Pedido();
             pedido.setIdPedido(res.getInt("Id_Pedido"));
             pedido.setIdCliente(res.getLong("Id_Cliente"));
             pedido.setPaquete(res.getString("Paquete"));
             pedido.setExtra(res.getString("Extra"));
             pedido.setFecha(res.getString("Fecha"));
             pedido.setTotal(res.getInt("Total"));
+            pedidos.add(pedido);
         }
-        return pedido;
+        return pedidos;
     }
     
     /**

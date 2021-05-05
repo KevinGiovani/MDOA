@@ -73,6 +73,34 @@ public class BDCliente {
         }
         return cliente;
     }
+    
+    /**
+     * Metodo utilizado para buscar clientes dentro de la base de datos conforme
+     * a lo que el usuario haya ingresado al momento dentro de la interfaz.
+     * 
+     * @param tel
+     * @return
+     * @throws SQLException 
+     */
+    public ArrayList<Cliente> buscarDinamico(long tel) throws SQLException {
+        ArrayList<Cliente> clientes = new ArrayList<>();
+        PreparedStatement ps;
+        ResultSet res;
+        ps = con.prepareStatement(
+                "Select * From Cliente where Telefono like ?"
+        );
+        ps.setString(1, String.valueOf(tel) + "%");
+        res = ps.executeQuery();
+        while (res.next()) {
+            cliente = new Cliente();
+            cliente.setNombre(res.getString("Nombre"));
+            cliente.setApellido(res.getString("Apellido"));
+            cliente.setTelefono(String.valueOf(res.getLong("Telefono")));
+            cliente.setDireccion(res.getString("Direccion"));
+            clientes.add(cliente);
+        }
+        return clientes;
+    }
 
     /**
      * Metodo utilizado para buscar a todos los clientes registrados 
