@@ -171,7 +171,7 @@ public class ControladorConsultar implements MouseListener, KeyListener {
      * @throws SQLException
      */
     public void consultar() throws SQLException {
-        if (tipoConsulta == true) {
+        if (tipoConsulta) {
             BDCliente bd = new BDCliente();
             ArrayList<Cliente> clientes;
             clientes = bd.consultar();
@@ -389,14 +389,17 @@ public class ControladorConsultar implements MouseListener, KeyListener {
         if (e.getSource().equals(consultarCliente.telefono)) {
             if (Character.isDigit(car)) {
                 try {
-                    if (tipoConsulta) {
-                        eventBusquedaDinamica(e);
-                    }else{
-                        
-                    }
-                        
+                    eventBusquedaDinamica(e);    
                 } catch (SQLException ex) {
                     Logger.getLogger(ControladorConsultar.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else{
+                if(e.getExtendedKeyCode() == KeyEvent.VK_BACK_SPACE){
+                    try {
+                        eventBusquedaDinamica(e);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ControladorConsultar.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
         }
