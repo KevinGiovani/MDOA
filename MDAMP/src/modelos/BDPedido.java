@@ -110,9 +110,9 @@ public class BDPedido {
      */
     public ArrayList<Pedido> consultarPedidosPorNumTel(String busqueda) throws SQLException {
         ArrayList<Pedido> pedidos = new ArrayList<>();
-        PreparedStatement ps = con.prepareStatement("Select * From Pedido where Id_Cliente=?");;
+        PreparedStatement ps = con.prepareStatement("Select * From Pedido where Id_Cliente like ?");;
         ResultSet res;
-        ps.setLong(1, Long.parseLong(busqueda));
+        ps.setString(1, String.valueOf(busqueda) + "%");
         res = ps.executeQuery();
         while (res.next()) {
             pedido = new Pedido();
