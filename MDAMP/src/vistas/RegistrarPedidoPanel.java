@@ -146,49 +146,55 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
         paq1.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
         paq1.setForeground(new java.awt.Color(153, 255, 153));
         paq1.setText("Paquete 1");
+        paq1.setToolTipText("<html>\n\n<body>\n\n<p>2 Pollos<br>2 Salsas<br>2 Cebollas<br>1 Paq. Maiz<br>Precio:$210</p>\n</body>\n\n</html>\n");
 
         cantPaq1.setFont(new java.awt.Font("Comfortaa Light", 0, 14)); // NOI18N
-        cantPaq1.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        cantPaq1.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
         cantPaq1.setPreferredSize(new java.awt.Dimension(85, 24));
 
         paq2.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
         paq2.setForeground(new java.awt.Color(153, 255, 153));
         paq2.setText("Paquete 2");
+        paq2.setToolTipText("<html>\n\n<body>\n\n<p>2 Pollos<br>2 Salsas<br>2 Cebollas<br>2 Purés de papa<br>1 Ensalada<br>1 Paq. Harina<br>Precio:$240</p>\n</body>\n\n</html>\n");
 
         cantPaq2.setFont(new java.awt.Font("Comfortaa Light", 0, 14)); // NOI18N
-        cantPaq2.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        cantPaq2.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
         cantPaq2.setPreferredSize(new java.awt.Dimension(85, 24));
 
         paq3.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
         paq3.setForeground(new java.awt.Color(153, 255, 153));
         paq3.setText("Paquete 3");
+        paq3.setToolTipText("<html>\n\n<body>\n\n<p>1 1/2 Pollos<br>2 Salsas<br>2 Cebollas<br>1 Puré de papa<br>1 Ensalada<br>1 Paq. Maíz<br>Precio:$190</p>\n</body>\n\n</html>\n");
 
         cantPaq3.setFont(new java.awt.Font("Comfortaa Light", 0, 14)); // NOI18N
-        cantPaq3.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        cantPaq3.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
         cantPaq3.setPreferredSize(new java.awt.Dimension(85, 24));
 
         paq4.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
         paq4.setForeground(new java.awt.Color(153, 255, 153));
         paq4.setText("Paquete 4");
+        paq4.setToolTipText("<html>\n\n<body>\n\n<p>1 Pollo<br>1 Salsa<br>1 Cebolla<br>1 Puré de papa<br>1 Ensalada<br>1 Paq. Maíz<br>Precio:$150</p>\n</body>\n\n</html>\n");
 
         cantPaq4.setFont(new java.awt.Font("Comfortaa Light", 0, 14)); // NOI18N
-        cantPaq4.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        cantPaq4.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
         cantPaq4.setPreferredSize(new java.awt.Dimension(85, 24));
 
         paq5.setFont(new java.awt.Font("Ebrima", 1, 14)); // NOI18N
         paq5.setForeground(new java.awt.Color(153, 255, 153));
         paq5.setText("Paquete 5");
+        paq5.setToolTipText("<html>\n\n<body>\n\n<p>1 Pollo<br>1 Salsa<br>1 Cebolla<br>1 Paq. Maíz<br>Precio:$120</p>\n</body>\n\n</html>\n");
 
         cantPaq5.setFont(new java.awt.Font("Comfortaa Light", 0, 14)); // NOI18N
-        cantPaq5.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        cantPaq5.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
         cantPaq5.setPreferredSize(new java.awt.Dimension(85, 24));
 
         paq6.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
         paq6.setForeground(new java.awt.Color(153, 255, 153));
         paq6.setText("Paquete 6");
+        paq6.setToolTipText("<html>\n\n<body>\n\n<p>1/2 Pollo<br>1 Salsa<br>1 Cebolla<br>1 Paq. Maíz<br>Precio:$60</p>\n</body>\n\n</html>\n");
 
         cantPaq6.setFont(new java.awt.Font("Comfortaa Light", 0, 14)); // NOI18N
-        cantPaq6.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        cantPaq6.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
         cantPaq6.setPreferredSize(new java.awt.Dimension(85, 24));
 
         jLabel1.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
@@ -198,44 +204,49 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
         extra2.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
         extra2.setForeground(new java.awt.Color(153, 255, 153));
         extra2.setText("Ensalada");
+        extra2.setToolTipText("<html>\n\n<body>\n\n<p>Precio:$20</p>\n</body>\n\n</html>");
 
         cantExt2.setFont(new java.awt.Font("Comfortaa Light", 0, 14)); // NOI18N
-        cantExt2.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        cantExt2.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
         cantExt2.setPreferredSize(new java.awt.Dimension(85, 24));
 
         extra3.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
         extra3.setForeground(new java.awt.Color(153, 255, 153));
         extra3.setText("Tortillas de Maiz");
+        extra3.setToolTipText("<html>\n\n<body>\n\n<p>Precio:$5</p>\n</body>\n\n</html>");
 
         cantExt3.setFont(new java.awt.Font("Comfortaa Light", 0, 14)); // NOI18N
-        cantExt3.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        cantExt3.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
         cantExt3.setPreferredSize(new java.awt.Dimension(85, 24));
 
         extra4.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
         extra4.setForeground(new java.awt.Color(153, 255, 153));
         extra4.setText("Tortillas de Harina");
+        extra4.setToolTipText("<html>\n\n<body>\n\n<p>Precio:$10</p>\n</body>\n\n</html>");
 
         cantExt4.setFont(new java.awt.Font("Comfortaa Light", 0, 14)); // NOI18N
-        cantExt4.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        cantExt4.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
         cantExt4.setPreferredSize(new java.awt.Dimension(85, 24));
 
         extra5.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
         extra5.setForeground(new java.awt.Color(153, 255, 153));
         extra5.setText("Puré de Papa");
+        extra5.setToolTipText("<html>\n\n<body>\n\n<p>Precio:$15</p>\n</body>\n\n</html>");
 
         cantExt5.setFont(new java.awt.Font("Comfortaa Light", 0, 14)); // NOI18N
-        cantExt5.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        cantExt5.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
         cantExt5.setPreferredSize(new java.awt.Dimension(85, 24));
 
         jLabel2.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(153, 255, 153));
         jLabel2.setText("Extra:");
 
-        cantExt1.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        cantExt1.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
 
         extra1.setFont(new java.awt.Font("Comfortaa Light", 1, 14)); // NOI18N
         extra1.setForeground(new java.awt.Color(153, 255, 153));
         extra1.setText("Salsa Y Cebolla");
+        extra1.setToolTipText("<html>\n\n<body>\n\n<p>Precio:$5</p>\n</body>\n\n</html>\n");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -395,7 +406,7 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
                     .addComponent(direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
+                .addContainerGap(34, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel3)

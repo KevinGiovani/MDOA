@@ -1,14 +1,16 @@
 /**
  * Este controlador se encarga de manejar los MouseListeners y KeyListeners,
- * algunos aspectos visuales que normalmente se aplican en el JFrame.
- * También permite realizar las consultas de pedido a partir del numero de identificacion que se le
- * asigno a su orden o realizar su busqueda a partir del num. de telefono del cliente,
- * y por ultimo, permite realizar la consulta de datos de un cliente a partir del numero de telefono.
+ * algunos aspectos visuales que normalmente se aplican en el JFrame. También
+ * permite realizar las consultas de pedido a partir del numero de
+ * identificacion que se le asigno a su orden o realizar su busqueda a partir
+ * del num. de telefono del cliente, y por ultimo, permite realizar la consulta
+ * de datos de un cliente a partir del numero de telefono.
  */
 package controladores;
 
 import java.applet.AudioClip;
-import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -35,8 +37,8 @@ import modelos.Pedido;
  * @author Pacheco Cesar
  * @version 23-04-2021
  */
-public class ControladorConsultar implements MouseListener, KeyListener {
-    
+public class ControladorConsultar implements MouseListener, KeyListener, ActionListener {
+
     private final AudioClip sonidoDeBoton; //Audio para los botones
     private final AudioClip sonidoDeRegresar; //Audio reproducido para salir
     private final JPanel mConsultar; //Panel de la ventana de menú principal
@@ -59,15 +61,15 @@ public class ControladorConsultar implements MouseListener, KeyListener {
         this.mConsultar = mConsultar;
         this.sonidoDeBoton = sonidoDeBoton;
         this.sonidoDeRegresar = sonidoDeRegresar;
-        //Botones
-        consultarCliente.buscar.addMouseListener(this);
-        consultarCliente.cancelar.addMouseListener(this);
         //Imagen
         consultarCliente.regresarImagen.addMouseListener(this);
         //Campos de texto
         consultarCliente.telefono.addKeyListener(this);
         //Tabla
         consultarCliente.tablaConsultas.addMouseListener(this);
+        //Botones Radio
+        consultarCliente.nTelefono.addActionListener(this);
+        consultarCliente.nPedido.addActionListener(this);
     }
 
     /**
@@ -80,6 +82,8 @@ public class ControladorConsultar implements MouseListener, KeyListener {
      */
     public void inicializar(Boolean tipoConsulta) throws SQLException {
         this.tipoConsulta = tipoConsulta;
+        consultarCliente.nPedido.setSelected(false);
+        consultarCliente.nTelefono.setSelected(false);
         iniciarTabla();
     }
 
@@ -93,13 +97,7 @@ public class ControladorConsultar implements MouseListener, KeyListener {
      */
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (e.getSource().getClass().getTypeName().equalsIgnoreCase("javax.swing.JButton")) {
-            try {
-                eventosJButton(e);
-            } catch (SQLException ex) {
-                Logger.getLogger(ControladorConsultar.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else if (e.getSource().getClass().getTypeName().equalsIgnoreCase("javax.swing.JLabel")) {
+        if (e.getSource().getClass().getTypeName().equalsIgnoreCase("javax.swing.JLabel")) {
             Icon icono = new ImageIcon(getClass().getResource("../imagenes/regreso.png"));
             sonidoDeRegresar.play();
             if (JOptionPane.showConfirmDialog(null, "¿Desea regresar al menu de consultas?", "Regresar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icono) == 0) {
@@ -121,11 +119,23 @@ public class ControladorConsultar implements MouseListener, KeyListener {
             }
         }
     }
-    
+
+    /**
+     * Detecta si se presionó alguno de los botones de Radio para realizar la
+     * búsqueda que les corresponde.
+     * @param e
+     * @throws SQLException 
+     */
+    public void eventosRadio(ActionEvent e) throws SQLException {
+        if (e.getSource().equals(consultarCliente.nPedido) || e.getSource().equals(consultarCliente.nTelefono)) {
+            buscar();
+        }
+    }
+
     @Override
     public void mousePressed(MouseEvent e) {
     }
-    
+
     @Override
     public void mouseReleased(MouseEvent e) {
     }
@@ -139,13 +149,7 @@ public class ControladorConsultar implements MouseListener, KeyListener {
      */
     @Override
     public void mouseEntered(MouseEvent e) {
-        if (e.getSource().equals(consultarCliente.buscar)) {
-            consultarCliente.buscar.setBackground(new Color(0, 102, 102));
-            sonidoDeBoton.play();
-        } else if (e.getSource().equals(consultarCliente.cancelar)) {
-            consultarCliente.cancelar.setBackground(new Color(0, 102, 102));
-            sonidoDeBoton.play();
-        }
+
     }
 
     /**
@@ -156,11 +160,6 @@ public class ControladorConsultar implements MouseListener, KeyListener {
      */
     @Override
     public void mouseExited(MouseEvent e) {
-        if (e.getSource().equals(consultarCliente.buscar)) {
-            consultarCliente.buscar.setBackground(new Color(0, 51, 51));
-        } else if (e.getSource().equals(consultarCliente.cancelar)) {
-            consultarCliente.cancelar.setBackground(new Color(0, 51, 51));
-        }
     }
 
     /**
@@ -188,7 +187,7 @@ public class ControladorConsultar implements MouseListener, KeyListener {
                 modelo.addRow(info);
             }
         }
-        
+
     }
 
     /**
@@ -208,7 +207,7 @@ public class ControladorConsultar implements MouseListener, KeyListener {
             modelo.addColumn("Apellido");
             modelo.addColumn("Teléfono");
             modelo.addColumn("Dirección");
-            for (int i = 0; i < consultarCliente.tablaConsultas.getColumnCount()-1; i++) {
+            for (int i = 0; i < consultarCliente.tablaConsultas.getColumnCount() - 1; i++) {
                 consultarCliente.tablaConsultas.getColumnModel().getColumn(i).setMinWidth(140);
                 consultarCliente.tablaConsultas.getColumnModel().getColumn(i).setMaxWidth(140);
             }
@@ -228,9 +227,10 @@ public class ControladorConsultar implements MouseListener, KeyListener {
     }
 
     /**
-     * Se realiza una consulta en la base de datos dada la informacion que se proporciono
-     * para poder ser mostrada los datos obtenidos, en caso de que no se encuentre en la busqueda
-     * se mostrara mensaje de error de busqueda en la pantalla del usuario.
+     * Se realiza una consulta en la base de datos dada la informacion que se
+     * proporciono para poder ser mostrada los datos obtenidos, en caso de que
+     * no se encuentre en la busqueda se mostrara mensaje de error de busqueda
+     * en la pantalla del usuario.
      *
      * @param tel
      * @throws SQLException
@@ -251,7 +251,7 @@ public class ControladorConsultar implements MouseListener, KeyListener {
                     modelo.addRow(info);
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "No existe un cliente con este número de teléfono", "Consulta", JOptionPane.WARNING_MESSAGE);
+                modelo.setRowCount(0);
             }
         } else {
             if (consultarCliente.nTelefono.isSelected()) {
@@ -271,19 +271,14 @@ public class ControladorConsultar implements MouseListener, KeyListener {
                         modelo.addRow(info);
                     }
                 } else {
-                    JOptionPane.showMessageDialog(
-                            null,
-                            "El cliente no está asociado a ningun pedido",
-                            "Consulta",
-                            JOptionPane.WARNING_MESSAGE
-                    );
+                    modelo.setRowCount(0);
                 }
             } else if (consultarCliente.nPedido.isSelected()) {
                 BDPedido bd = new BDPedido();
                 ArrayList<Pedido> pedidos = bd.buscar(consultarCliente.telefono.getText());
                 if (!pedidos.isEmpty()) {
                     modelo.setRowCount(0);
-                    for(int i = 0; i < pedidos.size(); i++){
+                    for (int i = 0; i < pedidos.size(); i++) {
                         Object info[] = {
                             pedidos.get(i).getIdPedido(),
                             pedidos.get(i).getIdCliente(),
@@ -295,13 +290,8 @@ public class ControladorConsultar implements MouseListener, KeyListener {
                         modelo.addRow(info);
                     }
                 } else {
-                    JOptionPane.showMessageDialog(
-                            null,
-                            "No existe un pedido con este número",
-                            "Consulta",
-                            JOptionPane.WARNING_MESSAGE
-                    );
-                }                
+                    modelo.setRowCount(0);
+                }
             } else {
                 JOptionPane.showMessageDialog(
                         null,
@@ -328,35 +318,28 @@ public class ControladorConsultar implements MouseListener, KeyListener {
 
     /**
      * Si el textField cuenta con el ingreso de la informacion necesaria para la
- busqueda del cliente se procede a llamar el metodo busqueda(), caso
- contrario, muestra mensaje en pantalla de que no se procedio a realizar
- la consulta debido a informacion faltante.
+     * busqueda del cliente se procede a llamar el metodo busqueda(), caso
+     * contrario, muestra mensaje en pantalla de que no se procedio a realizar
+     * la consulta debido a informacion faltante.
      *
      * @throws SQLException
      */
     public void buscar() throws SQLException {
         if (!consultarCliente.telefono.getText().isEmpty()) {
-            busqueda(Long.parseLong(consultarCliente.telefono.getText())); 
+            busqueda(Long.parseLong(consultarCliente.telefono.getText()));
         } else {
             cancelar();
         }
     }
 
     /**
-     * Segun el boton que se haya presionado, el MouseEvent se encarga de
- compararlo para saber cual fue escogido y entra a una condicion para
- proceder a otra el metodo buscar() o cancelar()
+     * Llama al método de buscar detectando algún evento de teclado para la
+     * búsqueda dinámica.
+     * @param e
+     * @throws SQLException 
      */
-    public void eventosJButton(MouseEvent e) throws SQLException {
-        if (e.getSource().equals(consultarCliente.buscar)) {
-            buscar();
-        } else if (e.getSource().equals(consultarCliente.cancelar)) {
-            cancelar();
-        }
-    }
-    
-    public void eventBusquedaDinamica(KeyEvent e) throws SQLException{
-        if(e.getSource().equals(consultarCliente.telefono)){
+    public void eventBusquedaDinamica(KeyEvent e) throws SQLException {
+        if (e.getSource().equals(consultarCliente.telefono)) {
             buscar();
         }
     }
@@ -366,10 +349,9 @@ public class ControladorConsultar implements MouseListener, KeyListener {
      * teléfono o numero de pedido con el cual se plantea la busqueda
      *
      * @param e
-     * @throws java.sql.SQLException
      */
     @Override
-    public void keyTyped(KeyEvent e){
+    public void keyTyped(KeyEvent e) {
         char car = e.getKeyChar();
         if (e.getSource().equals(consultarCliente.telefono)) {
             if (!Character.isDigit(car)) {
@@ -381,7 +363,8 @@ public class ControladorConsultar implements MouseListener, KeyListener {
     /**
      * keyReleased verifica que cada vez que se le agregue un numero al campo
      * telefono se haga la busqueda sin necesidad de presionar en buscar
-     * @param e 
+     *
+     * @param e
      */
     @Override
     public void keyReleased(KeyEvent e) {
@@ -389,12 +372,12 @@ public class ControladorConsultar implements MouseListener, KeyListener {
         if (e.getSource().equals(consultarCliente.telefono)) {
             if (Character.isDigit(car)) {
                 try {
-                    eventBusquedaDinamica(e);    
+                    eventBusquedaDinamica(e);
                 } catch (SQLException ex) {
                     Logger.getLogger(ControladorConsultar.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }else{
-                if(e.getExtendedKeyCode() == KeyEvent.VK_BACK_SPACE){
+            } else {
+                if (e.getExtendedKeyCode() == KeyEvent.VK_BACK_SPACE) {
                     try {
                         eventBusquedaDinamica(e);
                     } catch (SQLException ex) {
@@ -408,5 +391,21 @@ public class ControladorConsultar implements MouseListener, KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
     }
-    
+
+    /**
+     * Detección de cambio de evento en los radio button para realizar su respectiva
+     * búsqueda dinámica.
+     * @param e 
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource().getClass().getTypeName().equalsIgnoreCase("javax.swing.JRadioButton")){
+        try {
+            eventosRadio(e);
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorConsultar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+    }
+
 }

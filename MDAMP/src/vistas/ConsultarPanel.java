@@ -60,8 +60,6 @@ public class ConsultarPanel extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         campo = new javax.swing.JLabel();
         telefono = new javax.swing.JTextField();
-        buscar = new javax.swing.JButton();
-        cancelar = new javax.swing.JButton();
         nPedido = new javax.swing.JRadioButton();
         nTelefono = new javax.swing.JRadioButton();
 
@@ -129,16 +127,6 @@ public class ConsultarPanel extends javax.swing.JPanel {
 
         telefono.setBackground(new java.awt.Color(153, 255, 204));
 
-        buscar.setBackground(new java.awt.Color(0, 51, 51));
-        buscar.setFont(new java.awt.Font("Gayathri", 1, 8)); // NOI18N
-        buscar.setForeground(new java.awt.Color(153, 255, 204));
-        buscar.setText("Buscar");
-
-        cancelar.setBackground(new java.awt.Color(0, 51, 51));
-        cancelar.setFont(new java.awt.Font("Gayathri", 1, 8)); // NOI18N
-        cancelar.setForeground(new java.awt.Color(153, 255, 204));
-        cancelar.setText("Cancelar");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -148,11 +136,7 @@ public class ConsultarPanel extends javax.swing.JPanel {
                 .addComponent(campo)
                 .addGap(71, 71, 71)
                 .addComponent(telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
-                .addComponent(buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(cancelar)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(261, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,10 +144,8 @@ public class ConsultarPanel extends javax.swing.JPanel {
                 .addContainerGap(26, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(campo)
-                    .addComponent(telefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buscar)
-                    .addComponent(cancelar))
-                .addGap(16, 16, 16))
+                    .addComponent(telefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19))
         );
 
         buttonGroup1.add(nPedido);
@@ -221,10 +203,8 @@ public class ConsultarPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton buscar;
     public javax.swing.ButtonGroup buttonGroup1;
     public javax.swing.JLabel campo;
-    public javax.swing.JButton cancelar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JLabel manejoOTexto;

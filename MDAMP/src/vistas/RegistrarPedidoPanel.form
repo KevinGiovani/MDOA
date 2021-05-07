@@ -308,6 +308,7 @@
               <Color blue="99" green="ff" red="99" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Paquete 1"/>
+            <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;&#xa;&lt;body&gt;&#xa;&#xa;&lt;p&gt;2 Pollos&lt;br&gt;2 Salsas&lt;br&gt;2 Cebollas&lt;br&gt;1 Paq. Maiz&lt;br&gt;Precio:$210&lt;/p&gt;&#xa;&lt;/body&gt;&#xa;&#xa;&lt;/html&gt;&#xa;"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -338,6 +339,7 @@
               <Color blue="99" green="ff" red="99" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Paquete 2"/>
+            <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;&#xa;&lt;body&gt;&#xa;&#xa;&lt;p&gt;2 Pollos&lt;br&gt;2 Salsas&lt;br&gt;2 Cebollas&lt;br&gt;2 Pur&#xe9;s de papa&lt;br&gt;1 Ensalada&lt;br&gt;1 Paq. Harina&lt;br&gt;Precio:$240&lt;/p&gt;&#xa;&lt;/body&gt;&#xa;&#xa;&lt;/html&gt;&#xa;"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -368,6 +370,7 @@
               <Color blue="99" green="ff" red="99" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Paquete 3"/>
+            <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;&#xa;&lt;body&gt;&#xa;&#xa;&lt;p&gt;1 1/2 Pollos&lt;br&gt;2 Salsas&lt;br&gt;2 Cebollas&lt;br&gt;1 Pur&#xe9; de papa&lt;br&gt;1 Ensalada&lt;br&gt;1 Paq. Ma&#xed;z&lt;br&gt;Precio:$190&lt;/p&gt;&#xa;&lt;/body&gt;&#xa;&#xa;&lt;/html&gt;&#xa;"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -398,6 +401,7 @@
               <Color blue="99" green="ff" red="99" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Paquete 4"/>
+            <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;&#xa;&lt;body&gt;&#xa;&#xa;&lt;p&gt;1 Pollo&lt;br&gt;1 Salsa&lt;br&gt;1 Cebolla&lt;br&gt;1 Pur&#xe9; de papa&lt;br&gt;1 Ensalada&lt;br&gt;1 Paq. Ma&#xed;z&lt;br&gt;Precio:$150&lt;/p&gt;&#xa;&lt;/body&gt;&#xa;&#xa;&lt;/html&gt;&#xa;"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -428,6 +432,7 @@
               <Color blue="99" green="ff" red="99" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Paquete 5"/>
+            <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;&#xa;&lt;body&gt;&#xa;&#xa;&lt;p&gt;1 Pollo&lt;br&gt;1 Salsa&lt;br&gt;1 Cebolla&lt;br&gt;1 Paq. Ma&#xed;z&lt;br&gt;Precio:$120&lt;/p&gt;&#xa;&lt;/body&gt;&#xa;&#xa;&lt;/html&gt;&#xa;"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -458,6 +463,7 @@
               <Color blue="99" green="ff" red="99" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Paquete 6"/>
+            <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;&#xa;&lt;body&gt;&#xa;&#xa;&lt;p&gt;1/2 Pollo&lt;br&gt;1 Salsa&lt;br&gt;1 Cebolla&lt;br&gt;1 Paq. Ma&#xed;z&lt;br&gt;Precio:$60&lt;/p&gt;&#xa;&lt;/body&gt;&#xa;&#xa;&lt;/html&gt;&#xa;"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -499,6 +505,7 @@
               <Color blue="99" green="ff" red="99" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Ensalada"/>
+            <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;&#xa;&lt;body&gt;&#xa;&#xa;&lt;p&gt;Precio:$20&lt;/p&gt;&#xa;&lt;/body&gt;&#xa;&#xa;&lt;/html&gt;"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -529,6 +536,7 @@
               <Color blue="99" green="ff" red="99" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Tortillas de Maiz"/>
+            <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;&#xa;&lt;body&gt;&#xa;&#xa;&lt;p&gt;Precio:$5&lt;/p&gt;&#xa;&lt;/body&gt;&#xa;&#xa;&lt;/html&gt;"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -559,6 +567,7 @@
               <Color blue="99" green="ff" red="99" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Tortillas de Harina"/>
+            <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;&#xa;&lt;body&gt;&#xa;&#xa;&lt;p&gt;Precio:$10&lt;/p&gt;&#xa;&lt;/body&gt;&#xa;&#xa;&lt;/html&gt;"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -589,6 +598,7 @@
               <Color blue="99" green="ff" red="99" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Pur&#xe9; de Papa"/>
+            <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;&#xa;&lt;body&gt;&#xa;&#xa;&lt;p&gt;Precio:$15&lt;/p&gt;&#xa;&lt;/body&gt;&#xa;&#xa;&lt;/html&gt;"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -640,6 +650,7 @@
               <Color blue="99" green="ff" red="99" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Salsa Y Cebolla"/>
+            <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;&#xa;&lt;body&gt;&#xa;&#xa;&lt;p&gt;Precio:$5&lt;/p&gt;&#xa;&lt;/body&gt;&#xa;&#xa;&lt;/html&gt;&#xa;"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
