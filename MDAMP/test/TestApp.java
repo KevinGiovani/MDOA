@@ -1,5 +1,7 @@
 
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
+import org.assertj.swing.core.MouseButton;
 import vistas.PrincipalFrame;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.core.matcher.JButtonMatcher.withName;
@@ -16,7 +18,6 @@ import org.junit.Test;
 public class TestApp {
 
     private FrameFixture window;
-    private JPanelFixture content1;
 
     /**
      * Constructor de clase
@@ -36,6 +37,7 @@ public class TestApp {
     /**
      * Inicializa los dispositivos de prueba, se ejecuta cada vez que se ejecute
      * un método de prueba
+     *
      * @throws java.sql.SQLException
      */
     @Before
@@ -54,15 +56,60 @@ public class TestApp {
         window.cleanUp();
     }
 
+//    @Test
+//    public void registrarCliente() {
+//        window.button("registroClienteBoton").focus().click();
+//        window.textBox("nombre").focus().setText("Kevin");
+//        window.textBox("apellido").focus().setText("Inzunza");
+//        window.textBox("numTelefono").focus().setText("6861234567");
+//        window.textBox("direccion").focus().setText("Benito Juarez, Mexicali");
+//        window.button("aceptarBoton").focus().click();
+//        window.dialog().focus().button(withText("Yes")).click();
+//    }
+//    
+//    @Test
+//    public void registrarPedido() {
+//        window.button("registroPedidoBoton").focus().click();
+//        window.checkBox("paq1").focus().check();
+//        window.spinner("cantPaq1").focus().increment();
+//        window.checkBox("paq5").focus().check();
+//        window.textBox("numTelefono").focus().setText("6861234567");
+//        window.button("buscarBoton").focus().click();
+//        window.textBox("totalCliente").focus().setText("540");
+//        window.button("pagarBoton").focus().click();
+//        window.dialog().focus().button(withText("Yes")).click();
+//    }
+//    
+//    
+//    
+//    @Test
+//    public void buscarClienteEnPedido(){
+//        window.button("registroPedidoBoton").focus().click();
+//        window.textBox("numTelefono").focus().setText("1234567890");
+//        window.button("buscarBoton").focus().click();
+//    }
+//    
+//    @Test
+//    public void obtenerTotal() {
+//        window.button("registroPedidoBoton").focus().click();
+//        window.checkBox("paq1").focus().check();
+//        window.spinner("cantPaq1").focus().increment();
+//        window.checkBox("paq5").focus().check();
+//        System.out.println(window.textBox("totalPagar").text());
+//        assertThat(window.textBox("totalPagar").text()).isEqualTo("540");
+//    }
+    
     @Test
-    public void registrarCliente() {
-
-         //window.button(withText("REGISTRAR ")).click();
-         window.button(withName("registroClienteBoton")).click();
-         
-        ///   contentFixture.button(withName("registroClienteBoton")).click();
-        //window.textBox("nombre").;
-        // assertThat(window.textBox("nombre").text()).isEqualTo("Kevin");      
+    public void consultarCliente() throws InterruptedException {
+        window.button("consultarBoton").focus().click();
+        window.panel("izquierdaJPanel").focus().click();
+        window.robot().pressAndReleaseKey(KeyEvent.VK_1);
+        window.robot().pressAndReleaseKey(KeyEvent.VK_2);
+        window.robot().pressAndReleaseKey(KeyEvent.VK_3);
+        window.robot().pressAndReleaseKey(KeyEvent.VK_4);
+        window.table("tablaConsultas").focus().selectRows(0,0);
+        System.out.println(window.table("tablaConsultas").selectionValue());
+        assertThat(window.table("tablaConsultas").selectionValue()).isEqualTo("Joel");
     }
 
 }

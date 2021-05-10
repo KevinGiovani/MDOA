@@ -35,6 +35,9 @@ public class ConsultarPanel extends javax.swing.JPanel {
     public ConsultarPanel(AudioClip sonidoBoton, AudioClip regresar, JPanel mConsultar) throws SQLException {
       initComponents();
       cConsultarC = new ControladorConsultar(this, sonidoBoton, regresar, mConsultar);
+      nTelefono.setName("nTelefono");
+      telefono.setName("telefono");
+      tablaConsultas.setName("tablaConsultas");
      }
     
     //Obtención del atributo de cConsultarC, que es el controlador de consulta.

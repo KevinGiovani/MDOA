@@ -45,6 +45,9 @@ public class PrincipalFrame extends javax.swing.JFrame {
         this.menuConsultar = new MenuConsultarPanel(sonidoDeBoton, sonidoDeSalir, this);
         this.corte = new CortePanel(sonidoDeBoton, sonidoDeSalir, fondoJPanel);
         cMenu = new ControladorMenuPrincipal(this, sonidoDeBoton, sonidoDeSalir, registrarCliente, registrarPedido, menuConsultar, corte);
+        registroClienteBoton.setName("registroClienteBoton");
+        registroPedidoBoton.setName("registroPedidoBoton");
+        consultarBoton.setName("consultarBoton");
         
     }
 
@@ -58,8 +61,8 @@ public class PrincipalFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         fondoJPanel = new javax.swing.JPanel();
-        registroClienteBoton = new javax.swing.JButton();
         consultarBoton = new javax.swing.JButton();
+        registroClienteBoton = new javax.swing.JButton();
         registroPedidoBoton = new javax.swing.JButton();
         consultarJPanel = new javax.swing.JPanel();
         consultaIcono = new javax.swing.JLabel();
@@ -87,17 +90,17 @@ public class PrincipalFrame extends javax.swing.JFrame {
         fondoJPanel.setBackground(new java.awt.Color(255, 204, 0));
         fondoJPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        registroClienteBoton.setBackground(new java.awt.Color(0, 51, 51));
-        registroClienteBoton.setFont(new java.awt.Font("Gayathri", 1, 8)); // NOI18N
-        registroClienteBoton.setForeground(new java.awt.Color(153, 255, 204));
-        registroClienteBoton.setText("REGISTRAR CLIENTE");
-        fondoJPanel.add(registroClienteBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 240, 190, 40));
-
         consultarBoton.setBackground(new java.awt.Color(0, 51, 51));
         consultarBoton.setFont(new java.awt.Font("Gayathri", 1, 8)); // NOI18N
         consultarBoton.setForeground(new java.awt.Color(153, 255, 204));
         consultarBoton.setText("CONSULTAR");
         fondoJPanel.add(consultarBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 320, 190, 40));
+
+        registroClienteBoton.setBackground(new java.awt.Color(0, 51, 51));
+        registroClienteBoton.setFont(new java.awt.Font("Gayathri", 1, 8)); // NOI18N
+        registroClienteBoton.setForeground(new java.awt.Color(153, 255, 204));
+        registroClienteBoton.setText("REGISTRAR CLIENTE");
+        fondoJPanel.add(registroClienteBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 240, 190, 40));
 
         registroPedidoBoton.setBackground(new java.awt.Color(0, 51, 51));
         registroPedidoBoton.setFont(new java.awt.Font("Gayathri", 1, 8)); // NOI18N

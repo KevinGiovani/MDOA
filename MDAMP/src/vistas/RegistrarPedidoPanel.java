@@ -29,6 +29,16 @@ public class RegistrarPedidoPanel extends javax.swing.JPanel {
     public RegistrarPedidoPanel(AudioClip sonidoBoton, AudioClip regresar, JPanel mPrincipal) {
         initComponents();
         cPedido = new ControladorRegistrarPedido(this, sonidoBoton, regresar, mPrincipal);
+        numTelefono.setName("numTelefono");
+        totalCliente.setName("totalCliente");
+        buscarBoton.setName("buscarBoton");
+        paq1.setName("paq1");
+        paq5.setName("paq5");
+        cantPaq1.setName("cantPaq1");
+        cantPaq5.setName("cantPaq5");
+        totalPagar.setName("totalPagar");
+        totalCliente.setName("totalCliente");
+        pagarBoton.setName("pagarBoton");
     }
 
     /**

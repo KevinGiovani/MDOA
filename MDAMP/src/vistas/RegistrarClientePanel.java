@@ -32,6 +32,11 @@ public class RegistrarClientePanel extends javax.swing.JPanel {
     public RegistrarClientePanel(AudioClip sonidoBoton, AudioClip regresar, JPanel mPrincipal) {
         initComponents();
         cCliente = new ControladorRegistrarCliente(this, sonidoBoton, regresar, mPrincipal);
+        nombre.setName("nombre");
+        apellido.setName("apellido");
+        numTelefono.setName("numTelefono");
+        direccion.setName("direccion");
+        aceptarBoton.setName("aceptarBoton");
     }
 
     /**

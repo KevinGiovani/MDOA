@@ -30,6 +30,7 @@ public class MenuConsultarPanel extends javax.swing.JPanel {
     public MenuConsultarPanel(AudioClip sonidoBoton, AudioClip regresar,PrincipalFrame principal) throws SQLException {
         initComponents();
         cMConsultar = new ControladorMenuConsultar(this,sonidoBoton,regresar,principal);
+        izquierdaJPanel.setName("izquierdaJPanel");
     }
 
     /**
