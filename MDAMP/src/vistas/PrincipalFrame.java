@@ -42,9 +42,10 @@ public class PrincipalFrame extends javax.swing.JFrame {
         sonidoDeSalir = java.applet.Applet.newAudioClip(getClass().getResource("../sonidos/salir.wav"));
         this.registrarPedido = new RegistrarPedidoPanel(sonidoDeBoton, sonidoDeSalir, fondoJPanel);
         this.registrarCliente = new RegistrarClientePanel(sonidoDeBoton, sonidoDeSalir, fondoJPanel);
-        this.menuConsultar = new MenuConsultarPanel(sonidoDeBoton,sonidoDeSalir,this);
+        this.menuConsultar = new MenuConsultarPanel(sonidoDeBoton, sonidoDeSalir, this);
         this.corte = new CortePanel(sonidoDeBoton, sonidoDeSalir, fondoJPanel);
-        cMenu = new ControladorMenuPrincipal(this, sonidoDeBoton, sonidoDeSalir, registrarCliente, registrarPedido,menuConsultar,corte);
+        cMenu = new ControladorMenuPrincipal(this, sonidoDeBoton, sonidoDeSalir, registrarCliente, registrarPedido, menuConsultar, corte);
+        
     }
 
     /**

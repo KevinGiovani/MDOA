@@ -72,8 +72,8 @@ public class BDPedidoIT {
         System.out.println("buscar");
         String busqueda = "10";
         BDPedido instance = new BDPedido();
-        Pedido result = instance.buscar(busqueda);
-        assertNotNull(result.getIdCliente());
+        ArrayList<Pedido> result = instance.buscar(busqueda);
+        assertNotNull(result.get(0).getIdCliente());
     }
 
     /**

@@ -20,8 +20,8 @@ public class Conexion {
 
     static {
         String URL = "jdbc:mysql://localhost:3306/MiPollo"; //URL utilizado para el ingreso hacia la base de datos
-        String USERNAME = "root"; //Usuario principal de la base de datos
-        String PASSWORD = ""; //Contraseña para el usuario principal
+        String USERNAME = "cesarP"; //Usuario principal de la base de datos
+        String PASSWORD = "AsaderoMP"; //Contraseña para el usuario principal
         try {
             Class.forName("com.mysql.cj.jdbc.Driver"); //Uso de la libreria jdbc especializada en la conexion de la base de datos
             con = (Connection) DriverManager.getConnection(URL, USERNAME, PASSWORD);
