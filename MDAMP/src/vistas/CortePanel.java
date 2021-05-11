@@ -34,6 +34,7 @@ public class CortePanel extends javax.swing.JPanel {
     public CortePanel(AudioClip sonidoBoton, AudioClip regresar,JPanel mPrincipal) throws SQLException {
       initComponents();
       cCorte = new ControladorCorte(this, sonidoBoton, regresar,mPrincipal);
+      generar.setName("generar");
      }
     //Obtención del atributo de cCorte, que es el controlador de corte.
     public ControladorCorte getcCorte() {

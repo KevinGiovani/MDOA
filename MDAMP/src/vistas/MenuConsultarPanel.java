@@ -31,6 +31,7 @@ public class MenuConsultarPanel extends javax.swing.JPanel {
         initComponents();
         cMConsultar = new ControladorMenuConsultar(this,sonidoBoton,regresar,principal);
         izquierdaJPanel.setName("izquierdaJPanel");
+        derechaJPanel.setName("derechaJPanel");
     }
 
     /**

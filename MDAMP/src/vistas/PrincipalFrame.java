@@ -48,7 +48,7 @@ public class PrincipalFrame extends javax.swing.JFrame {
         registroClienteBoton.setName("registroClienteBoton");
         registroPedidoBoton.setName("registroPedidoBoton");
         consultarBoton.setName("consultarBoton");
-        
+        corteBoton.setName("corteBoton");
     }
 
     /**

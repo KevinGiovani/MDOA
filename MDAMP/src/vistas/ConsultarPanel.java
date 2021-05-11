@@ -38,6 +38,7 @@ public class ConsultarPanel extends javax.swing.JPanel {
       nTelefono.setName("nTelefono");
       telefono.setName("telefono");
       tablaConsultas.setName("tablaConsultas");
+      nPedido.setName("nPedido");
      }
     
     //Obtención del atributo de cConsultarC, que es el controlador de consulta.

@@ -16,14 +16,14 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class TestApp {
+public class TestConsultar {
 
     private FrameFixture window;
 
     /**
      * Constructor de clase
      */
-    public TestApp() {
+    public TestConsultar() {
     }
 
     /**
@@ -57,49 +57,6 @@ public class TestApp {
         window.cleanUp();
     }
 
-    //    @Test
-//    public void registrarPedido() {
-//        window.button("registroPedidoBoton").focus().click();
-//        window.checkBox("paq1").focus().check();
-//        window.spinner("cantPaq1").focus().increment();
-//        window.checkBox("paq5").focus().check();
-//        window.textBox("numTelefono").focus().setText("6861234567");
-//        window.button("buscarBoton").focus().click();
-//        window.textBox("totalCliente").focus().setText("540");
-//        window.button("pagarBoton").focus().click();
-//        window.dialog().focus().button(withText("Yes")).click();
-//    }
-//    
-//    
-//    
-//    @Test
-//    public void buscarClienteEnPedido(){
-//        window.button("registroPedidoBoton").focus().click();
-//        window.textBox("numTelefono").focus().setText("1234567890");
-//        window.button("buscarBoton").focus().click();
-//    }
-//    
-//    @Test
-//    public void obtenerTotal() {
-//        window.button("registroPedidoBoton").focus().click();
-//        window.checkBox("paq1").focus().check();
-//        window.spinner("cantPaq1").focus().increment();
-//        window.checkBox("paq5").focus().check();
-//        System.out.println(window.textBox("totalPagar").text());
-//        assertThat(window.textBox("totalPagar").text()).isEqualTo("540");
-//    }
-    
-//    @Test
-//    public void registrarCliente() {
-//        window.button("registroClienteBoton").focus().click();
-//        window.textBox("nombre").focus().setText("Kevin");
-//        window.textBox("apellido").focus().setText("Inzunza");
-//        window.textBox("numTelefono").focus().setText("6861234567");
-//        window.textBox("direccion").focus().setText("Benito Juarez, Mexicali");
-//        window.button("aceptarBoton").focus().click();
-//        window.dialog().focus().button(withText("Yes")).click();
-//    }
-//    
 
 //    @Test
 //    public void consultarCliente() throws InterruptedException {
@@ -135,14 +92,7 @@ public class TestApp {
 //        assertThat(window.table("tablaConsultas").selectionValue()).isEqualTo("32");
 //    }
 //    
-    @Test
-    public void realizarCorte() throws InterruptedException{
-        window.button("corteBoton").focus().click();
-        window.button("generar").focus().click();
-        File direccion=new File(System.getProperty("user.dir"));
-        window.fileChooser().focus().setCurrentDirectory(direccion).approve();
-    }
-
+ 
     private void ingresarNumero(String numero) {
         int tecla;
         for (int i = 0; i < numero.length(); i++) {
