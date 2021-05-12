@@ -24,8 +24,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
 public class TestRegistrarPedido {
+
     private FrameFixture window;
+    
     /**
      * Fuerza a una prueba a fallar si el acceso a los componentes de la GUI no
      * se realiza en el EDT (Event Dispatch Thread)

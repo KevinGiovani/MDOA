@@ -27,7 +27,7 @@ public class TestCorte {
     }
 
     /**
-     * Fuerza a una prueba a fallar si el acceso a los componentes de la GUI no
+     * Forza a una prueba a fallar si el acceso a los componentes de la GUI no
      * se realiza en el EDT (Event Dispatch Thread)
      */
     @BeforeClass
@@ -36,8 +36,8 @@ public class TestCorte {
     }
 
     /**
-     * Inicializa los dispositivos de prueba, se ejecuta cada vez que se ejecute
-     * un método de prueba
+     * Inicializa los dispositivos de prueba que se ejecutan cada vez que se
+     * realiza un método de prueba
      *
      * @throws java.sql.SQLException
      */
@@ -50,13 +50,20 @@ public class TestCorte {
 
     /**
      * Limpia los recursos utilizados después de ejecutar cada método de prueba
-     * y libera el bloqueo de teclado y moyse para la siguiente prueba
+     * y libera el bloqueo de teclado y mouse para la siguiente prueba.
      */
     @After
     public void tearDown() {
         window.cleanUp();
     }
 
+    /**
+     * Metodo en donnde se simula el darle clic al botón de corte y despues
+     * al botón de generar para despues iniciar un corte de caja y asignarle la 
+     * direccion dada "user.dir" al fileChosser para que ahí guarde el
+     * documento de corte.
+     * @throws InterruptedException 
+     */
     @Test
     public void realizarCorte() throws InterruptedException{
         window.button("corteBoton").focus().click();

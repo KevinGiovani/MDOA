@@ -27,7 +27,7 @@ public class TestConsultar {
     }
 
     /**
-     * Fuerza a una prueba a fallar si el acceso a los componentes de la GUI no
+     * Forza a una prueba a fallar si el acceso a los componentes de la GUI no
      * se realiza en el EDT (Event Dispatch Thread)
      */
     @BeforeClass
@@ -36,8 +36,8 @@ public class TestConsultar {
     }
 
     /**
-     * Inicializa los dispositivos de prueba, se ejecuta cada vez que se ejecute
-     * un método de prueba
+     * Inicializa los dispositivos de prueba que se ejecutan cada vez que se
+     * realiza un método de prueba
      *
      * @throws java.sql.SQLException
      */
@@ -50,7 +50,7 @@ public class TestConsultar {
 
     /**
      * Limpia los recursos utilizados después de ejecutar cada método de prueba
-     * y libera el bloqueo de teclado y moyse para la siguiente prueba
+     * y libera el bloqueo de teclado y mouse para la siguiente prueba.
      */
     @After
     public void tearDown() {
@@ -93,6 +93,12 @@ public class TestConsultar {
 //    }
 //    
  
+    /**
+     * Metodo en donde con un ciclo for se simula el presionar alguna
+     * tecla digito del 0 al 9, dependiendo del numero de bucles que lleve
+     * el for.
+     * @param numero 
+     */
     private void ingresarNumero(String numero) {
         int tecla;
         for (int i = 0; i < numero.length(); i++) {
@@ -121,7 +127,6 @@ public class TestConsultar {
                     break;
 
             }
-
             
         }
     }
