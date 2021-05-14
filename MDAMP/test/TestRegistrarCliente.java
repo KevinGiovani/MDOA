@@ -1,3 +1,10 @@
+/**
+ *
+ * @author Inzunza Kevin
+ * @author De La Cruz Joel
+ * @author Pacheco Cesar
+ * @author Avendaño Antonio
+ */
 
 import java.awt.event.KeyEvent;
 import java.io.File;
@@ -57,6 +64,14 @@ public class TestRegistrarCliente {
         window.cleanUp();
     }
 
+    /**
+     * Metodo que sirve para probar el registrar a un nuevo cliente simulando 
+     * un clic primeramente en el botón de registro de cliente y despues 
+     * llenando todos los campos de texto con el tipo de dato que es requerido 
+     * para despues darle click al botón de aceptar y cuando salga el dialogo 
+     * de confirmacion para el registro darle en el botón con el texto "Yes" y 
+     * así realizar el registro del nuevo cliente
+     */
 //    @Test
 //    public void registrarCliente() {
 //        window.button("registroClienteBoton").focus().click();

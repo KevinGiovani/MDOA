@@ -1,3 +1,10 @@
+/**
+ *
+ * @author Inzunza Kevin
+ * @author De La Cruz Joel
+ * @author Pacheco Cesar
+ * @author Avendaño Antonio
+ */
 
 import java.awt.event.KeyEvent;
 import java.io.File;

@@ -1,3 +1,10 @@
+/**
+ *
+ * @author Inzunza Kevin
+ * @author De La Cruz Joel
+ * @author Pacheco Cesar
+ * @author Avendaño Antonio
+ */
 
 import java.awt.event.KeyEvent;
 import java.io.File;
@@ -58,6 +65,16 @@ public class TestConsultar {
     }
 
 
+    /**
+     * Metodo que sirve para probar la consulta de cliente haciendo clic 
+     * primeramente en el botón de las consultas y despues al panel izquierdo 
+     * que es de las consultas a los clientes, ingresa algunos numeros 
+     * que la funcion toma como numero de telefono con el cual se hace la 
+     * consulta y despues toma el primer renglon de la consulta y lo compara 
+     * con el cliente que ya se encuentra registrado llamado Joel
+     */
+    
+//    
 //    @Test
 //    public void consultarCliente() throws InterruptedException {
 //        window.button("consultarBoton").focus().click();
@@ -68,6 +85,17 @@ public class TestConsultar {
 //        assertThat(window.table("tablaConsultas").selectionValue()).isEqualTo("Joel");
 //    }
 
+    /**
+     * Metodo que sirve para probar la consulta de pedido simulando un clic 
+     * primeramente en el botón de las consultas y despues al panel derecho 
+     * que es de las consulta de pedidos, despues selecciona el check box para
+     * determinar que la busqueda será por numero de telefono
+     * ingresa algunos numeros que la funcion toma como el numero de telefono
+     * con el cual se hace la consulta y despues toma el primer renglón de la
+     * consulta para compararlo con el pedido que ya se encuentra registrado
+     * con el id 31
+     */
+//
 //    @Test
 //    public void consultarPedidoPorTelefono() throws InterruptedException {
 //        window.button("consultarBoton").focus().click();
@@ -79,7 +107,17 @@ public class TestConsultar {
 //        System.out.println(window.table("tablaConsultas").selectionValue());
 //        assertThat(window.table("tablaConsultas").selectionValue()).isEqualTo("31");
 //    }
-    
+
+    /**
+     * Metodo que sirve para probar la consulta de pedido simulando un clic 
+     * primeramente en el botón de las consultas y despues al panel derecho 
+     * que es de las consulta de pedidos, despues selecciona el check box para
+     * determinar que la busqueda será por numero de pedido (id) ingresa algunos
+     * numeros que la funcion toma como el numero de pedido (id) con el cual se 
+     * hace la consulta y despues toma el primer renglón de la consulta para 
+     * compararlo con el pedido que ya se encuentra registrado con el id 32
+     */
+//    
 //    @Test
 //    public void consultarPedidoPorNumero(){
 //        window.button("consultarBoton").focus().click();
@@ -125,9 +163,7 @@ public class TestConsultar {
                     break;
                 case 9: window.robot().pressAndReleaseKey(KeyEvent.VK_9);
                     break;
-
-            }
-            
+            }   
         }
     }
 
