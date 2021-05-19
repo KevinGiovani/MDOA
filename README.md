@@ -5,6 +5,7 @@ Integrantes del proyecto:
 - Inzunza Rodriguez Kevin Giovani
 - De La Cruz Joel Salvador Mendoza
 - Mendibil Pacheco Cesar Magdiel
+- Avendaño Hernandez Antonio Naum
 
 Materia: Ingenieria de Software
 Docente: Olguin Espinoza Jose Martin
