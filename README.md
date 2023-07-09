@@ -8,7 +8,9 @@ Integrantes del proyecto:
 - Avendaño Hernandez Antonio Naum
 
 Materia: Ingenieria de Software
-Docente: Olguin Espinoza Jose Martin
-Universidad Autonoma de Baja Calfornia
-Mexicali,B.C.,Mexico
 
+Docente: Olguin Espinoza Jose Martin
+
+Universidad Autonoma de Baja Calfornia
+
+Mexicali,B.C.,Mexico
